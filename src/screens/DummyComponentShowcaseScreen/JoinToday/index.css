@@ -1,0 +1,19 @@
+.call-to-action {
+    position: relative;
+    background-color: #343a40;
+    background: url("https://i.ibb.co/jbtLsTk/random1.jpg") no-repeat center
+      center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-top: 2rem;
+    padding-bottom: 7rem;
+    padding-left: 1rem;
+  }
+  
+  .btn.btn-primary.pcjt-color-overide {
+    background-color: rgba(128, 91, 231, 255);
+    border: white 1px solid;
+  }
+  
