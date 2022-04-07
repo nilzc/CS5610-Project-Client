@@ -16,3 +16,12 @@ export const logout = async (dispatch) => {
         type: LOG_OUT
     })
 }
+
+export const register = async (dispatch, user) => {
+    const response = await authServices.register(user);
+    const loggedInUser = {username: response.username, userId: response._id};
+    dispatch({
+        type: LOG_IN,
+        user: loggedInUser
+    })
+}

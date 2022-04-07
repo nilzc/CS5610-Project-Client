@@ -15,3 +15,7 @@ export const logout = () => {
     return api.post(`${AUTH_URL}/logout`)
         .then(response => response.data);
 }
+export const register = (userCredential) => {
+    return api.post(`${AUTH_URL}/register`, userCredential)
+        .then(response => response.data);
+}
