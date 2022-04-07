@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+.pc-thumb-image {
+  height: 450px;
+  max-height: 450px;
+}
+
+.pc-largeinfocard-container {
+  font-family: "Open Sans", sans-serif;
+}
+
+.pc-pgtype {
+  border: 0.06rem black solid;
+  padding: 0.3125rem;
+  border-radius: 0.3125rem;
+  font-size: 1rem;
+}
+
+.pc-genre {
+  font-size: 0.93rem;
+}
+
+.pc-movietime {
+  font-size: 0.93rem;
+}
+
+.pc-heart:hover {
+  color: red;
+}
+
+.no-click {
+  pointer-events: none;
+}
+
+.pc-creatornames {
+  font-size: 0.85rem;
+}

@@ -18,6 +18,7 @@ import MyProfileScreen from "./screens/MyProfileScreen";
 import createPersistStore from "./redux/store";
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/integration/react";
+import DummyComponentShowcaseScreen from "./screens/DummyComponentShowcaseScreen";
 
 const {store, persistor} = createPersistStore();
 
@@ -40,6 +41,7 @@ ReactDOM.render(
                         <Route path={"login"} element={<LoginScreen/>}/>
                         <Route path={"register"} element={<RegisterScreen/>}/>
                         <Route path={"privacy"} element={<PrivacyScreen/>}/>
+                        <Route path={"components"} element={<DummyComponentShowcaseScreen/>}/>
                         <Route path={"*"} element={<NoMatchScreen/>}/>
                     </Route>
                 </Routes>

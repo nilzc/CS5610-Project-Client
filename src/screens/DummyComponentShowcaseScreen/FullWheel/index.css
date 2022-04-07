@@ -1,0 +1,26 @@
+.pcfw-back {
+    z-index: -1;
+    width: 44px;
+    background-color: black;
+    height: 44px;
+    position: absolute;
+    border-radius: 50%;
+    /* top: 2.1rem; */
+    top: 5px;
+    left: 5px;
+  }
+  
+  .pcfw-container {
+    position: relative;
+  }
+  
+  .pcfw-number {
+    z-index: 2;
+    color: white;
+    position: absolute;
+    font-size: 0.9rem;
+    top: 18px;
+    left: 14px;
+    font-weight: bold;
+  }
+  
