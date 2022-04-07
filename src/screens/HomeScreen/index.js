@@ -1,13 +1,15 @@
 import {useSelector} from "react-redux";
 import {getUserName, isLoggedIn} from "../../redux/selectors";
+import MovieItem from "../../components/MovieItem";
+import MovieGallery from "../../components/MovieGallery";
 
 const HomeScreen = () => {
     const loggedIn = useSelector(isLoggedIn);
     const username = useSelector(getUserName);
     return (
-        <div>
+        <div className={"col-12"}>
             {loggedIn && `Show content for a logged-in user: ${username}`}
-            {!loggedIn && "Show content for an anonymous user"}
+            {!loggedIn && <MovieGallery/>}
         </div>
     )
 };

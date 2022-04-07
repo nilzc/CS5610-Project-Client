@@ -3,7 +3,7 @@ import NavigationBar from "./components/NavigationBar";
 
 function App() {
   return (
-      <div>
+      <div className={"container"}>
           <NavigationBar/>
           <Outlet/>
       </div>
