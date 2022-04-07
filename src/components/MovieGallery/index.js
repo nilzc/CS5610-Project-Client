@@ -8,9 +8,9 @@ const MovieGallery = ({
                           }]
                       }) => {
     return (
-        <div className={"col-3"}>
+        <div className={"row"}>
             {
-                movies && movies.map(movie => <MovieItem movie={movie}/>)
+                movies && movies.map(movie => <MovieItem key={movie.id} movie={movie}/>)
             }
         </div>
     )

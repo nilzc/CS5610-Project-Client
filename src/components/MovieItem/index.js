@@ -6,7 +6,7 @@ const MovieItem = ({
                        }
                    }) => {
     return (
-        <div className={"card"}>
+        <div className={"col-3 card"}>
             <img className={"card-img-top"} src={`${process.env.REACT_APP_MOVIE_BASE_URL}/w342/${movie.poster_path}`} alt={"..."}/>
             <div className={"card-body"}>
                 <h5 className={"card-title"}>{movie.title}</h5>

@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 import {getUserName, isLoggedIn} from "../../redux/selectors";
-import MovieItem from "../../components/MovieItem";
-import MovieGallery from "../../components/MovieGallery";
+import MovieSection from "./MovieSection";
+import * as movieServices from "../../services/movieServices";
 
 const HomeScreen = () => {
     const loggedIn = useSelector(isLoggedIn);
@@ -9,7 +9,18 @@ const HomeScreen = () => {
     return (
         <div className={"col-12"}>
             {loggedIn && `Show content for a logged-in user: ${username}`}
-            {!loggedIn && <MovieGallery/>}
+            {!loggedIn &&
+                <>
+                    <h1>Popular Movies</h1>
+                    <MovieSection findMoviesFromServer={movieServices.findPopularMovies}/>
+                    <h1>Now Playing</h1>
+                    <MovieSection findMoviesFromServer={movieServices.findNowPlayingMovies}/>
+                    <h1>Top Rated</h1>
+                    <MovieSection findMoviesFromServer={movieServices.findTopRatedMovies}/>
+                    <h1>Upcoming</h1>
+                    <MovieSection findMoviesFromServer={movieServices.findUpcomingMovies}/>
+                </>
+            }
         </div>
     )
 };
