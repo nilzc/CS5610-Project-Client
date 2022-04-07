@@ -1,0 +1,59 @@
+.Leaderboard {
+    padding: 2.2rem 1.2rem;
+    margin: auto;
+  }
+  .leader-wrap {
+    display: flex;
+  }
+  
+  .leader {
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .leader-ava {
+    padding: 0.4rem;
+    margin-right: 1rem;
+    position: relative;
+  }
+  
+  .leader-score {
+    display: flex;
+    align-items: center;
+    opacity: 0.6;
+  }
+  
+  .leader-score svg {
+    display: block;
+    margin-right: 0.25rem;
+  }
+  
+  .leader-score_title {
+    /* line-height: 1; */
+    font-size: 1rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .leader-bar {
+    animation-name: barLoad;
+    animation-duration: 0.4s;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.6, 0.2, 0.1, 1);
+    transform-origin: left;
+  }
+  
+  .bar {
+    height: 0.5rem;
+    border-top-right-radius: 0.25rem;
+  }
+  
+  @keyframes barLoad {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  

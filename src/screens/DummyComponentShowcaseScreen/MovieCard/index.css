@@ -1,0 +1,50 @@
+.pc-card-block {
+    height: 300px;
+    background-color: #fff;
+    border: none;
+    transition: all 0.2s ease-in-out !important;
+    border-radius: 1.5rem;
+  }
+  
+  .pc-image-container {
+    text-align: center;
+  }
+  
+  .pc-image-container img {
+    border-radius: 1.5rem;
+    height: 230px;
+    width: 150px;
+    max-height: 230px;
+    max-width: 150px;
+  }
+  
+  .card-block:hover {
+    transform: translateY(-5px);
+    box-shadow: none;
+    opacity: 0.9;
+  }
+  
+  .pc-card-extra {
+    /* background-color: #1158d0;
+    background-image: linear-gradient(
+      43deg,
+      #1258c0 0%,
+      #1450c4 46%,
+      #f4cc74 100%
+    ); */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  
+  .pc-card-extra:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+  
+  .pc-card-movie-content {
+    font-size: 0.9rem;
+  }
+  
+  .pc-card-movie-content .fas.fa-star {
+    color: orange;
+  }
+  
