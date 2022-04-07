@@ -1,9 +1,10 @@
 import {Outlet} from "react-router-dom";
+import NavigationBar from "./components/NavigationBar";
 
 function App() {
   return (
       <div>
-          We can have navigation bars here
+          <NavigationBar/>
           <Outlet/>
       </div>
   );
