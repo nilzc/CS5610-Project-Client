@@ -3,7 +3,7 @@ import {useSearchParams, useNavigate, Outlet} from "react-router-dom";
 const SearchScreen = () => {
     const navigate = useNavigate();
     let [searchParams, setSearchParams] = useSearchParams();
-    const searchFieldOnchangeHandler = (event) => {
+    const searchFieldOnChange = (event) => {
         let query = event.target.value;
         if (query) {
             setSearchParams({query});
@@ -11,7 +11,7 @@ const SearchScreen = () => {
             setSearchParams({});
         }
     }
-    const searchButtonOnclickHandler = () => {
+    const searchButtonOnClick = () => {
         navigate({
             pathname: "results",
             search: searchParams.toString()
@@ -21,9 +21,9 @@ const SearchScreen = () => {
         <div>
             <label className={"form-label"}>
                 Search:
-                <input className={"form-control"} type={"text"} onChange={searchFieldOnchangeHandler}/>
+                <input className={"form-control"} type={"text"} onChange={searchFieldOnChange}/>
             </label>
-            <button className={"btn btn-primary"} onClick={searchButtonOnclickHandler}>Search</button>
+            <button className={"btn btn-primary"} onClick={searchButtonOnClick}>Search</button>
             <div>
                 query string is : {searchParams.get("query")}
             </div>
