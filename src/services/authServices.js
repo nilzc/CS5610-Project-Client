@@ -19,3 +19,7 @@ export const register = (userCredential) => {
     return api.post(`${AUTH_URL}/register`, userCredential)
         .then(response => response.data);
 }
+export const profile = () => {
+    return api.post(`${AUTH_URL}/profile`)
+        .then(response => response.data);
+}

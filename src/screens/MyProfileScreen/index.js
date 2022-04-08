@@ -1,24 +1,29 @@
 import {useSelector} from "react-redux";
 import {getUserState, isLoggedIn} from "../../redux/selectors";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import * as authService from "../../services/authServices";
 
 const MyProfileScreen = () => {
     const loggedIn = useSelector(isLoggedIn);
-    const loggedInUser = useSelector(getUserState);
+    const [userInfo, setUserInfo] = useState({});
     const navigate = useNavigate();
     const checkLogin = () => {
         if (!loggedIn) {
-            alert("Please login first!")
             navigate("/login");
+            alert("Please login first!");
+            return;
         }
+        authService.profile()
+            .then((user) => setUserInfo(user))
+            .catch((err) => alert(err.response.data.error));
     }
-    useEffect(checkLogin);
+    useEffect(checkLogin, [loggedIn, navigate]);
     return (
         <div>
-            My Profile:
-            <div>UserID: {loggedInUser.userId}</div>
-            <div>Username: {loggedInUser.username}</div>
+            My Profile Including Private Information
+            <div>Username: {userInfo.username}</div>
+            <div>Phone (private): {userInfo.phone}</div>
         </div>
     )
 };
