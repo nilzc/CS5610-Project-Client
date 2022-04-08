@@ -22,6 +22,7 @@ const NavigationBar = () => {
                 <span>
                     <button className={"btn btn-warning"} onClick={logoutButtonOnClick}>Logout</button>
                     <Link className={"btn btn-primary"} to={"/profile"}>Profile</Link>
+                    <Link className={"btn btn-primary"} to={"/list/new"}>Create List</Link>
                 </span>}
             {!loggedIn &&
                 <span>
