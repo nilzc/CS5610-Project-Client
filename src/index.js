@@ -19,6 +19,7 @@ import createPersistStore from "./redux/store";
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/integration/react";
 import DummyComponentShowcaseScreen from "./screens/DummyComponentShowcaseScreen";
+import CreateNewListScreen from "./screens/CreateNewListScreen";
 
 const {store, persistor} = createPersistStore();
 
@@ -34,6 +35,7 @@ ReactDOM.render(
                         <Route path={"profile"} element={<MyProfileScreen/>}/>
                         <Route path={"profile/:uid"} element={<ProfileScreen/>}/>
                         <Route path={"list/:lid"} element={<ListScreen/>}/>
+                        <Route path={"list/new"} element={<CreateNewListScreen/>}/>
                         <Route path={"search"} element={<SearchScreen/>}>
                             <Route path={"results"} element={<SearchResultsScreen/>}/>
                         </Route>

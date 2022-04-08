@@ -10,6 +10,7 @@
   * Search params:
     * ```query```: string
 * ```/list/:lid``` Movie list screen
+* ```/list/new``` Create new list screen
 * ```/details/:mid``` Movie's details page
 * ```/login``` Login page
 * ```/register``` Register page
