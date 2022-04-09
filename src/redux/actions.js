@@ -1,5 +1,6 @@
 import {LOG_IN, LOG_OUT} from "./actionTypes";
 import * as authServices from "../services/authServices";
+import {profile} from "../services/authServices";
 
 export const login = async (dispatch, user) => {
     const response = await authServices.login(user);
@@ -24,4 +25,19 @@ export const register = async (dispatch, user) => {
         type: LOG_IN,
         user: loggedInUser
     })
+}
+
+export const refresh = async (dispatch) => {
+    try {
+        const response = await authServices.profile();
+        const loggedInUser = {username: response.username, userId: response._id};
+        dispatch({
+            type: LOG_IN,
+            user: loggedInUser
+        })
+    } catch (e) {
+        dispatch({
+            type: LOG_OUT
+        })
+    }
 }
