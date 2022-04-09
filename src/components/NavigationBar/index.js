@@ -17,6 +17,7 @@ const NavigationBar = () => {
     }
     return (
         <>
+            <Link className={"btn btn-primary"} to={"/home"}>Home</Link>
             We can have navigation bars here
             {loggedIn &&
                 <span>

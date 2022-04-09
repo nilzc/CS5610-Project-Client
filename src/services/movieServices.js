@@ -24,3 +24,7 @@ export const searchMovie = (query, page) => {
     return axios.get(SEARCH_URL, {params: {query: query, page: page}})
         .then(response => response.data.results);
 }
+export const findMovieDetail = (mid) => {
+    return axios.get(`${MOVIE_URL}/${mid}`)
+        .then(response => response.data);
+}

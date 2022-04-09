@@ -1,6 +1,6 @@
 const ProfileOverview = ({
                              user =
-                                 {username: "Dummy", firstName: "Harry", lastName: "Potter", phone: "123456"}
+                                 {username: "Dummy", firstName: "Harry", lastName: "Potter", phone: ""}
                          }) => {
     return (
         <div>
