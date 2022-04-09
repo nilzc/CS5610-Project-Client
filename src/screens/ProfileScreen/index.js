@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import {getUserId} from "../../redux/selectors";
 import {useEffect, useState} from "react";
 import * as userServices from "../../services/userService";
+import ProfileOverview from "../../components/ProfileOverview";
 
 const ProfileScreen = () => {
     let params = useParams();
@@ -16,22 +17,21 @@ const ProfileScreen = () => {
             return;
         }
         userServices.findUserById(profileOwnerId)
-            .then(user => setProfileOwner(user))
+            .then(user => {
+                if (user) {
+                    setProfileOwner(user)
+                } else {
+                    navigate("/home");
+                    alert("Nonexistent user");
+                }
+            })
             .catch(err => alert(err.response.data.error))
     }
     useEffect(isThisMyProfile, [loggedInUserId, navigate, profileOwnerId]);
     return (
         <div>
-            {profileOwner.username}'s Profile with Only Public Information
-            <div>
-                First Name: {profileOwner.firstName}
-            </div>
-            <div>
-                Last Name: {profileOwner.lastName}
-            </div>
-            <div>
-                Phone (private field is musked): {profileOwner.phone}
-            </div>
+            {profileOwner.username && profileOwner.username}'s Profile
+            <ProfileOverview user={profileOwner}/>
         </div>
     )
 };

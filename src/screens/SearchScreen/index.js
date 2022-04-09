@@ -1,26 +1,24 @@
-import {useSearchParams, useNavigate, Outlet} from "react-router-dom";
+import {useSearchParams, useNavigate} from "react-router-dom";
+import Search from "../../components/Search";
 
 const SearchScreen = () => {
     const navigate = useNavigate();
     let [searchParams, setSearchParams] = useSearchParams();
-    const searchButtonOnClick = () => {
+    const submitHandler = () => {
         navigate({
             pathname: "results",
             search: searchParams.toString()
         })
     }
+    const inputOnChangeHandler = (e) => {
+        setSearchParams({query: e.target.value})
+    }
     return (
         <div>
-            <label className={"form-label"}>
-                Search:
-                <input className={"form-control"} type={"text"}
-                       onChange={(e) => setSearchParams({query: e.target.value})}/>
-            </label>
-            <button className={"btn btn-primary"} onClick={searchButtonOnClick}>Search</button>
+            <Search inputOnChangeHandler={inputOnChangeHandler} submitHandler={submitHandler}/>
             <div>
                 query string is : {searchParams.get("query")}
             </div>
-            <Outlet/>
         </div>
     )
 };
