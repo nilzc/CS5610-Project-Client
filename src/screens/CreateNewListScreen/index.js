@@ -59,7 +59,6 @@ const CreateNewListScreen = () => {
     const checkLogin = () => {
         if (!loggedIn) {
             navigate("/login");
-            alert("Please login first!");
         }
     }
     useEffect(checkLogin, [loggedIn, navigate]);
