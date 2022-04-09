@@ -11,3 +11,7 @@ export const findUserById = (uid) => {
     return api.get(`${USER_URL}/${uid}`)
         .then(response => response.data);
 }
+export const updateUser = (uid, updatedUser) => {
+    return api.put(`${USER_URL}/${uid}`, updatedUser)
+        .then(response => response.data);
+}
