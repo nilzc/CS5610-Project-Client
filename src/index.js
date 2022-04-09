@@ -32,13 +32,12 @@ ReactDOM.render(
                     <Route path={"/"} element={<App/>}>
                         <Route index element={<HomeScreen/>}/>
                         <Route path={"home"} element={<HomeScreen/>}/>
-                        <Route path={"profile"} element={<MyProfileScreen/>}/>
                         <Route path={"profile/:uid"} element={<ProfileScreen/>}/>
+                        <Route path={"profile/*"} element={<MyProfileScreen/>}/>
                         <Route path={"list/:lid"} element={<ListScreen/>}/>
                         <Route path={"list/new"} element={<CreateNewListScreen/>}/>
-                        <Route path={"search"} element={<SearchScreen/>}>
-                            <Route path={"results"} element={<SearchResultsScreen/>}/>
-                        </Route>
+                        <Route path={"search"} element={<SearchScreen/>}/>
+                        <Route path={"search/results"} element={<SearchResultsScreen/>}/>
                         <Route path={"details/:mid"} element={<MovieDetailsScreen/>}/>
                         <Route path={"login"} element={<LoginScreen/>}/>
                         <Route path={"register"} element={<RegisterScreen/>}/>

@@ -1,26 +1,26 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getUserName, isLoggedIn} from "../../redux/selectors";
 import MovieSection from "./MovieSection";
 import * as movieServices from "../../services/movieServices";
+import {useEffect} from "react";
+import {refresh} from "../../redux/actions";
 
 const HomeScreen = () => {
     const loggedIn = useSelector(isLoggedIn);
     const username = useSelector(getUserName);
+    const dispatch = useDispatch();
+    useEffect(() => refresh(dispatch), [])
     return (
         <div className={"col-12"}>
             {loggedIn && `Show content for a logged-in user: ${username}`}
-            {!loggedIn &&
-                <>
-                    <h1>Popular Movies</h1>
-                    <MovieSection findMoviesFromServer={movieServices.findPopularMovies}/>
-                    <h1>Now Playing</h1>
-                    <MovieSection findMoviesFromServer={movieServices.findNowPlayingMovies}/>
-                    <h1>Top Rated</h1>
-                    <MovieSection findMoviesFromServer={movieServices.findTopRatedMovies}/>
-                    <h1>Upcoming</h1>
-                    <MovieSection findMoviesFromServer={movieServices.findUpcomingMovies}/>
-                </>
-            }
+            <h1>Popular Movies</h1>
+            <MovieSection findMoviesFromServer={movieServices.findPopularMovies}/>
+            <h1>Now Playing</h1>
+            <MovieSection findMoviesFromServer={movieServices.findNowPlayingMovies}/>
+            <h1>Top Rated</h1>
+            <MovieSection findMoviesFromServer={movieServices.findTopRatedMovies}/>
+            <h1>Upcoming</h1>
+            <MovieSection findMoviesFromServer={movieServices.findUpcomingMovies}/>
         </div>
     )
 };
