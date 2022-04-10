@@ -1,3 +1,4 @@
+import './index.css';
 const MovieItem = ({
                        movie = {
                            title: "Spider-Man: No Way Home",
@@ -10,7 +11,7 @@ const MovieItem = ({
     return (
         // we can have multiple clickable elements, each of them can have a handler provided by the parent
         <div className={"col-3 card"} onClick={() => posterOnClickHandler(movie)}>
-            <img className={"card-img-top mt-2"} src={posterPath} alt={"Poster Not Found"} style={{height:'300px'}}/>
+            <img className={"card-img-top mt-2 mi-image"} src={posterPath} alt={"Poster Not Found"}/>
             <div className={"card-body"}>
                 <h6 className={"card-title"}>{movie.title}</h6>
                 <h6 className={"card-subtitle"}>{movie.release_date}</h6>

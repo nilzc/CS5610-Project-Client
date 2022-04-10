@@ -1,0 +1,24 @@
+.cnls-image-container img{
+    max-width: 150px;
+}
+
+.cnls-info-container span{
+    font-size:1.6rem;
+}
+
+.cnls-info-container p{
+    font-size:1.2rem;
+}
+
+.cnls-para{
+    font-size:1rem;
+}
+
+.cnls-cross{
+    font-size:1.5rem;
+    float: right;
+}
+
+.cnls-button{
+    font-size: 1.4rem;
+}
