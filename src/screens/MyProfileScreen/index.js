@@ -48,12 +48,13 @@ const MyProfileScreen = () => {
     useEffect(init, [loggedIn, navigate]);
     return (
         <div>
-            My Profile
-            <div>
-                <Link to={""}>MyProfile</Link>
-                <Link to={"s/lists"}>MyLists</Link>
-                <Link to={"s/edit"}>Edit</Link>
+            <h2>My Profile</h2>
+            <div className={`d-flex`}>
+                <Link className={`col-4`} to={""}>MyProfile</Link>
+                <Link className={`col-4`} to={"s/lists"}>MyLists</Link>
+                <Link className={`col-4`} to={"s/edit"}>Edit</Link>
             </div>
+            <br/>
             <Routes>
                 <Route index element={<ProfileOverview user={user}/>}/>
                 <Route path={"s/lists"} element={<MovieList lists={movieLists} listItemOnClickHandler={(l) => {}}/>}/>
