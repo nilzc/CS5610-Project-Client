@@ -9,7 +9,7 @@ const HomeScreen = () => {
     const loggedIn = useSelector(isLoggedIn);
     const username = useSelector(getUserName);
     const dispatch = useDispatch();
-    useEffect(() => refresh(dispatch))
+    useEffect(() => refresh(dispatch), [dispatch])
     return (
         <div className={"col-12"}>
             {loggedIn && `Show content for a logged-in user: ${username}`}

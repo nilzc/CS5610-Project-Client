@@ -1,12 +1,15 @@
 import MovieReviewItem from "../MovieReviewItem";
 
-const MovieReviews = ({reviews=[]}) => {
+const MovieReviews = ({reviews=[], refresh}) => {
     return (
-        <div>
+        <div className={"row"}>
             {
                 reviews.length > 0 &&
                 reviews.map((r, nth) =>
-                    <MovieReviewItem key={nth} review={r}/>)
+                    <div key={nth + "div"} className={"col-12"}>
+                        <MovieReviewItem key={nth} review={r} refresh={refresh}/>
+                    </div>
+                )
             }
         </div>
     )

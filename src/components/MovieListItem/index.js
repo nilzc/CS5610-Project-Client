@@ -1,3 +1,5 @@
+import MovieGallery from "../MovieGallery";
+
 const MovieListItem = ({
                            list = {
                                _id: "1",
@@ -8,7 +10,7 @@ const MovieListItem = ({
     return (
         <div>
             <div>ListName: {list.listName}</div>
-            <div>Movies: {list.movies}</div>
+            <MovieGallery movies={list.movies} posterOnClickHandler={() => {}}/>
             <button className={"btn btn-primary"} onClick={() => onClickHandler(list)}>Action</button>
         </div>
     )
