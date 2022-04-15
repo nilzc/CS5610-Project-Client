@@ -1,21 +1,49 @@
 import {useParams} from "react-router-dom";
 import * as movieServices from "../../services/movieServices";
-import {useEffect, useState} from "react";
+import * as reviewServices from "../../services/reviewServices";
+import * as errorServices from "../../services/errorServices";
+import {useCallback, useEffect, useState} from "react";
 import MovieItem from "../../components/MovieItem";
+import MovieReviews from "../../components/MovieReviews";
+import CreateReview from "../../components/CreateReview";
 
 const MovieDetailsScreen = () => {
     let params = useParams();
+    const movieId = params.mid;
     const [movie, setMovie] = useState({});
-    const findMovie = () => {
-        movieServices.findMovieDetail(params.mid)
-            .then((m) => setMovie(m))
-            .catch(err => alert(err.response.data.error))
-    }
-    useEffect(findMovie, [params.mid])
+    const [reviews, setReviews] = useState([]);
+    const findMovie = useCallback(
+        () => {
+            movieServices.findMovieDetail(movieId)
+                .then((m) => setMovie(m))
+                .catch(errorServices.alertError)
+        }, [movieId]
+    )
+    const findReviews = useCallback(
+        () => {
+            reviewServices.findAllReviewsOfMovie(movieId)
+                .then(reviews => setReviews(reviews))
+                .catch(errorServices.alertError)
+        }, [movieId]
+    )
+    const init = useCallback(
+        async () => {
+            await findMovie();
+            await findReviews();
+        }, [findMovie, findReviews]
+    )
+    useEffect(init, [init])
     return (
-        <div>
-            Movie details page (change the content below with more detailed components):
-            <MovieItem movie={movie} posterOnClickHandler={() => {}}/>
+        <div className={"row"}>
+            <div className={"col-2 p-0"}>
+                <MovieItem movie={movie} posterOnClickHandler={() => {}}/>
+            </div>
+            <div className={"col-12"}>
+                <MovieReviews reviews={reviews} refresh={findReviews}/>
+            </div>
+            <div className={"col-12"}>
+                <CreateReview movieId={movieId} refresh={findReviews}/>
+            </div>
         </div>
     )
 };

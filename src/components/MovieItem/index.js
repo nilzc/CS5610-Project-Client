@@ -9,7 +9,7 @@ const MovieItem = ({
         movie.poster_path ? `${process.env.REACT_APP_MOVIE_BASE_URL}/w342/${movie.poster_path}` : "";
     return (
         // we can have multiple clickable elements, each of them can have a handler provided by the parent
-        <div className={"col-3 card"} onClick={() => posterOnClickHandler(movie)}>
+        <div className={"card border-0"} onClick={() => posterOnClickHandler(movie)}>
             <img className={"card-img-top"} src={posterPath} alt={"Poster Not Found"}/>
             <div className={"card-body"}>
                 <h5 className={"card-title"}>{movie.title}</h5>

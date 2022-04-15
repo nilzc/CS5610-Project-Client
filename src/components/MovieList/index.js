@@ -4,7 +4,7 @@ const MovieList = ({
                        lists = [{
                            _id: "1",
                            listName: "My List",
-                           movies: ["1726", "10138", "68721"]
+                           movies: []
                        }], listItemOnClickHandler
                    }) => {
     return (
