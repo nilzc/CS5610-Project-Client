@@ -9,12 +9,11 @@ import * as listServices from "../../services/listServices";
 import * as userServices from "../../services/userService";
 import * as reviewServices from "../../services/reviewServices";
 import * as errorServices from "../../services/errorServices";
-import * as movieServices from "../../services/movieServices";
 import {MY} from "../../services/constants";
 import EditProfile from "./EditProfile";
 import MovieReviews from "../../components/MovieReviews";
 
-const MyProfileScreen = () => {
+const MyProfileScreen = ({navigation}) => {
     const loggedIn = useSelector(isLoggedIn);
     // declare all fields here to avoid undefined value
     const [user, setUser] = useState({
@@ -46,43 +45,28 @@ const MyProfileScreen = () => {
     );
     const findLists = useCallback(
         () => {
-            listServices.findAllListsOwnedByUser(MY)
-                .then(lists => {
-                    Promise.all(
-                        lists.map(async l => {
-                            l.movies = await Promise.all(l.movies.map(async mid => await movieServices.findMovieDetail(mid)));
-                            return l;
-                        })
-                    ).then(ls => setMovieLists(ls));
-                })
-                .catch(e => alert(e.response.data.error))
+            listServices.findAllListsOwnedByUserWithMovieDetails(MY)
+                .then(lists => setMovieLists(lists))
+                .catch(errorServices.alertError);
         }, []
     );
     const findReviews = useCallback(
         () => {
-            reviewServices.findAllReviewsOwnedByUser(MY)
-                .then(rs => {
-                    // find movie details and insert to reviews
-                    Promise.all(
-                        rs.map(async r => {
-                            r.movie = await movieServices.findMovieDetail(r.movieId);
-                            return r;
-                        })
-                    ).then(rs => setReviews(rs))
-                })
+            reviewServices.findAllReviewsOwnedByUserWithMovieDetails(MY)
+                .then(rs => setReviews(rs))
                 .catch(errorServices.alertError);
         }, []
     )
     const init = useCallback(
         async () => {
             if (!loggedIn) {
-                navigate("/login");
+                await navigation.navigate("/login");
                 return;
             }
             await findProfile();
             await findLists();
             await findReviews();
-        }, [findLists, findProfile, findReviews, loggedIn, navigate]
+        }, [findLists, findProfile, findReviews, loggedIn, navigation]
     )
     useEffect(init, [init]);
     return (

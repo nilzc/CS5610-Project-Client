@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as movieServices from "./movieServices";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 const MOVIE_URL = `${BASE_URL}/api/movies`
@@ -31,4 +32,12 @@ export const deleteReview = (uid, rid) => {
 export const findAllReviewsOwnedByUser = (uid) => {
     return api.get(`${USER_URL}/${uid}/movie-reviews`)
         .then(response => response.data);
+}
+export const findAllReviewsOwnedByUserWithMovieDetails = async (uid) => {
+    let reviews = await findAllReviewsOwnedByUser(uid);
+    reviews = await Promise.all(reviews.map(async r => {
+        r.movie = await movieServices.findMovieDetail(r.movieId);
+        return r;
+    }));
+    return reviews;
 }
