@@ -28,3 +28,7 @@ export const findMovieDetail = (mid) => {
     return axios.get(`${MOVIE_URL}/${mid}`)
         .then(response => response.data);
 }
+export const getRecommendationsByMovie = (mid, page) => {
+    return axios.get(`${MOVIE_URL}/${mid}/recommendations/${page}`)
+        .then(response => response.data.results);
+}
