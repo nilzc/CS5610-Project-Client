@@ -45,7 +45,7 @@ const HomeScreen = () => {
     }
     useEffect(init, [dispatch, loggedIn, userId])
     return (
-        <div className={"col-12"}>
+        <div className={"col-12"} style={{marginTop: '75px'}}>
             {
                 recommendations &&
                 <div>

@@ -18,7 +18,7 @@ const LargeInfoCard = () => {
           <Col sm={7} md={8} lg={8} xxl={6}>
             <section className="mt-4">
               <div className="pt-4">
-                <h2>Name of Movie, TV Shows</h2>
+                <h2>Name of Movie, TV Shows, Actors</h2>
                 <div className="mt-4">
                   <span className="pc-pgtype">TV-MA</span>
                   <span className="ps-2 pc-genre">
