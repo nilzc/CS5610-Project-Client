@@ -3,10 +3,12 @@ import NavigationBar from "./components/NavigationBar";
 
 function App() {
   return (
+    <>
+      <NavigationBar/>
       <div className={"container"}>
-          <NavigationBar/>
           <Outlet/>
       </div>
+    </>
   );
 }
 

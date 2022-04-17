@@ -1,8 +1,10 @@
 import React from "react";
-
+import {useSelector} from "react-redux";
+import  {isLoggedIn} from "../../../redux/selectors";
 import "./index.css";
 
 const Footer = () => {
+  const loggedIn = useSelector(isLoggedIn);
   return (
     <>
       <footer class="footer-section">
@@ -63,34 +65,35 @@ const Footer = () => {
                   </div>
                   <ul>
                     <li>
-                      <a href="/#">Home</a>
+                      <a href="/home">Home</a>
                     </li>
                     <li>
-                      <a href="/#">Random</a>
+                      <a href="/search">Search Movie</a>
+                    </li>
+                    {!loggedIn && <>
+                    <li>
+                      <a href="/login">Login</a>
                     </li>
                     <li>
-                      <a href="/#">Services</a>
+                      <a href="/register">Register</a>
+                    </li>
+                    </>}
+                    {loggedIn && <>
+                    <li>
+                      <a href="/profile">Profile</a>
                     </li>
                     <li>
-                      <a href="/#">Movies</a>
+                      <a href="/list/new">Create List</a>
+                    </li>
+                    </>}
+                    <li>
+                      <a href="https://github.com/ZhuochengLin/CS5610-Project-Client">Github FrontEnd</a>
                     </li>
                     <li>
-                      <a href="/#">TV Shows</a>
-                    </li>
-                    <li>
-                      <a href="/#">About us</a>
-                    </li>
-                    <li>
-                      <a href="/#">Random</a>
-                    </li>
-                    <li>
-                      <a href="/#">Expert Team</a>
+                      <a href="https://github.com/ZhuochengLin/CS5610-Project-Server">Github BackEnd</a>
                     </li>
                     <li>
                       <a href="/#">Contact us</a>
-                    </li>
-                    <li>
-                      <a href="/#">Latest Popular</a>
                     </li>
                   </ul>
                 </div>

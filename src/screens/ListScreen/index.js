@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 const ListScreen = () => {
     let params = useParams();
     return (
-        <div>
+        <div >
             List id: {params.lid ? params.lid : ""}
         </div>
     )
