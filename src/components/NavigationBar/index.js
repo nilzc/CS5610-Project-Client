@@ -19,9 +19,9 @@ const NavigationBar = () => {
     }
     return (
         <>
-        <Navbar bg="light" expand="lg" fixed="top">
+        <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#landingpage">LPQK Movies</Navbar.Brand>
+          <Navbar.Brand>LPQK Movies</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

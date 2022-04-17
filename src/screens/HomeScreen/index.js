@@ -45,7 +45,7 @@ const HomeScreen = () => {
     }
     useEffect(init, [dispatch, loggedIn, userId])
     return (
-        <div className={"col-12 mt-4"}>
+        <div className={"col-12"}>
             {
                 recommendations &&
                 <div>

@@ -70,7 +70,7 @@ const MyProfileScreen = ({navigation}) => {
     )
     useEffect(init, [init]);
     return (
-        <div className="mt-5">
+        <div>
             My Profile
             <div>
                 <Link to={""}>MyProfile</Link>
