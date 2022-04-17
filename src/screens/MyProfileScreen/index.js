@@ -70,7 +70,7 @@ const MyProfileScreen = ({navigation}) => {
     )
     useEffect(init, [init]);
     return (
-        <div>
+        <div style={{marginTop: '75px'}}>
             My Profile
             <div>
                 <Link to={""}>MyProfile</Link>

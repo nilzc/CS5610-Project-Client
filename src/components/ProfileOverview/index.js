@@ -3,7 +3,7 @@ const ProfileOverview = ({
                                  {username: "Dummy", firstName: "Harry", lastName: "Potter", phone: ""}
                          }) => {
     return (
-        <div style={{marginTop: '20px'}}>
+        <div>
             Public:
             {user.username && <div>Username: {user.username}</div>}
             {user.firstName && <div>First Name: {user.firstName}</div>}
