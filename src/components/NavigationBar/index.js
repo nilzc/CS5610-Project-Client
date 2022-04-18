@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {isLoggedIn} from "../../redux/selectors";
 import {logout} from "../../redux/actions";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import React from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 
@@ -17,6 +17,7 @@ const NavigationBar = () => {
             })
             .catch(err => err.response.data.error)
     }
+    const location = useLocation();
     return (
         <>
         <Navbar bg="light" expand="lg">
@@ -25,13 +26,13 @@ const NavigationBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/home">Home</Nav.Link>
-              <Nav.Link href="/search">Search Movie</Nav.Link>
+              <Nav.Link href="/home"  className={`nav-link ${location.pathname.indexOf('home') >= 0 ? 'active':''}`} >Home</Nav.Link>
+              <Nav.Link href="/search"  className={`nav-link ${location.pathname.indexOf('search') >= 0 ? 'active':''}`}>Search Movie</Nav.Link>
               {loggedIn && <>
-                <Nav.Link  href="/profile">
+                <Nav.Link  className={`nav-link ${location.pathname.indexOf('profile') >= 0 ? 'active':''}`}  href="/profile">
                 Profile
               </Nav.Link>
-              <Nav.Link  href="/list/new">
+              <Nav.Link  className={`nav-link ${location.pathname.indexOf('new') >= 0 ? 'active':''}`}  href="/list/new">
               Create List
               </Nav.Link>
               </>}
@@ -51,7 +52,6 @@ const NavigationBar = () => {
               <Nav.Link href="/login">Login</Nav.Link>
               <Nav.Link  href="/register">Register</Nav.Link>
               <Nav.Link
-       
                 href="https://github.com/ZhuochengLin/CS5610-Project-Client"
               >
                 <i className="fab fa-github"></i>

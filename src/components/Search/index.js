@@ -6,7 +6,7 @@ const Search = ({inputOnChangeHandler, submitHandler}) => {
 
                 <div className="flexbox101">
                     <div className="search">
-                        <h4>Search For Movies</h4>
+                        <h4 className={`text-primary`}>Search For Movies</h4>
                         <div>
                         <input className="mb-3 mt-2" type="text" placeholder="Enter A Movie Name To Add In List :)" required  onChange={(e) => inputOnChangeHandler(e)} />
                         </div>

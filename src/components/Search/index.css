@@ -37,7 +37,7 @@
   background: transparent;
   width: 3rem;
   padding: 0.625rem;
-  border: solid 0.1875rem red;
+  border: solid #0275d8;
   outline: none;
   border-radius: 35px;
   transition: width 0.5s;
