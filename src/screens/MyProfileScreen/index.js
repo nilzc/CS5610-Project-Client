@@ -75,7 +75,7 @@ const MyProfileScreen = ({navigation}) => {
             <ul className="mt-4 mb-5 nav nav-pills nav-fill fs-4">
                 <li className="nav-item">
                     <Link to=""
-                          className={`nav-link w-75 ${(location.pathname.indexOf('lists') < 0 ) && (location.pathname.indexOf('edit') < 0 )? 'active':''}`}>
+                          className={`nav-link w-75 ${(location.pathname.indexOf('lists') < 0 ) && (location.pathname.indexOf('edit') < 0 ) && (location.pathname.indexOf('reviews') < 0 ) ? 'active':''}`}>
                         My Profile</Link>
                 </li>
                 <li className="nav-item">
@@ -87,6 +87,11 @@ const MyProfileScreen = ({navigation}) => {
                     <Link to="s/edit"
                           className={`nav-link w-75  ${location.pathname.indexOf('edit') >= 0 ? 'active':''}`}>
                         Edit Profile</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="s/reviews"
+                          className={`nav-link w-75  ${location.pathname.indexOf('reviews') >= 0 ? 'active':''}`}>
+                        My Reviews</Link>
                 </li>
             </ul>
             <br/>
