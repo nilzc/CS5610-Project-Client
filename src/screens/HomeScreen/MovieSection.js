@@ -18,7 +18,10 @@ const MovieSection = ({findMoviesFromServer={}}) => {
     }
     useEffect(findMovies, [findMoviesFromServer, page]);
     return (
-        <MovieGallery movies={movies} posterOnClickHandler={posterOnClickHandler}/>
+        <div className={`list-group-item bg-light m-2 p-3`}>
+            <MovieGallery  movies={movies} posterOnClickHandler={posterOnClickHandler}/>
+        </div>
+
     )
 };
 export default MovieSection;

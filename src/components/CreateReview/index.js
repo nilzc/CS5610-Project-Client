@@ -18,23 +18,21 @@ const CreateReview = ({movieId, refresh}) => {
             .catch(errorServices.alertError);
     }
     return (
-        <div className={"row"}>
-            <h2 className={"col-12"}>
-                Add My Review
-            </h2>
-            <label className={"col-12"}>
+        <div className={"row m-3 mt-4"}>
+
+            <label className={"col-12 fw-bold m-1"}>
                 Rating: {review.rating}
                 <input type="range" className="form-range" min="0" max="10" value={review.rating}
                        onChange={(e) =>
                            setReview({...review, rating: e.target.value})}/>
             </label>
-            <label className={"col-12"}>
+            <label className={"col-12 fw-bold m-1"}>
                 Review:
                 <textarea className={"form-control"} rows={3} value={review.review}
                           onChange={(e) =>
                               setReview({...review, review: e.target.value})}/>
             </label>
-            <div className={"col-12"}>
+            <div className={"col-12 m-2"} align={`right`}>
                 <button className={"btn btn-primary"} onClick={createReview}>Submit</button>
             </div>
         </div>

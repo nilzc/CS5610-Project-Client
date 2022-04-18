@@ -18,23 +18,27 @@ const MovieReviewItem = ({
             .catch(errorServices.alertError);
     }
     return (
-        <div className={"row"}>
-            {
-                review.movie &&
-                <div className={"col-2"}>
-                    <MovieItem movie={review.movie} posterOnClickHandler={() => {}}/>
-                </div>
-            }
-            <div className="col card">
-                <div className="card-body">
-                    <h5 className="card-title">User: {review.postedBy.username}</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">Rating: {review.rating}</h6>
-                    <p className="card-text">{review.review}</p>
-                    {
-                        isMyReview &&
-                        <button className={"btn btn-warning"}
-                                onClick={deleteReview}>Delete</button>
-                    }
+        <div className={"row d-flex flex-row justify-content-between bg-light list-group-item p-0"}>
+            {/*{*/}
+            {/*    review.movie &&*/}
+            {/*    <div className={"col-1 bg-light"}>*/}
+            {/*        <MovieItem movie={review.movie} posterOnClickHandler={() => {}}/>*/}
+            {/*    </div>*/}
+            {/*}*/}
+            <div className="col-12 card border-0 bg-light">
+                <div className="card-body d-flex justify-content-between">
+                    <div>
+                        <h5 className="card-title p-1">User: {review.postedBy.username}</h5>
+                        <h6 className="card-subtitle text-muted p-1 ">Rating: {review.rating}</h6>
+                        <p className="card-text p-1">{review.review}</p>
+                    </div>
+                    <div>
+                        {
+                            isMyReview &&
+                            <button className={"btn btn-danger"}
+                                    onClick={deleteReview}>Delete</button>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

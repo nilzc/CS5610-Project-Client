@@ -1,6 +1,6 @@
 import {useSelector} from "react-redux";
 import {isLoggedIn} from "../../redux/selectors";
-import {Link, Route, Routes, useNavigate} from "react-router-dom";
+import {Link, Route, Routes, useNavigate, useLocation} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
 import * as authService from "../../services/authServices";
 import ProfileOverview from "../../components/ProfileOverview";
@@ -21,6 +21,7 @@ const MyProfileScreen = ({navigation}) => {
     const [movieLists, setMovieLists] = useState([]);
     const [reviews, setReviews] = useState([]);
     const navigate = useNavigate();
+    const location = useLocation();
     const editInputOnChangeHandler = (e, field) => {
         const tempUser = {...user};
         tempUser[field] = e.target.value;
@@ -70,16 +71,27 @@ const MyProfileScreen = ({navigation}) => {
     )
     useEffect(init, [init]);
     return (
-        <div>
-            <h3>My Profile</h3>
-            <div className={`d-flex fs-3`} align={`center`}>
-                <Link className={`col-4`} to={""}>MyProfile</Link>
-                <Link className={`col-4`} to={"s/lists"}>MyLists</Link>
-                <Link className={`col-4`} to={"s/edit"}>Edit</Link>
-            </div>
+        <div className={`m-3`}>
+            <ul className="mt-4 nav nav-pills nav-fill fs-4">
+                <li className="nav-item">
+                    <Link to=""
+                          className={`nav-link ${(location.pathname.indexOf('lists') < 0 ) && (location.pathname.indexOf('edit') < 0 )? 'active':''}`}>
+                        My Profile</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="s/lists"
+                          className={`nav-link ${location.pathname.indexOf('lists') >= 0 ? 'active':''}`}>
+                        My Lists</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="s/edit"
+                          className={`nav-link ${location.pathname.indexOf('edit') >= 0 ? 'active':''}`}>
+                        Edit Profile</Link>
+                </li>
+            </ul>
             <br/>
             <Routes>
-                <Route index element={<ProfileOverview user={user} loggedIn={loggedIn}/>}/>
+                <Route index element={<ProfileOverview user={user} />}/>
                 <Route path={"s/lists"} element={<MovieList lists={movieLists} listItemOnClickHandler={(l) => {}}/>}/>
                 <Route path={"s/edit"} element={<EditProfile user={user} inputOnChangeHandler={editInputOnChangeHandler} saveOnClickHandler={editSaveOnClickHandler}/>}/>
                 <Route path={"s/reviews"} element={<MovieReviews reviews={reviews} refresh={findReviews}/>}/>

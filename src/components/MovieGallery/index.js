@@ -8,7 +8,7 @@ const MovieGallery = ({
                           }], posterOnClickHandler, addMovieOnClickHandler
                       }) => {
     return (
-        <div className={"row"}>
+        <div className={"row p-1 m-1"}>
             {
                 movies && movies.map((movie, nth) =>
                     <div className={"col-2"} key={nth}>
