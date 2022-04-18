@@ -13,21 +13,26 @@ const RegisterScreen = () => {
             .catch(err => alert(err.response.data.error));
     }
     return (
-        <div>
-            <h1>Register</h1>
-            <label className={"form-label"}>
-                Username:
-                <input className={"form-control"} type={"text"}
-                       onChange={(e) =>
-                           setUserCredential({...userCredential, username: e.target.value})}/>
-            </label>
-            <label className={"form-label"}>
-                Password:
-                <input className={"form-control"} type={"password"}
-                       onChange={(e) =>
-                           setUserCredential({...userCredential, password: e.target.value})}/>
-            </label>
-            <button className={"btn btn-primary"} onClick={registerButtonOnClick}>Register</button>
+        <div align={`center`} className={`m-3 p-2`}>
+            <h3 className={`text-primary`}>Register</h3>
+            <div>
+                <label className={"form-label fw-bold m-1"} align={`left`}>
+                    Username:
+                    <input className={"form-control m-1"} type={"text"}
+                           onChange={(e) =>
+                               setUserCredential({...userCredential, username: e.target.value})}/>
+                </label>
+            </div>
+            <div>
+                <label className={"form-label fw-bold m-1"} align={`left`}>
+                    Password:
+                    <input className={"form-control m-1"} type={"password"}
+                           onChange={(e) =>
+                               setUserCredential({...userCredential, password: e.target.value})}/>
+                </label>
+            </div>
+
+            <button className={"btn btn-primary m-3"} onClick={registerButtonOnClick}>Register</button>
         </div>
     )
 };

@@ -11,7 +11,7 @@ const MovieGallery = ({
         <div className={"row"}>
             {
                 movies && movies.map((movie, nth) =>
-                    <div className={"col-2"} key={nth}>
+                    <div className={"col-2 align-content-stretch d-flex"} key={nth}>
                         <MovieItem key={movie.id} movie={movie} posterOnClickHandler={posterOnClickHandler} addMovieOnClickHandler={addMovieOnClickHandler}/>
                     </div>
                 )

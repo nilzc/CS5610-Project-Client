@@ -45,21 +45,21 @@ const HomeScreen = () => {
     }
     useEffect(init, [dispatch, loggedIn, userId])
     return (
-        <div className={"col-12"}>
+        <div className={"col-12 list-group "} align={`;eft`}>
             {
                 recommendations &&
-                <div>
+                <div className={`m-1 p1 text-primary`}>
                     You liked {myLatestMovie}, you may also like:
                     <MovieGallery movies={recommendations} posterOnClickHandler={(movie) => {navigate(`/details/${movie.id}`);}}/>
                 </div>
             }
-            <h1>Popular Movies</h1>
-            <MovieSection findMoviesFromServer={movieServices.findPopularMovies}/>
-            <h1>Now Playing</h1>
+            <h4 className={`text-primary m-1 p-1`}>Popular Movies</h4>
+            <MovieSection  findMoviesFromServer={movieServices.findPopularMovies}/>
+            <h4 className={`text-primary m-1 p-1`}>Now Playing</h4>
             <MovieSection findMoviesFromServer={movieServices.findNowPlayingMovies}/>
-            <h1>Top Rated</h1>
+            <h4 className={`text-primary m-1 p-1`}> Top Rated</h4>
             <MovieSection findMoviesFromServer={movieServices.findTopRatedMovies}/>
-            <h1>Upcoming</h1>
+            <h4 className={`text-primary m-1 p-1`}>Upcoming</h4>
             <MovieSection findMoviesFromServer={movieServices.findUpcomingMovies}/>
         </div>
     )

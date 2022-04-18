@@ -34,15 +34,19 @@ const MovieDetailsScreen = () => {
     )
     useEffect(init, [init])
     return (
-        <div className={"row"}>
-            <div className={"col-2 p-0"}>
+        <div className={"row d-flex justify-content-between m-3 p-2"}>
+            <div className={"col-3 m-3 p-2"}>
                 <MovieItem movie={movie} posterOnClickHandler={() => {}}/>
             </div>
-            <div className={"col-12"}>
-                <MovieReviews reviews={reviews} refresh={findReviews}/>
-            </div>
-            <div className={"col-12"}>
-                <CreateReview movieId={movieId} refresh={findReviews}/>
+            <div className={"col-7 m-3 bg-light"}>
+                <div className={`m-3`}>
+                    <h3 className={`text-primary`}>Reviews</h3>
+                    <MovieReviews reviews={reviews} refresh={findReviews}/>
+                </div>
+                <div className={`m-3`}>
+                    <h3 className={"text-primary mt-5"}>Add My Review</h3>
+                    <CreateReview movieId={movieId} refresh={findReviews}/>
+                </div>
             </div>
         </div>
     )

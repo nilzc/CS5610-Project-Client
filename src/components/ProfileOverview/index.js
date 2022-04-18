@@ -1,16 +1,34 @@
+import {useSelector} from "react-redux";
+import {isLoggedIn} from "../../redux/selectors";
 const ProfileOverview = ({
                              user =
                                  {username: "Dummy", firstName: "Harry", lastName: "Potter", phone: ""}
                          }) => {
+    const loggedIn = useSelector(isLoggedIn);
+
     return (
-        <div>
-            Public:
-            {user.username && <div>Username: {user.username}</div>}
-            {user.firstName && <div>First Name: {user.firstName}</div>}
-            {user.lastName && <div>Last Name: {user.lastName}</div>}
-            Private:
-            {user.phone && <div>Phone (private): {user.phone}</div>}
+        <div align={`center`}>
+            <div>
+                <h4 className={`list-group m-2 col-3 text-primary`} align={`left`}>Public:</h4>
+                {user.username &&
+                    <div className={`list-group-item fw-bold col-3 bg-light`}>Username:<span className={`fw-normal`}>  {user.username}</span></div>
+                }
+                {user.firstName &&
+                    <div className={`list-group-item fw-bold col-3 bg-light`}>First Name:<span className={`fw-normal ps-1`}>  {user.firstName}</span></div>
+                }
+                {user.lastName &&
+                    <div className={`list-group-item fw-bold col-3 bg-light`}>Last Name:<span className={`fw-normal ps-1`}>  {user.lastName}</span></div>
+                }
+            </div>
+            <br/>
+            {loggedIn && <div>
+                <h3 className={`list-group m-2 col-3 text-primary`} align = {`left`}>Private:</h3>
+                {user.phone &&
+                    <div className={`list-group-item fw-bold col-3 bg-light`}>Phone Number:<span className={`fw-normal ps-1`}>{user.phone}</span></div>
+                }
+            </div>}
         </div>
+
     )
 };
 export default ProfileOverview;
