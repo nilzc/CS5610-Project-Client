@@ -10,7 +10,7 @@ const MovieItem = ({
     return (
         // we can have multiple clickable elements, each of them can have a handler provided by the parent
         <div className={"card border-0 bg-light h-100"} onClick={() => posterOnClickHandler(movie)}>
-            <img className={"card-img-top "}  style={{height:'60vh'}} src={posterPath} alt={"Poster Not Found"}/>
+            <img className={"card-img-top "}  style={{height:'50vh'}} src={posterPath} alt={"Poster Not Found"}/>
             <div className={"card-body m-0 p-1"} align={`center`}>
                 <h5 className={"card-title fs-6 fw-bold"}>{movie.title}</h5>
                 <h6 className={"card-subtitle"}>{movie.release_date}</h6>
