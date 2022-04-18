@@ -10,7 +10,7 @@ const MovieSection = ({findMoviesFromServer={}}) => {
     const findMovies = () => {
         findMoviesFromServer(page)
             // TODO: slice is for simplicity, remove slice when you're working on this component
-            .then((ms) => setMovies(ms.slice(0, 4)))
+            .then((ms) => setMovies(ms.slice(0, 6)))
             .catch(e => alert(e.response.data));
     }
     const posterOnClickHandler = (movie) => {
