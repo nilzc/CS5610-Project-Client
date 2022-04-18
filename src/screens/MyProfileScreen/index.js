@@ -72,20 +72,20 @@ const MyProfileScreen = ({navigation}) => {
     useEffect(init, [init]);
     return (
         <div className={`m-3`}>
-            <ul className="mt-4 nav nav-pills nav-fill fs-4">
+            <ul className="mt-4 mb-5 nav nav-pills nav-fill fs-4">
                 <li className="nav-item">
                     <Link to=""
-                          className={`nav-link ${(location.pathname.indexOf('lists') < 0 ) && (location.pathname.indexOf('edit') < 0 )? 'active':''}`}>
+                          className={`nav-link w-75 ${(location.pathname.indexOf('lists') < 0 ) && (location.pathname.indexOf('edit') < 0 )? 'active':''}`}>
                         My Profile</Link>
                 </li>
                 <li className="nav-item">
                     <Link to="s/lists"
-                          className={`nav-link ${location.pathname.indexOf('lists') >= 0 ? 'active':''}`}>
+                          className={`nav-link  w-75  ${location.pathname.indexOf('lists') >= 0 ? 'active':''}`}>
                         My Lists</Link>
                 </li>
                 <li className="nav-item">
                     <Link to="s/edit"
-                          className={`nav-link ${location.pathname.indexOf('edit') >= 0 ? 'active':''}`}>
+                          className={`nav-link w-75  ${location.pathname.indexOf('edit') >= 0 ? 'active':''}`}>
                         Edit Profile</Link>
                 </li>
             </ul>
