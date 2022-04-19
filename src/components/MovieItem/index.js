@@ -6,7 +6,7 @@ const MovieItem = ({
                        }, posterOnClickHandler, addMovieOnClickHandler
                    }) => {
     const posterPath =
-        movie.poster_path ? `${process.env.REACT_APP_MOVIE_BASE_URL}/w342/${movie.poster_path}` : "";
+        movie.poster_path ? `${process.env.REACT_APP_MOVIE_BASE_URL}/w342/${movie.poster_path}` : "https://i.ibb.co/LrdpnJ5/movie-poster-coming-soon-2.png";
     return (
         // we can have multiple clickable elements, each of them can have a handler provided by the parent
         <div className={"card border-0 bg-light"} onClick={() => posterOnClickHandler(movie)}>
