@@ -1,6 +1,8 @@
 import MovieListItem from "../MovieListItem";
 import { useState } from "react";
 import MovieGallery from "../MovieGallery";
+import { useNavigate } from "react-router-dom";
+
 
 const MovieList = ({
                        lists = [{
@@ -19,6 +21,10 @@ const MovieList = ({
         setShowListDetails(false);
         setListDetails({});
     }
+    const navigate = useNavigate();
+    const posterOnClickHandler = (li) => {
+        navigate('/details/'+li.id)
+    }
     return (
         <>
         
@@ -31,7 +37,7 @@ const MovieList = ({
             showListDetails &&
             <>
             <div className="fs-4 mb-2" onClick={goBackClickHandler}><i class="fas fa-angle-left"></i> <span className="align-items-center">Go Back</span></div>
-            <MovieGallery movies={listDetails.movies} posterOnClickHandler={() => {}}/>
+            <MovieGallery movies={listDetails.movies} posterOnClickHandler={posterOnClickHandler}/>
             </>
             }
         
