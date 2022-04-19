@@ -19,12 +19,14 @@ const PopularMoviesScreen = () => {
             setCurrPage(1);
             setPages([1, 2, 3, 4, 5]);
         } else if (pageNum >= pages.at(4)) {
+            pageNum = pages.at(4)
             const newPages = [];
             for (let i = 0; i < 5; i++) {
                 newPages.push(pageNum + i);
             }
             setPages(newPages);
         } else if (pageNum <= pages.at(0)) {
+            pageNum = pages.at(0);
             const newPages = [];
             for (let i = 4; i >= 0; i--) {
                 newPages.push(pageNum - i);
@@ -56,7 +58,7 @@ const PopularMoviesScreen = () => {
                 movies.length > 0 &&
                 <div className={"border bg-light p-3"}>
                     <MovieGallery movies={movies} posterOnClickHandler={(movie) => navigate(`/movies/${movie.id}`)}/>
-                    <nav className={"p-3"}>
+                    <nav className={"p-4 pb-1"}>
                         <ul className="pagination justify-content-center">
                             <li className="page-item">
                                 <div className="page-link" onClick={firstOnClick}>First</div>

@@ -14,8 +14,8 @@ const MovieItem = ({
                      onClick={() => posterOnClickHandler(movie)}>
                     <img className={"img-fluid"} src={posterPath} alt={"Poster Not Found"}/>
                 </div>
-                <div className={"p-2 ps-3 pe-3 rounded-bottom bg-white"}>
-                    <div style={{width: "100%", height: "0", paddingBottom: "58%"}}>
+                <div className={"p-2 ps-3 pe-3 rounded-bottom bg-white overflow-hidden"}>
+                    <div style={{width: "100%", height: "0", paddingBottom: "60%"}}>
                         <div className={"fs-5 fw-bold"}>{movie.title}</div>
                         <div className={"fs-6 text-secondary"}>{movie.release_date}</div>
                     </div>

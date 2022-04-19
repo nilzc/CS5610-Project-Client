@@ -49,7 +49,7 @@ const MovieDetailsScreen = () => {
             <div className={"col-3 m-3 p-2"}>
                 <MovieItem movie={movie} posterOnClickHandler={() => {}} addMovieOnClickHandler={() => {}}/>
             </div>
-            <div className={"col-7 m-3 bg-light"}>
+            <div className={"col-7 m-3 bg-light border"}>
                 <div className={`m-3`}>
                     <h3 className={`text-primary`}>Reviews</h3>
                     <MovieReviews reviews={reviews} refresh={findReviews}/>
@@ -61,12 +61,12 @@ const MovieDetailsScreen = () => {
             </div>
             {
                 recommendations.length > 0 &&
-                <>
+                <div className={"col-12 p-4"}>
                     <h4 className={"text-primary m-1 p-1"}>You May Also Like:</h4>
-                    <div className={"col-12 bg-light m-2 p-4"}>
+                    <div className={"col-12 bg-light m-2 p-4 border"}>
                         <MovieGallery movies={recommendations} posterOnClickHandler={(movie) => navigate(`/movies/${movie.id}`)}/>
                     </div>
-                </>
+                </div>
             }
         </div>
     )
