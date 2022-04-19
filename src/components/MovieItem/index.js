@@ -8,16 +8,25 @@ const MovieItem = ({
     const posterPath =
         movie.poster_path ? `${process.env.REACT_APP_MOVIE_BASE_URL}/w342/${movie.poster_path}` : "https://i.ibb.co/LrdpnJ5/movie-poster-coming-soon-2.png";
     return (
-        // we can have multiple clickable elements, each of them can have a handler provided by the parent
-        <div className={"card border-0 bg-light"} onClick={() => posterOnClickHandler(movie)}>
-            <div className={"col-12 overflow-hidden bg-black"} style={{width: "100%", height: "0", paddingBottom: "150%"}}>
-                <img className={"img-fluid"} src={posterPath} alt={"Poster Not Found"}/>
+        <div className={"col"}>
+            <div className={"shadow"}>
+                <div className={"overflow-hidden bg-black rounded-top"} style={{width: "100%", height: "0", paddingBottom: "150%"}}
+                     onClick={() => posterOnClickHandler(movie)}>
+                    <img className={"img-fluid"} src={posterPath} alt={"Poster Not Found"}/>
+                </div>
+                <div className={"p-2 ps-3 pe-3 rounded-bottom bg-white"}>
+                    <div style={{width: "100%", height: "0", paddingBottom: "58%"}}>
+                        <div className={"fs-5 fw-bold"}>{movie.title}</div>
+                        <div className={"fs-6 text-secondary"}>{movie.release_date}</div>
+                    </div>
+                </div>
+                {
+                    addMovieOnClickHandler &&
+                    <div className={"row justify-content-center pb-3"}>
+                        <button className={"col-8 btn btn-primary"} onClick={() => addMovieOnClickHandler(movie)}>Add Movie</button>
+                    </div>
+                }
             </div>
-            <div className={"card-body"}>
-                <h5 className={"card-title fs-6 fw-bold"}>{movie.title}</h5>
-                <h6 className={"card-subtitle"}>{movie.release_date}</h6>
-            </div>
-            {addMovieOnClickHandler && <button className={"btn btn-primary mb-2"} onClick={() => addMovieOnClickHandler(movie)}>Add Movie to List</button>}
         </div>
     )
 };

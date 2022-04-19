@@ -13,13 +13,13 @@ import MovieDetailsScreen from "./screens/MovieDetailsScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import PrivacyScreen from "./screens/PrivacyScreen";
-import ListScreen from "./screens/ListScreen";
 import MyProfileScreen from "./screens/MyProfileScreen";
 import createPersistStore from "./redux/store";
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/integration/react";
 import DummyComponentShowcaseScreen from "./screens/DummyComponentShowcaseScreen";
 import CreateNewListScreen from "./screens/CreateNewListScreen";
+import PopularMoviesScreen from "./screens/PopularMoviesScreen";
 
 const {store, persistor} = createPersistStore();
 
@@ -34,11 +34,11 @@ ReactDOM.render(
                         <Route path={"home"} element={<HomeScreen/>}/>
                         <Route path={"profile/:uid"} element={<ProfileScreen/>}/>
                         <Route path={"profile/*"} element={<MyProfileScreen/>}/>
-                        <Route path={"list/:lid"} element={<ListScreen/>}/>
                         <Route path={"list/new"} element={<CreateNewListScreen/>}/>
                         <Route path={"search"} element={<SearchScreen/>}/>
                         <Route path={"search/results"} element={<SearchResultsScreen/>}/>
-                        <Route path={"details/:mid"} element={<MovieDetailsScreen/>}/>
+                        <Route path={"movies/:mid"} element={<MovieDetailsScreen/>}/>
+                        <Route path={"movies/popular"} element={<PopularMoviesScreen/>}/>
                         <Route path={"login"} element={<LoginScreen/>}/>
                         <Route path={"register"} element={<RegisterScreen/>}/>
                         <Route path={"privacy"} element={<PrivacyScreen/>}/>

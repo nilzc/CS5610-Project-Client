@@ -94,10 +94,9 @@ const MyProfileScreen = ({navigation}) => {
                         My Reviews</Link>
                 </li>
             </ul>
-            <br/>
             <Routes>
                 <Route index element={<ProfileOverview user={user} />}/>
-                <Route path={"s/lists"} element={<MovieList lists={movieLists} />}/>
+                <Route path={"s/lists/*"} element={<MovieList lists={movieLists} />}/>
                 <Route path={"s/edit"} element={<EditProfile user={user} inputOnChangeHandler={editInputOnChangeHandler} saveOnClickHandler={editSaveOnClickHandler}/>}/>
                 <Route path={"s/reviews"} element={<MovieReviews reviews={reviews} refresh={findReviews}/>}/>
             </Routes>

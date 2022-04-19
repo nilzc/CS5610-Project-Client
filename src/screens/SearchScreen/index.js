@@ -16,9 +16,6 @@ const SearchScreen = () => {
     return (
         <div>
             <Search inputOnChangeHandler={inputOnChangeHandler} submitHandler={submitHandler}/>
-            <div>
-                query string is : {searchParams.get("query")}
-            </div>
         </div>
     )
 };

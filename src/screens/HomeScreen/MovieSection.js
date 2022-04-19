@@ -10,15 +10,15 @@ const MovieSection = ({findMoviesFromServer={}}) => {
     const findMovies = () => {
         findMoviesFromServer(page)
             // TODO: slice is for simplicity, remove slice when you're working on this component
-            .then((ms) => setMovies(ms.slice(0, 6)))
+            .then((ms) => setMovies(ms.slice(0, 5)))
             .catch(e => alert(e.response.data));
     }
     const posterOnClickHandler = (movie) => {
-        navigate(`/details/${movie.id}`);
+        navigate(`/movies/${movie.id}`);
     }
     useEffect(findMovies, [findMoviesFromServer, page]);
     return (
-        <div className={`list-group-item bg-light m-2 p-3`}>
+        <div className={`list-group-item bg-light m-2 p-4`}>
             <MovieGallery  movies={movies} posterOnClickHandler={posterOnClickHandler}/>
         </div>
 

@@ -23,13 +23,15 @@ const SearchResultsScreen = () => {
     useEffect(searchMovies, [page, searchParams]);
     const navigate = useNavigate();
     const posterOnClickHandler = (li) => {
-        navigate('/details/'+li.id)
+        navigate('/movies/'+li.id)
     }
-    
+    // TODO: add pagination
     return (
         <>
             <Search submitHandler={submitHandler} inputOnChangeHandler={inputOnChangeHandler}/>
-            <MovieGallery movies={results} posterOnClickHandler={posterOnClickHandler}/>
+            <div className={"bg-light p-4 border"}>
+                <MovieGallery movies={results} posterOnClickHandler={posterOnClickHandler}/>
+            </div>
         </>
     )
 };

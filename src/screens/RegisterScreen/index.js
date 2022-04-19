@@ -13,26 +13,40 @@ const RegisterScreen = () => {
             .catch(err => alert(err.response.data.error));
     }
     return (
-        <div align={`center`} className={`m-3 p-2`}>
-            <h3 className={`text-primary`}>Register</h3>
-            <div>
-                <label className={"form-label fw-bold m-1"} align={`left`}>
-                    Username:
-                    <input className={"form-control m-1"} type={"text"}
-                           onChange={(e) =>
-                               setUserCredential({...userCredential, username: e.target.value})}/>
-                </label>
+        <div className={"row m-3 p-2"}>
+            <div className={"col-12"}>
+                <div className={"row justify-content-center"}>
+                    <h1 className={`col-4 text-primary text-center`}>Register</h1>
+                </div>
             </div>
-            <div>
-                <label className={"form-label fw-bold m-1"} align={`left`}>
-                    Password:
-                    <input className={"form-control m-1"} type={"password"}
-                           onChange={(e) =>
-                               setUserCredential({...userCredential, password: e.target.value})}/>
-                </label>
+            <div className={"col-12"}>
+                <div className={"row justify-content-center"}>
+                    <label className={"col-4 form-label fw-bold m-1"} align={`left`}>
+                        Username:
+                        <input className={"form-control m-1"} type={"text"}
+                               onChange={(e) =>
+                                   setUserCredential({...userCredential, username: e.target.value})}/>
+                    </label>
+                </div>
+            </div>
+            <div className={"col-12"}>
+                <div className={"row justify-content-center"}>
+                    <label className={"col-4 form-label fw-bold m-1"} align={`left`}>
+                        Password:
+                        <input className={"form-control m-1"} type={"password"}
+                               onChange={(e) =>
+                                   setUserCredential({...userCredential, password: e.target.value})}/>
+                    </label>
+                </div>
             </div>
 
-            <button className={"btn btn-primary m-3"} onClick={registerButtonOnClick}>Register</button>
+            <div className={"col-12"}>
+                <div className={"row justify-content-center"}>
+                    <button className={"col-2 btn btn-primary m-3"} onClick={registerButtonOnClick}>Register</button>
+                </div>
+            </div>
+
+
         </div>
     )
 };

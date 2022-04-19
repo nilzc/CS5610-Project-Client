@@ -41,7 +41,7 @@ const CreateNewListScreen = () => {
           const newMovieList = !isFound ? [...movieSelected, movie] : movieSelected;
     
           if (isFound) {
-            alert("Movie is already in the list. Please, select a new movie to add to list.");
+            alert("Movie is already in the list.");
           }else{
             setMovieSelected(newMovieList);
           }
@@ -63,41 +63,44 @@ const CreateNewListScreen = () => {
     useEffect(checkLogin, [loggedIn, navigate]);
     
     return (
-        <div>
-            <div className={`mt-3 p-2`}>
+        <div className={"row"}>
+            <div className={`m-3`}>
                 <h3 className="mt-3 text-primary">List Name</h3>
                 <input className={"form-control w-25"} type={"text"}
                        onChange={(e) => setListName(e.target.value)} required placeholder="Give this list a name"/>
             </div>
-            <div className={`mt-3 p-2`}>
-                <Search inputOnChangeHandler={searchInputOnChangeHandler} />
+            <Search inputOnChangeHandler={searchInputOnChangeHandler} />
+            <div className={"m-3"}>
                 <MovieGallery movies={searchResults} posterOnClickHandler={(arg) => {}} addMovieOnClickHandler={addMovieOnClickHandler}/>
             </div>
 
-            <div className={`mt-3 p-2`}>
+            <div className={"m-3"}>
                 <h3 className="mt-3 text-primary">Movies In Your List</h3>
                 <ul className="list-group">
                     {movieSelected &&
                         movieSelected.map((litem, t) => {
                             return (
                                 <li className="mt-2 list-group-item d-flex align-items-start" key={t}>
-                                    <div className="cnls-image-container">
-                                        <img style={{maxHeight: '150px'}} src={`${litem.poster_path ? `${process.env.REACT_APP_MOVIE_BASE_URL}/w342/${litem.poster_path}` : ""}`} className="img-fluid" alt="Poster Not Found" />
+                                    <div className={"col-1"}>
+                                        <img src={`${litem.poster_path ? `${process.env.REACT_APP_MOVIE_BASE_URL}/w342/${litem.poster_path}` : ""}`} className="img-fluid" alt="Poster Not Found" />
                                     </div>
-                                    <div className="ms-4 fw-bold w-100">
+                                    <div className="col ms-4 w-100">
                                         <span className="fs-4">{litem.title}</span>
                                         <p className="fs-6"> Release Date: {litem.release_date}</p>
-                                        {litem.overview && <p className="fs-6">Description: {litem.overview}</p>}
+                                        {litem.overview && <p className="fs-6">Description: <span className={"text-secondary"}>{litem.overview}</span></p>}
                                     </div>
-                                    <div className="ms-4 fw-bold " style={{float: 'right', color: 'red'}}><span onClick={() => deleteMSOnClickHandler(litem)}><i className="fas fa-times"></i></span></div>
+                                    <div className="ms-4 fw-bold " style={{float: 'right', color: 'red'}}>
+                                        <i className="fas fa-times" onClick={() => deleteMSOnClickHandler(litem)}/>
+                                    </div>
                                 </li>
 
                             );
                         })}
                 </ul>
             </div>
-            <button className="btn btn-primary m-3 rounded-pill w-25 " align={`left`} onClick={submitHandler}>Submit</button>
-
+            <div className={"col-2 m-3"}>
+                <button className="btn btn-primary rounded-pill w-100" onClick={submitHandler}>Submit</button>
+            </div>
         </div>
     )
 };
