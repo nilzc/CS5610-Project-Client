@@ -28,9 +28,9 @@ const MovieReviewItem = ({
             <div className="col-12 card border-0 bg-light">
                 <div className="card-body d-flex justify-content-between">
                     <div>
-                        <h5 className="card-title p-1">User: {review.postedBy.username}</h5>
-                        <h6 className="card-subtitle text-muted p-1 ">Rating: {review.rating}</h6>
-                        <p className="card-text p-1">{review.review}</p>
+                        <h5 className="card-title p-1">{review.movie.original_title}</h5>
+                        <h6 className="card-subtitle text-muted p-1 ">Your Rating: {review.rating}</h6>
+                        <p className="card-text p-1">Review: {review.review}</p>
                     </div>
                     <div>
                         {
