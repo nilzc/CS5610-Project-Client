@@ -1,4 +1,4 @@
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import * as movieServices from "../../services/movieServices";
 import {useEffect, useState} from "react";
 import MovieGallery from "../../components/MovieGallery";
@@ -21,10 +21,15 @@ const SearchResultsScreen = () => {
         setInputString(e.target.value);
     }
     useEffect(searchMovies, [page, searchParams]);
+    const navigate = useNavigate();
+    const posterOnClickHandler = (li) => {
+        navigate('/details/'+li.id)
+    }
+    
     return (
         <>
             <Search submitHandler={submitHandler} inputOnChangeHandler={inputOnChangeHandler}/>
-            <MovieGallery movies={results} posterOnClickHandler={() => {}}/>
+            <MovieGallery movies={results} posterOnClickHandler={posterOnClickHandler}/>
         </>
     )
 };
