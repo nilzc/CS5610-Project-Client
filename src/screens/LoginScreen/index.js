@@ -29,7 +29,9 @@ const LoginScreen = () => {
                         Username:
                         <input className={"form-control m-1"} type={"text"}
                                onChange={(e) =>
-                                   setUserCredential({...userCredential, username: e.target.value})}/>
+                                   setUserCredential({...userCredential, username: e.target.value})}
+                               placeholder="username"
+                        />
                     </label>
                 </div>
             </div>
@@ -39,7 +41,9 @@ const LoginScreen = () => {
                         Password:
                         <input className={"form-control m-1"} type={"password"}
                                onChange={(e) =>
-                                   setUserCredential({...userCredential, password: e.target.value})}/>
+                                   setUserCredential({...userCredential, password: e.target.value})}
+                               placeholder="password"
+                        />
                     </label>
                 </div>
             </div>
