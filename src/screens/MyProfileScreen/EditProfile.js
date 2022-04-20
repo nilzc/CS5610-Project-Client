@@ -12,28 +12,32 @@ const EditProfile = ({
                         <label className={"form-label m-2 fw-bold"} align={`left`}>
                             Username:
                             <input className={"form-control"} type={"text"} value={user.username ? user.username : ""}
-                                   onChange={(e) => inputOnChangeHandler(e, "username")}/>
+                                   onChange={(e) => inputOnChangeHandler(e, "username")}
+                                placeholder="Enter username"/>
                         </label>
                     </div>
                     <div>
                         <label className={"form-label m-2  fw-bold"} align={`left`}>
                             First Name:
                             <input className={"form-control"} type={"text"} value={user.firstName ? user.firstName : ""}
-                                   onChange={(e) => inputOnChangeHandler(e, "firstName")}/>
+                                   onChange={(e) => inputOnChangeHandler(e, "firstName")}
+                            placeholder="Enter first name"/>
                         </label>
                     </div>
                     <div>
                         <label className={"form-label m-2  fw-bold"} align={`left`}>
                             Last Name:
                             <input className={"form-control"} type={"text"} value={user.lastName ? user.lastName : ""}
-                                   onChange={(e) => inputOnChangeHandler(e, "lastName")}/>
+                                   onChange={(e) => inputOnChangeHandler(e, "lastName")}
+                            placeholder="Enter last name"/>
                         </label>
                     </div>
                     <div>
                         <label className={"form-label m-2  fw-bold "} align={`left`}>
                             Phone:
                             <input className={"form-control"} type={"text"} value={user.phone ? user.phone : ""}
-                                   onChange={(e) => inputOnChangeHandler(e, "phone")}/>
+                                   onChange={(e) => inputOnChangeHandler(e, "phone")}
+                            placeholder="Enter phone number"/>
                         </label>
                     </div>
                     <button className={"btn btn-primary m-2 w-50"} onClick={saveOnClickHandler}>Save</button>
