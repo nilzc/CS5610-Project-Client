@@ -9,7 +9,6 @@ const MovieSection = ({findMoviesFromServer={}}) => {
     const [page, setPage] = useState(1);
     const findMovies = () => {
         findMoviesFromServer(page)
-            // TODO: slice is for simplicity, remove slice when you're working on this component
             .then((ms) => setMovies(ms.slice(0, 5)))
             .catch(e => alert(e.response.data));
     }

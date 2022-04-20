@@ -12,7 +12,6 @@ const NavigationBar = () => {
     const logoutButtonOnClick = () => {
         logout(dispatch)
             .then(() => {
-                navigate("/home");
                 alert("Logout successful!");
             })
             .catch(err => err.response.data.error)

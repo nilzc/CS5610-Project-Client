@@ -4,101 +4,73 @@ import {Link, Route, Routes, useNavigate, useLocation} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
 import * as authService from "../../services/authServices";
 import ProfileOverview from "../../components/ProfileOverview";
-import MovieList from "../../components/MovieList";
-import * as listServices from "../../services/listServices";
-import * as userServices from "../../services/userService";
-import * as reviewServices from "../../services/reviewServices";
 import * as errorServices from "../../services/errorServices";
-import {MY} from "../../services/constants";
+import {cloud} from "../../services/utils";
 import EditProfile from "./EditProfile";
-import MovieReviews from "../../components/MovieReviews";
+import MyLists from "./MyLists";
+import MyListDetails from "./MyListDetails";
+import "./style.css";
+import {fill} from "@cloudinary/url-gen/actions/resize";
+import {max} from "@cloudinary/url-gen/actions/roundCorners";
+import MyReviews from "./MyReviews";
 
 const MyProfileScreen = ({navigation}) => {
-    const loggedIn = useSelector(isLoggedIn);
-    // declare all fields here to avoid undefined value
-    const [user, setUser] = useState({
-        username: "", firstName: "", lastName: "", phone: ""});
-    const [movieLists, setMovieLists] = useState([]);
-    const [reviews, setReviews] = useState([]);
     const navigate = useNavigate();
+    const loggedIn = useSelector(isLoggedIn);
+    const [user, setUser] = useState({username: "", firstName: "", lastName: "", phone: ""});
     const location = useLocation();
-    const editInputOnChangeHandler = (e, field) => {
-        const tempUser = {...user};
-        tempUser[field] = e.target.value;
-        setUser(tempUser);
-    }
-    const editSaveOnClickHandler = (e) => {
-        userServices.updateUser(MY, user)
-            .then((response) => {
-                navigate("/profile");
-                alert("Profile updated!");
-                findProfile();
-        }).catch(err => alert(err.response.data.error));
-    }
     const findProfile = useCallback(
         () => {
             authService.profile().then((u) => {
                 // remove password
                 delete u["password"];
                 setUser(u);
-            }).catch(e => alert(e.response.data.error));
+            }).catch(errorServices.alertError);
         }, []
     );
-    const findLists = useCallback(
-        () => {
-            listServices.findAllListsOwnedByUserWithMovieDetails(MY)
-                .then(lists => setMovieLists(lists))
-                .catch(errorServices.alertError);
-        }, []
-    );
-    const findReviews = useCallback(
-        () => {
-            reviewServices.findAllReviewsOwnedByUserWithMovieDetails(MY)
-                .then(rs => setReviews(rs))
-                .catch(errorServices.alertError);
-        }, []
-    )
     const init = useCallback(
-        async () => {
+        () => {
             if (!loggedIn) {
-                await navigation.navigate("/login");
+                navigate("/login");
                 return;
             }
-            await findProfile();
-            await findLists();
-            await findReviews();
-        }, [findLists, findProfile, findReviews, loggedIn, navigation]
+            findProfile();
+        }, [findProfile, loggedIn, navigate]
     )
     useEffect(init, [init]);
     return (
-        <div className={`m-3`}>
-            <ul className="mt-4 mb-5 nav nav-pills nav-fill fs-4">
-                <li className="nav-item">
+        <div className={`row m-3 justify-content-center`}>
+            <div className={"col-12 header-image mb-5"}>
+                <div className={"w-100 position-relative rounded shadow"}
+                     style={{
+                         backgroundImage: `url(${cloud.image(user.headerImage).toURL()})`,
+                         backgroundSize: "cover", backgroundPosition: "center"
+                     }}>
+                    <img className={"position-absolute rounded-circle shadow border profile-photo"} src={cloud.image(user.profilePhoto).resize(fill(150, 150)).roundCorners(max()).toURL()} alt={"..."}/>
+                </div>
+            </div>
+            <div className="col-12 m-5 pt-3 ps-5 pe-5 nav-pills fs-4">
+                <div className={"row gx-5"}>
                     <Link to=""
-                          className={`nav-link w-75 ${(location.pathname.indexOf('lists') < 0 ) && (location.pathname.indexOf('edit') < 0 ) && (location.pathname.indexOf('reviews') < 0 ) ? 'active':''}`}>
+                          className={`col text-center nav-link ${(location.pathname.indexOf('lists') < 0 ) && (location.pathname.indexOf('edit') < 0 ) && (location.pathname.indexOf('reviews') < 0 ) ? 'active':''}`}>
                         My Profile</Link>
-                </li>
-                <li className="nav-item">
                     <Link to="s/lists"
-                          className={`nav-link  w-75  ${location.pathname.indexOf('lists') >= 0 ? 'active':''}`}>
+                          className={`col text-center nav-link ${location.pathname.indexOf('lists') >= 0 ? 'active':''}`}>
                         My Lists</Link>
-                </li>
-                <li className="nav-item">
                     <Link to="s/edit"
-                          className={`nav-link w-75  ${location.pathname.indexOf('edit') >= 0 ? 'active':''}`}>
+                          className={`col text-center nav-link ${location.pathname.indexOf('edit') >= 0 ? 'active':''}`}>
                         Edit Profile</Link>
-                </li>
-                <li className="nav-item">
                     <Link to="s/reviews"
-                          className={`nav-link w-75  ${location.pathname.indexOf('reviews') >= 0 ? 'active':''}`}>
+                          className={`col text-center nav-link ${location.pathname.indexOf('reviews') >= 0 ? 'active':''}`}>
                         My Reviews</Link>
-                </li>
-            </ul>
+                </div>
+            </div>
             <Routes>
-                <Route index element={<ProfileOverview user={user} />}/>
-                <Route path={"s/lists/*"} element={<MovieList lists={movieLists} />}/>
-                <Route path={"s/edit"} element={<EditProfile user={user} inputOnChangeHandler={editInputOnChangeHandler} saveOnClickHandler={editSaveOnClickHandler}/>}/>
-                <Route path={"s/reviews"} element={<MovieReviews reviews={reviews} refresh={findReviews}/>}/>
+                <Route index element={<ProfileOverview user={user}/>}/>
+                <Route path={"s/lists"} element={<MyLists/>}/>
+                <Route path={"s/lists/:lid"} element={<MyListDetails/>}/>
+                <Route path={"s/edit"} element={<EditProfile refresh={findProfile}/>}/>
+                <Route path={"s/reviews"} element={<MyReviews/>}/>
             </Routes>
         </div>
     )

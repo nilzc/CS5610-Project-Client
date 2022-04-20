@@ -3,7 +3,7 @@ import {isLoggedIn} from "../../redux/selectors";
 import {useState} from "react";
 import * as reviewServices from "../../services/reviewServices";
 import * as errorServices from "../../services/errorServices";
-import {MY} from "../../services/constants";
+import {MY} from "../../services/utils";
 
 const CreateReview = ({movieId, refresh}) => {
     const loggedIn = useSelector(isLoggedIn);
@@ -16,9 +16,10 @@ const CreateReview = ({movieId, refresh}) => {
         reviewServices.createReview(MY, review)
             .then((res) => refresh())
             .catch(errorServices.alertError);
+            setReview({movieId: movieId, rating: "0", review: ""});
     }
     return (
-        <div className={"row m-3 mt-4"}>
+        <div className={"row mt-4"}>
 
             <label className={"col-12 fw-bold m-1"}>
                 Rating: {review.rating}

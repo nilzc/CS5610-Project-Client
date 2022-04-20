@@ -4,7 +4,7 @@ import * as errorServices from "../../services/errorServices";
 import MovieGallery from "../../components/MovieGallery";
 import {useNavigate} from "react-router-dom";
 
-const PopularMoviesScreen = () => {
+const NowPlayingMoviesScreen = () => {
     const navigate = useNavigate();
     const [movies, setMovies] = useState([]);
     const [pages, setPages] = useState([1, 2, 3, 4, 5]);
@@ -45,26 +45,19 @@ const PopularMoviesScreen = () => {
     const nextOnClick = () => {
         changePage(currPage+1)
     }
-    const findPopularMovies = useCallback(
+    const findNowPlayingMovies = useCallback(
         () => {
-            movieServices.findPopularMovies(currPage).then(ms => setMovies(ms)).catch(errorServices.alertError);
+            movieServices.findNowPlayingMovies(currPage).then(ms => setMovies(ms)).catch(errorServices.alertError);
         }, [currPage]
     )
-    useEffect(findPopularMovies, [findPopularMovies]);
+    useEffect(findNowPlayingMovies, [findNowPlayingMovies]);
     return (
         <div className={"m-4"}>
-            <h1>Popular</h1>
+            <h1>Now Playing</h1>
             {
                 movies.length > 0 &&
                 <div className={"border bg-light p-3"}>
-                    {
-                        movies.length > 0 &&
-                        <MovieGallery movies={movies} posterOnClickHandler={(movie) => navigate(`/movies/${movie.id}`)}/>
-                    }
-                    {
-                        movies.length === 0 &&
-                        <div className={"fs-5 text-center"}>Sorry, no movies are found</div>
-                    }
+                    <MovieGallery movies={movies} posterOnClickHandler={(movie) => navigate(`/movies/${movie.id}`)}/>
                     <nav className={"p-4 pb-1"}>
                         <ul className="pagination justify-content-center">
                             <li className="page-item">
@@ -89,4 +82,4 @@ const PopularMoviesScreen = () => {
         </div>
     )
 };
-export default PopularMoviesScreen;
+export default NowPlayingMoviesScreen;

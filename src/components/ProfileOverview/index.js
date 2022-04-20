@@ -1,34 +1,65 @@
 import {useSelector} from "react-redux";
 import {isLoggedIn} from "../../redux/selectors";
+import {getDate} from "../../services/utils";
 const ProfileOverview = ({
                              user =
-                                 {username: "Dummy", firstName: "Harry", lastName: "Potter", phone: ""}
+                                 {username: "Dummy", firstName: "Harry", lastName: "Potter", phone: "", dateOfBirth: ""}
                          }) => {
     const loggedIn = useSelector(isLoggedIn);
-
     return (
-        <div align={`center`}>
-            <div>
-                <h4 className={`list-group m-2 col-3 text-primary`} align={`left`}>Public:</h4>
-                {user.username &&
-                    <div className={`list-group-item fw-bold col-3 bg-light`}>Username:<span className={`fw-normal`}>  {user.username}</span></div>
-                }
-                {user.firstName &&
-                    <div className={`list-group-item fw-bold col-3 bg-light`}>First Name:<span className={`fw-normal ps-1`}>  {user.firstName}</span></div>
-                }
-                {user.lastName &&
-                    <div className={`list-group-item fw-bold col-3 bg-light`}>Last Name:<span className={`fw-normal ps-1`}>  {user.lastName}</span></div>
-                }
+        <div className={"row justify-content-center"}>
+            <div className={"col-4"}>
+                <div className={"row list-group"}>
+                    <h4 className={"col-12 text-primary"}>Public:</h4>
+                    {user.username &&
+                        <div className={"col-12 list-group-item bg-light"}>
+                            <div className={"row"}>
+                                <div className={`col-4 fw-bold`}>Username:</div>
+                                <div className={"col-8"}>{user.username}</div>
+                            </div>
+                        </div>
+                    }
+                    {user.firstName &&
+                        <div className={"col-12 list-group-item bg-light"}>
+                            <div className={"row"}>
+                                <div className={`col-4 fw-bold`}>First Name:</div>
+                                <div className={"col-8"}>{user.firstName}</div>
+                            </div>
+                        </div>
+                    }
+                    {user.lastName &&
+                        <div className={"col-12 list-group-item bg-light"}>
+                            <div className={"row"}>
+                                <div className={`col-4 fw-bold`}>Last Name:</div>
+                                <div className={"col-8"}>{user.lastName}</div>
+                            </div>
+                        </div>
+                    }
+                    {
+                        loggedIn &&
+                        <>
+                            <h4 className={"text-primary mt-3"}>Private:</h4>
+                            {user.phone &&
+                                <div className={"col-12 list-group-item bg-light"}>
+                                    <div className={"row"}>
+                                        <div className={`col-4 fw-bold`}>Phone:</div>
+                                        <div className={"col-8"}>{user.phone}</div>
+                                    </div>
+                                </div>
+                            }
+                            {user.dateOfBirth &&
+                                <div className={"col-12 list-group-item bg-light"}>
+                                    <div className={"row"}>
+                                        <div className={`col-4 fw-bold`}>Birthday:</div>
+                                        <div className={"col-8"}>{user.dateOfBirth ? `${getDate(user.dateOfBirth)}` : "......"}</div>
+                                    </div>
+                                </div>
+                            }
+                        </>
+                    }
+                </div>
             </div>
-            <br/>
-            {loggedIn && <div>
-                <h3 className={`list-group m-2 col-3 text-primary`} align = {`left`}>Private:</h3>
-                {user.phone &&
-                    <div className={`list-group-item fw-bold col-3 bg-light`}>Phone Number:<span className={`fw-normal ps-1`}>{user.phone}</span></div>
-                }
-            </div>}
         </div>
-
     )
 };
 export default ProfileOverview;

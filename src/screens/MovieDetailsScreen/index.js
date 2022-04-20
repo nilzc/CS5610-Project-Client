@@ -32,7 +32,7 @@ const MovieDetailsScreen = () => {
     const findReviews = useCallback(
         () => {
             reviewServices.findAllReviewsOfMovie(movieId)
-                .then(reviews => setReviews(reviews))
+                .then(reviews => setReviews(reviews.slice(0,3)))
                 .catch(errorServices.alertError)
         }, [movieId]
     )
@@ -45,19 +45,21 @@ const MovieDetailsScreen = () => {
     )
     useEffect(init, [init])
     return (
-        <div className={"row d-flex justify-content-between m-3 p-2"}>
-            <div className={"col-3 m-3 p-2"}>
+        <div className={"row justify-content-between p-3"}>
+            <div className={"col-3"}>
                 <MovieItem movie={movie} posterOnClickHandler={() => {}} addMovieOnClickHandler={() => {}}/>
             </div>
-            <div className={"col-7 m-3 bg-light border"}>
-                <div className={`m-3`}>
+            <div className="ps-4 col-9">
+            <div className={"bg-light border p-2"}>
+                <div className={'m-3'}>
                     <h3 className={`text-primary`}>Reviews</h3>
-                    <MovieReviews reviews={reviews} refresh={findReviews}/>
+                    <MovieReviews reviews={reviews.slice(0,5)} refresh={findReviews}/>
                 </div>
-                <div className={`m-3`}>
+                <div className={'m-3'}>
                     <h3 className={"text-primary mt-5"}>Add My Review</h3>
                     <CreateReview movieId={movieId} refresh={findReviews}/>
                 </div>
+            </div>
             </div>
             {
                 recommendations.length > 0 &&

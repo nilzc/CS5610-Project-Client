@@ -6,7 +6,7 @@ const MovieReviews = ({reviews=[], refresh}) => {
             {
                 reviews.length > 0 &&
                 reviews.map((r, nth) =>
-                    <div key={nth + "div"} className={"col-12 list-group"}>
+                    <div key={nth + "div"} className={"col-12 p-0"}>
                         <MovieReviewItem key={nth} review={r} refresh={refresh}/>
                     </div>
                 )
