@@ -93,7 +93,12 @@ const HomeScreen = () => {
                 </Link>
             </div>
             <MovieSection  findMoviesFromServer={movieServices.findPopularMovies}/>
-            <h3 className={`text-primary m-1 p-1`}>Now Playing</h3>
+            <div className={"row m-0 align-items-end"}>
+                <h3 className={`col text-primary m-1 p-1`}>Now Playing</h3>
+                <Link to={"/movies/nowplaying"} className={"col text-end pe-4"}>
+                    <i className="fa-solid fa-ellipsis text-primary fs-3"/>
+                </Link>
+            </div>
             <MovieSection findMoviesFromServer={movieServices.findNowPlayingMovies}/>
             <h3 className={`text-primary m-1 p-1`}> Top Rated</h3>
             <MovieSection findMoviesFromServer={movieServices.findTopRatedMovies}/>
