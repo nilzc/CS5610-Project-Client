@@ -5,16 +5,13 @@ import {useCallback, useEffect, useState} from "react";
 import * as authService from "../../services/authServices";
 import ProfileOverview from "../../components/ProfileOverview";
 import * as errorServices from "../../services/errorServices";
-import {cloud} from "../../services/utils";
 import EditProfile from "./EditProfile";
 import MyLists from "./MyLists";
 import MyListDetails from "./MyListDetails";
-import "./style.css";
-import {fill} from "@cloudinary/url-gen/actions/resize";
-import {max} from "@cloudinary/url-gen/actions/roundCorners";
 import MyReviews from "./MyReviews";
+import ProfileImages from "../../components/ProfileImages";
 
-const MyProfileScreen = ({navigation}) => {
+const MyProfileScreen = () => {
     const navigate = useNavigate();
     const loggedIn = useSelector(isLoggedIn);
     const [user, setUser] = useState({username: "", firstName: "", lastName: "", phone: ""});
@@ -39,16 +36,11 @@ const MyProfileScreen = ({navigation}) => {
     )
     useEffect(init, [init]);
     return (
-        <div className={`row m-3 justify-content-center`}>
-            <div className={"col-12 header-image mb-5"}>
-                <div className={"w-100 position-relative rounded shadow"}
-                     style={{
-                         backgroundImage: `url(${cloud.image(user.headerImage).toURL()})`,
-                         backgroundSize: "cover", backgroundPosition: "center"
-                     }}>
-                    <img className={"position-absolute rounded-circle shadow border profile-photo"} src={cloud.image(user.profilePhoto).resize(fill(150, 150)).roundCorners(max()).toURL()} alt={"..."}/>
-                </div>
-            </div>
+        <div className={"row m-3 justify-content-center"}>
+            {
+                user &&
+                <ProfileImages profileOwner={user}/>
+            }
             <div className="col-12 m-5 pt-3 ps-5 pe-5 nav-pills fs-4">
                 <div className={"row gx-5"}>
                     <Link to=""
@@ -66,7 +58,7 @@ const MyProfileScreen = ({navigation}) => {
                 </div>
             </div>
             <Routes>
-                <Route index element={<ProfileOverview user={user}/>}/>
+                <Route index element={<ProfileOverview profileOwner={user}/>}/>
                 <Route path={"s/lists"} element={<MyLists/>}/>
                 <Route path={"s/lists/:lid"} element={<MyListDetails/>}/>
                 <Route path={"s/edit"} element={<EditProfile refresh={findProfile}/>}/>

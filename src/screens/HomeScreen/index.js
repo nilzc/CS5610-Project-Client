@@ -7,14 +7,12 @@ import * as errorServices from "../../services/errorServices";
 import * as userServices from "../../services/userService";
 import {useCallback, useEffect, useState} from "react";
 import {refresh} from "../../redux/actions";
-import {MY, resetScrollToTop} from "../../services/utils";
-import MovieGallery from "../../components/MovieGallery";
-import {Link, useNavigate} from "react-router-dom";
+import {MY} from "../../services/utils";
+import {Link} from "react-router-dom";
 import UserLists from "../../components/UserLists";
 
 const HomeScreen = () => {
     const loggedIn = useSelector(isLoggedIn);
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [users, setUsers] = useState([]);
     const [myLists, setMyLists] = useState([])
@@ -24,9 +22,6 @@ const HomeScreen = () => {
     const [topRatedMovies, setTopRatedMovies] = useState([]);
     const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
     const [upcomingMovies, setUpcomingMovies] = useState([]);
-    const posterOnClickHandler = (movie) => {
-        navigate(`/movies/${movie.id}`);
-    }
     const findMovies = useCallback(
         (func, setMovies) => {
             func(1).then((ms) => setMovies(ms.slice(0, 5)))
@@ -79,9 +74,7 @@ const HomeScreen = () => {
                     <h3 className={`text-primary m-1 p-1 mt-3`}>
                         You liked <span className={"fst-italic fw-bold"}>{myLatestMovie}</span>, you may also like:
                     </h3>
-                    <div className={"list-group-item bg-light m-2 p-4"}>
-                        <MovieGallery movies={recommendations} posterOnClickHandler={(movie) => {navigate(`/movies/${movie.id}`);}}/>
-                    </div>
+                    <MovieSection movies={recommendations}/>
                 </>
             }
             {
@@ -95,51 +88,43 @@ const HomeScreen = () => {
             }
             <div className={"row m-0 align-items-end"}>
                 <h3 className={`col text-primary m-1 p-1`}>Popular Movies</h3>
-                <Link to={"/movies/popular"} className={"col text-end pe-4"}>
+                <Link to={"/movies/in/popular"} className={"col text-end pe-4"}>
                     <i className="fa-solid fa-ellipsis text-primary fs-3"/>
                 </Link>
             </div>
             {
                 popularMovies.length > 0 &&
-                <div className={`list-group-item bg-light m-2 p-4`}>
-                    <MovieGallery  movies={popularMovies} posterOnClickHandler={posterOnClickHandler}/>
-                </div>
+                <MovieSection movies={popularMovies}/>
             }
             <div className={"row m-0 align-items-end"}>
                 <h3 className={`col text-primary m-1 p-1`}>Now Playing</h3>
-                <Link to={"/movies/now-playing"} className={"col text-end pe-4"}>
+                <Link to={"/movies/in/now-playing"} className={"col text-end pe-4"}>
                     <i className="fa-solid fa-ellipsis text-primary fs-3"/>
                 </Link>
             </div>
             {
                 nowPlayingMovies.length > 0 &&
-                <div className={`list-group-item bg-light m-2 p-4`}>
-                    <MovieGallery  movies={nowPlayingMovies} posterOnClickHandler={posterOnClickHandler}/>
-                </div>
+                <MovieSection movies={nowPlayingMovies}/>
             }
             <div className={"row m-0 align-items-end"}>
                 <h3 className={`col text-primary m-1 p-1`}>Top Rated</h3>
-                <Link to={"/movies/top-rated"} className={"col text-end pe-4"}>
+                <Link to={"/movies/in/top-rated"} className={"col text-end pe-4"}>
                     <i className="fa-solid fa-ellipsis text-primary fs-3"/>
                 </Link>
             </div>
             {
                 topRatedMovies.length > 0 &&
-                <div className={`list-group-item bg-light m-2 p-4`}>
-                    <MovieGallery  movies={topRatedMovies} posterOnClickHandler={posterOnClickHandler}/>
-                </div>
+                <MovieSection movies={topRatedMovies}/>
             }
             <div className={"row m-0 align-items-end"}>
                 <h3 className={`col text-primary m-1 p-1`}>Upcoming Movies</h3>
-                <Link to={"/movies/upcoming"} className={"col text-end pe-4"}>
+                <Link to={"/movies/in/upcoming"} className={"col text-end pe-4"}>
                     <i className="fa-solid fa-ellipsis text-primary fs-3"/>
                 </Link>
             </div>
             {
                 upcomingMovies.length > 0 &&
-                <div className={`list-group-item bg-light m-2 p-4`}>
-                    <MovieGallery  movies={upcomingMovies} posterOnClickHandler={posterOnClickHandler}/>
-                </div>
+                <MovieSection movies={upcomingMovies}/>
             }
             <h3 className={`text-primary m-1 p-1`}>Active Users</h3>
             {

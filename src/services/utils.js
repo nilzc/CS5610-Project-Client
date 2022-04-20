@@ -1,4 +1,6 @@
 import {Cloudinary} from "@cloudinary/url-gen";
+import {fill} from "@cloudinary/url-gen/actions/resize";
+import {max} from "@cloudinary/url-gen/actions/roundCorners";
 
 export const MY = "my";
 export const ADMIN = "admin";
@@ -20,3 +22,6 @@ export const resetScrollToTop = () => {
     window.scrollTo(0, 0);
 }
 export const cloud = new Cloudinary({cloud: {cloudName: CLOUD_NAME}});
+export const getAvatar = (profilePhoto) => {
+    return cloud.image(profilePhoto).resize(fill(300, 300)).roundCorners(max()).toURL()
+}

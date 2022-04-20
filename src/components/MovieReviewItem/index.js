@@ -16,9 +16,8 @@ const MovieReviewItem = ({
     const isMyReview = loggedInUserId ? review.postedBy._id === loggedInUserId : false;
     const deleteReview = () => {
         reviewServices.deleteReview(MY, review._id)
-            .then((res) => refresh())
+            .then(refresh)
             .catch(errorServices.alertError);
-
     }
     return (
         <div className={"row justify-content-between bg-light border p-0"}>
@@ -27,8 +26,8 @@ const MovieReviewItem = ({
                     <div className="col-12">
                         <div className={"row m-0 pt-2 pb-2"}>
                             <h5 className="col p-1">Written by
-                                <span className="text-success fw-bold">
-                                    <u>{review.postedBy.username}</u>
+                                <span className="text-success fw-bold text-decoration-underline ps-1">
+                                    {review.postedBy.username}
                                 </span> on {getDate(review.createdOn)}
                             </h5>
                             <div className="col-1 p-0">

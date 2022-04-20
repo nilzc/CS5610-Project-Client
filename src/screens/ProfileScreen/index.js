@@ -4,6 +4,7 @@ import {getUserId} from "../../redux/selectors";
 import {useEffect, useState} from "react";
 import * as userServices from "../../services/userService";
 import ProfileOverview from "../../components/ProfileOverview";
+import ProfileImages from "../../components/ProfileImages";
 
 const ProfileScreen = () => {
     let params = useParams();
@@ -11,11 +12,7 @@ const ProfileScreen = () => {
     const profileOwnerId = params.uid;
     const loggedInUserId = useSelector(getUserId);
     const [profileOwner, setProfileOwner] = useState({});
-    const isThisMyProfile = () => {
-        if (loggedInUserId === profileOwnerId) {
-            navigate("/profile")
-            return;
-        }
+    const init = () => {
         userServices.findUserById(profileOwnerId)
             .then(user => {
                 if (user) {
@@ -27,11 +24,11 @@ const ProfileScreen = () => {
             })
             .catch(err => alert(err.response.data.error))
     }
-    useEffect(isThisMyProfile, [loggedInUserId, navigate, profileOwnerId]);
+    useEffect(init, [loggedInUserId, navigate, profileOwnerId]);
     return (
-        <div>
-            {profileOwner.username && profileOwner.username}'s Profile
-            <ProfileOverview user={profileOwner}/>
+        <div className={"row m-3 justify-content-center"}>
+            <ProfileImages profileOwner={profileOwner}/>
+            <ProfileOverview profileOwner={profileOwner}/>
         </div>
     )
 };

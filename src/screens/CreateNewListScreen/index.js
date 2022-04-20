@@ -63,10 +63,14 @@ const CreateNewListScreen = () => {
     useEffect(checkLogin, [loggedIn, navigate]);
     return (
         <div className={"row"}>
-            <div className={`m-3`}>
-                <h3 className="mt-3 text-primary">List Name</h3>
-                <input className={"form-control w-25"} type={"text"}
-                       onChange={(e) => setListName(e.target.value)} required placeholder="Give this list a name"/>
+            <div className={"m-3"}>
+                <div className={"search"}>
+                    <h4 className="text-primary">List Name</h4>
+                    <div className={"d-inline-block"}>
+                        <input className={"form-control mb-3 mt-2"} type={"text"}
+                               onChange={(e) => setListName(e.target.value)} required placeholder="Give this list a name"/>
+                    </div>
+                </div>
             </div>
             <Search inputOnChangeHandler={searchInputOnChangeHandler} />
             <div className={"m-3"}>

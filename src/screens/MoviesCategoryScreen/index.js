@@ -2,9 +2,17 @@ import {useCallback, useEffect, useState} from "react";
 import * as movieServices from "../../services/movieServices";
 import * as errorServices from "../../services/errorServices";
 import MovieGallery from "../../components/MovieGallery";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
-const PopularMoviesScreen = () => {
+const CATEGORY_ITEMS = {
+    "popular": {title: "Popular", func: movieServices.findPopularMovies},
+    "top-rated": {title: "Top Rated", func: movieServices.findTopRatedMovies},
+    "now-playing": {title: "Now Playing", func: movieServices.findNowPlayingMovies},
+    "upcoming": {title: "Upcoming", func: movieServices.findUpcomingMovies}
+}
+
+const MoviesCategoryScreen = () => {
+    const category = useParams().category;
     const navigate = useNavigate();
     const [movies, setMovies] = useState([]);
     const [pages, setPages] = useState([1, 2, 3, 4, 5]);
@@ -47,13 +55,13 @@ const PopularMoviesScreen = () => {
     }
     const findPopularMovies = useCallback(
         () => {
-            movieServices.findPopularMovies(currPage).then(ms => setMovies(ms)).catch(errorServices.alertError);
-        }, [currPage]
+            CATEGORY_ITEMS[category].func(currPage).then(ms => setMovies(ms)).catch(errorServices.alertError);
+        }, [category, currPage]
     )
     useEffect(findPopularMovies, [findPopularMovies]);
     return (
         <div className={"m-4"}>
-            <h1>Popular</h1>
+            <h1>{CATEGORY_ITEMS[category].title}</h1>
             {
                 movies.length > 0 &&
                 <div className={"border bg-light p-3"}>
@@ -89,4 +97,4 @@ const PopularMoviesScreen = () => {
         </div>
     )
 };
-export default PopularMoviesScreen;
+export default MoviesCategoryScreen;

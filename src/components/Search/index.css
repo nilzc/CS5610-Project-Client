@@ -3,7 +3,7 @@
 }
 
 .search > div > input::placeholder {
-  opacity: 0;
+  opacity: 0.5;
   transition: opacity 150ms ease-out;
 }
 
@@ -13,5 +13,5 @@
 
 .search > div > input:focus,
 .search > div > input:not(:placeholder-shown) {
-  width: 450px;
+  width: 20rem;
 }
