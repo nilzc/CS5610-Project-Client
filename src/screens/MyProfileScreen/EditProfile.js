@@ -1,10 +1,56 @@
-import {CLOUD_NAME, getDateYYYYMMDD} from "../../services/utils";
+import {CLOUD_NAME, getDateYYYYMMDD, MY, UPLOAD_PRESET} from "../../services/utils";
+import {useCallback, useEffect, useState} from "react";
+import * as authService from "../../services/authServices";
+import * as cloudServices from "../../services/cloudinaryServices";
+import * as userServices from "../../services/userService";
+import {useNavigate} from "react-router-dom";
 
-const EditProfile = ({
-                         user =
-                             {username: "Dummy", firstName: "Harry", lastName: "Potter", phone: "123456"},
-                         inputOnChangeHandler, saveOnClickHandler, fileUploadHandler
-                     }) => {
+const EditProfile = ({refresh}) => {
+    const navigate = useNavigate();
+    const [user, setUser] = useState({
+        username: "", firstName: "", lastName: "", phone: ""});
+    const findProfile = useCallback(
+        () => {
+            authService.profile().then((u) => {
+                // remove password
+                delete u["password"];
+                setUser(u);
+            }).catch(e => alert(e.response.data.error));
+        }, []
+    );
+    const fileUploadHandler = (e, field) => {
+        if (e.target.files) {
+            const tempUser = {...user}
+            tempUser[field] = e.target.files[0];
+            setUser(tempUser);
+        }
+    }
+    const inputOnChangeHandler = (e, field) => {
+        const tempUser = {...user};
+        tempUser[field] = e.target.value;
+        setUser(tempUser);
+    }
+    const saveOnClickHandler = async (e) => {
+        if (user.profilePhoto instanceof File) {
+            const formData = new FormData();
+            formData.append("file", user.profilePhoto);
+            formData.append("upload_preset", UPLOAD_PRESET);
+            const res = await cloudServices.uploadImage(formData).catch(alert);
+            user.profilePhoto = res.public_id;
+        }
+        if (user.headerImage instanceof File) {
+            const formData = new FormData();
+            formData.append("file", user.headerImage);
+            formData.append("upload_preset", UPLOAD_PRESET);
+            const res = await cloudServices.uploadImage(formData).catch(alert);
+            user.headerImage = res.public_id;
+        }
+        await userServices.updateUser(MY, user).catch(err => alert(err.response.data.error));
+        await refresh()
+        navigate("/profile");
+        alert("Profile updated!");
+    }
+    useEffect(findProfile, [findProfile]);
     return (
         <>
             <div className={`row`}>

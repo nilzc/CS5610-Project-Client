@@ -61,7 +61,6 @@ const CreateNewListScreen = () => {
     }
 
     useEffect(checkLogin, [loggedIn, navigate]);
-    
     return (
         <div className={"row"}>
             <div className={`m-3`}>

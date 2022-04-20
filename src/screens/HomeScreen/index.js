@@ -27,26 +27,24 @@ const HomeScreen = () => {
     const posterOnClickHandler = (movie) => {
         navigate(`/movies/${movie.id}`);
     }
-    const findMovies = (func, setMovies) => {
-        func(1).then((ms) => setMovies(ms.slice(0, 5)))
-            .catch(errorServices.alertError);
-    }
+    const findMovies = useCallback(
+        (func, setMovies) => {
+            func(1).then((ms) => setMovies(ms.slice(0, 5)))
+                .catch(errorServices.alertError);
+        }, []
+    )
     const findAllUsers = useCallback(
         async () => {
             const allUsers = await userServices.findAllUsers().catch(errorServices.alertError);
             setUsers(allUsers.slice(0, 8));
         }, []
     )
-    const findMyLists = useCallback(
+    const findRecommendations = useCallback(
         async () => {
             const lists = await listServices.findAllListsOwnedByUserWithMovieDetails(MY).catch(alert);
             setMyLists(lists);
-        }, []
-    )
-    const findRecommendations = useCallback(
-        async () => {
             let latestMovie;
-            for (const list of myLists) {
+            for (const list of lists) {
                 if (list.movies && list.movies.length > 0) {
                     latestMovie = list.movies[0].id;
                     setMyLatestMovie(list.movies[0].title);
@@ -57,13 +55,12 @@ const HomeScreen = () => {
                 const recommendMovies = await movieServices.getRecommendationsByMovie(latestMovie, 1).catch(alert);
                 setRecommendations(recommendMovies.slice(0, 5));
             }
-        }, [myLists]
+        }, []
     )
     const init = useCallback(
         async () => {
             await refresh(dispatch).catch(errorServices.alertError);
             if (loggedIn) {
-                await findMyLists().catch(errorServices.alertError);
                 await findRecommendations().catch(errorServices.alertError);
             }
             await findMovies(movieServices.findPopularMovies, setPopularMovies);
@@ -71,7 +68,7 @@ const HomeScreen = () => {
             await findMovies(movieServices.findNowPlayingMovies, setNowPlayingMovies);
             await findMovies(movieServices.findUpcomingMovies, setUpcomingMovies);
             await findAllUsers().catch(errorServices.alertError);
-        }, [dispatch, findAllUsers, findMyLists, findRecommendations, loggedIn]
+        }, [dispatch, findAllUsers, findMovies, findRecommendations, loggedIn]
     )
     useEffect(init, [init])
     return (
@@ -120,7 +117,12 @@ const HomeScreen = () => {
                     <MovieGallery  movies={nowPlayingMovies} posterOnClickHandler={posterOnClickHandler}/>
                 </div>
             }
-            <h3 className={`text-primary m-1 p-1`}> Top Rated</h3>
+            <div className={"row m-0 align-items-end"}>
+                <h3 className={`col text-primary m-1 p-1`}>Top Rated</h3>
+                <Link to={"/movies/top-rated"} className={"col text-end pe-4"}>
+                    <i className="fa-solid fa-ellipsis text-primary fs-3"/>
+                </Link>
+            </div>
             {
                 topRatedMovies.length > 0 &&
                 <div className={`list-group-item bg-light m-2 p-4`}>

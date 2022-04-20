@@ -22,6 +22,7 @@ import PopularMoviesScreen from "./screens/PopularMoviesScreen";
 import AdminScreen from "./screens/AdminScreen";
 import NowPlayingMoviesScreen from './screens/NowPlayMoviesScreen';
 import UpcomingMoviesScreen from './screens/UpcomingMoviesScreen';
+import TopRatedMoviesScreen from './screens/TopRatedMoviesScreen';
 
 const {store, persistor} = createPersistStore();
 
@@ -44,6 +45,7 @@ ReactDOM.render(
                         <Route path={"movies/popular"} element={<PopularMoviesScreen/>}/>
                         <Route path={"movies/now-playing"} element={<NowPlayingMoviesScreen/>}/>
                         <Route path={"movies/upcoming"} element={<UpcomingMoviesScreen/>}/>
+                        <Route path={"movies/top-rated"} element={<TopRatedMoviesScreen/>}/>
                         <Route path={"login"} element={<LoginScreen/>}/>
                         <Route path={"register"} element={<RegisterScreen/>}/>
                         <Route path={"privacy"} element={<PrivacyScreen/>}/>

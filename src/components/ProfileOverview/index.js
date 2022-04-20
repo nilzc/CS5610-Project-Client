@@ -6,7 +6,6 @@ const ProfileOverview = ({
                                  {username: "Dummy", firstName: "Harry", lastName: "Potter", phone: "", dateOfBirth: ""}
                          }) => {
     const loggedIn = useSelector(isLoggedIn);
-
     return (
         <div className={"row justify-content-center"}>
             <div className={"col-4"}>
@@ -51,7 +50,7 @@ const ProfileOverview = ({
                             {user.dateOfBirth &&
                                 <div className={"col-12 list-group-item bg-light"}>
                                     <div className={"row"}>
-                                        <div className={`col-4 fw-bold`}>Data of Birth:</div>
+                                        <div className={`col-4 fw-bold`}>Birthday:</div>
                                         <div className={"col-8"}>{user.dateOfBirth ? `${getDate(user.dateOfBirth)}` : "......"}</div>
                                     </div>
                                 </div>

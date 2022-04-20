@@ -13,7 +13,7 @@ const MovieReviewItem = ({
                              refresh
                          }) => {
     const loggedInUserId = useSelector(getUserId);
-    const isMyReview = review.postedBy._id === loggedInUserId;
+    const isMyReview = loggedInUserId ? review.postedBy._id === loggedInUserId : false;
     const deleteReview = () => {
         reviewServices.deleteReview(MY, review._id)
             .then((res) => refresh())
