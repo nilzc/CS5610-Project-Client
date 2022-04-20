@@ -7,17 +7,12 @@ import * as errorServices from "../../services/errorServices";
 import * as userServices from "../../services/userService";
 import {useCallback, useEffect, useState} from "react";
 import {refresh} from "../../redux/actions";
-import {MY} from "../../services/utils";
+import {MY, resetScrollToTop} from "../../services/utils";
 import MovieGallery from "../../components/MovieGallery";
 import {Link, useNavigate} from "react-router-dom";
-import {Cloudinary} from "@cloudinary/url-gen";
-import {fill} from "@cloudinary/url-gen/actions/resize";
-import {max} from "@cloudinary/url-gen/actions/roundCorners";
-import {colorize} from "@cloudinary/url-gen/actions/effect";
-import {color} from "@cloudinary/url-gen/qualifiers/background";
+import UserLists from "../../components/UserLists";
 
 const HomeScreen = () => {
-    const cloud = new Cloudinary({cloud: {cloudName: 'cs5610-project'}});
     const loggedIn = useSelector(isLoggedIn);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -25,10 +20,21 @@ const HomeScreen = () => {
     const [myLists, setMyLists] = useState([])
     const [recommendations, setRecommendations] = useState([]);
     const [myLatestMovie, setMyLatestMovie] = useState("");
+    const [popularMovies, setPopularMovies] = useState([]);
+    const [topRatedMovies, setTopRatedMovies] = useState([]);
+    const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
+    const [upcomingMovies, setUpcomingMovies] = useState([]);
+    const posterOnClickHandler = (movie) => {
+        navigate(`/movies/${movie.id}`);
+    }
+    const findMovies = (func, setMovies) => {
+        func(1).then((ms) => setMovies(ms.slice(0, 5)))
+            .catch(errorServices.alertError);
+    }
     const findAllUsers = useCallback(
         async () => {
             const allUsers = await userServices.findAllUsers().catch(errorServices.alertError);
-            setUsers([...allUsers]);
+            setUsers(allUsers.slice(0, 8));
         }, []
     )
     const findMyLists = useCallback(
@@ -55,11 +61,16 @@ const HomeScreen = () => {
     )
     const init = useCallback(
         async () => {
+            resetScrollToTop()
             await refresh(dispatch).catch(errorServices.alertError);
             if (loggedIn) {
                 await findMyLists().catch(errorServices.alertError);
                 await findRecommendations().catch(errorServices.alertError);
             }
+            await findMovies(movieServices.findPopularMovies, setPopularMovies);
+            await findMovies(movieServices.findTopRatedMovies, setTopRatedMovies);
+            await findMovies(movieServices.findNowPlayingMovies, setNowPlayingMovies);
+            await findMovies(movieServices.findUpcomingMovies, setUpcomingMovies);
             await findAllUsers().catch(errorServices.alertError);
         }, [dispatch, findAllUsers, findMyLists, findRecommendations, loggedIn]
     )
@@ -92,35 +103,42 @@ const HomeScreen = () => {
                     <i className="fa-solid fa-ellipsis text-primary fs-3"/>
                 </Link>
             </div>
-            <MovieSection  findMoviesFromServer={movieServices.findPopularMovies}/>
+            {
+                popularMovies.length > 0 &&
+                <div className={`list-group-item bg-light m-2 p-4`}>
+                    <MovieGallery  movies={popularMovies} posterOnClickHandler={posterOnClickHandler}/>
+                </div>
+            }
             <div className={"row m-0 align-items-end"}>
                 <h3 className={`col text-primary m-1 p-1`}>Now Playing</h3>
-                <Link to={"/movies/nowplaying"} className={"col text-end pe-4"}>
+                <Link to={"/movies/now-playing"} className={"col text-end pe-4"}>
                     <i className="fa-solid fa-ellipsis text-primary fs-3"/>
                 </Link>
             </div>
-            <MovieSection findMoviesFromServer={movieServices.findNowPlayingMovies}/>
+            {
+                nowPlayingMovies.length > 0 &&
+                <div className={`list-group-item bg-light m-2 p-4`}>
+                    <MovieGallery  movies={nowPlayingMovies} posterOnClickHandler={posterOnClickHandler}/>
+                </div>
+            }
             <h3 className={`text-primary m-1 p-1`}> Top Rated</h3>
-            <MovieSection findMoviesFromServer={movieServices.findTopRatedMovies}/>
+            {
+                topRatedMovies.length > 0 &&
+                <div className={`list-group-item bg-light m-2 p-4`}>
+                    <MovieGallery  movies={topRatedMovies} posterOnClickHandler={posterOnClickHandler}/>
+                </div>
+            }
             <h3 className={`text-primary m-1 p-1`}>Upcoming</h3>
-            <MovieSection findMoviesFromServer={movieServices.findUpcomingMovies}/>
+            {
+                upcomingMovies.length > 0 &&
+                <div className={`list-group-item bg-light m-2 p-4`}>
+                    <MovieGallery  movies={upcomingMovies} posterOnClickHandler={posterOnClickHandler}/>
+                </div>
+            }
             <h3 className={`text-primary m-1 p-1`}>Active Users</h3>
             {
                 users.length > 0 &&
-                <div className={"row row-cols-2 gy-3 m-1 p-1"}>
-                    {users.map((u, nth) =>
-                        <div key={nth} className={"col"}>
-                            <div className={"row align-items-center"}>
-                                <div className={"col-2"}>
-                                    <img className={"img-fluid"}
-                                         src={cloud.image(u.profilePhoto).resize(fill(150, 150)).roundCorners(max()).toURL()}/>
-                                </div>
-                                <div className={"col-10 fs-4 fw-bold"}>
-                                    {u.username}
-                                </div>
-                            </div>
-                        </div>)}
-                </div>
+                <UserLists users={users}/>
             }
         </div>
     )
