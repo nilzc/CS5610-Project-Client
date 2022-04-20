@@ -129,7 +129,12 @@ const HomeScreen = () => {
                     <MovieGallery  movies={topRatedMovies} posterOnClickHandler={posterOnClickHandler}/>
                 </div>
             }
-            <h3 className={`text-primary m-1 p-1`}>Upcoming</h3>
+            <div className={"row m-0 align-items-end"}>
+                <h3 className={`col text-primary m-1 p-1`}>Upcoming Movies</h3>
+                <Link to={"/movies/upcoming"} className={"col text-end pe-4"}>
+                    <i className="fa-solid fa-ellipsis text-primary fs-3"/>
+                </Link>
+            </div>
             {
                 upcomingMovies.length > 0 &&
                 <div className={`list-group-item bg-light m-2 p-4`}>
