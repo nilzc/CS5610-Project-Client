@@ -13,13 +13,7 @@ const LoginScreen = () => {
     const loginButtonOnClick = () => {
         userCredential.role = isAdmin ? ADMIN : USER;
         login(dispatch, userCredential)
-            .then(() => {
-                if (userCredential.role === ADMIN) {
-                    navigate("/admin");
-                } else {
-                    navigate("/home");
-                }
-            })
+            .then(() => navigate(-1))
             .catch(errorServices.alertError);
     }
     return (
@@ -31,7 +25,7 @@ const LoginScreen = () => {
             </div>
             <div className={"col-12"}>
                 <div className={"row justify-content-center"}>
-                    <label className={"col-4 form-label fw-bold m-1"} align={`left`}>
+                    <label className={"col-4 form-label fw-bold m-1"}>
                         Username:
                         <input className={"form-control m-1"} type={"text"}
                                onChange={(e) =>

@@ -1,17 +1,12 @@
 import {useSelector} from "react-redux";
-import {getProfile, isLoggedIn} from "../../redux/selectors";
+import {isLoggedIn} from "../../redux/selectors";
 import {Link, Route, Routes, useNavigate, useLocation} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
 import * as authService from "../../services/authServices";
 import ProfileOverview from "../../components/ProfileOverview";
-import * as listServices from "../../services/listServices";
-import * as userServices from "../../services/userService";
-import * as cloudServices from "../../services/cloudinaryServices";
-import * as reviewServices from "../../services/reviewServices";
 import * as errorServices from "../../services/errorServices";
-import {cloud, MY, UPLOAD_PRESET} from "../../services/utils";
+import {cloud} from "../../services/utils";
 import EditProfile from "./EditProfile";
-import MovieReviews from "../../components/MovieReviews";
 import MyLists from "./MyLists";
 import MyListDetails from "./MyListDetails";
 import "./style.css";
@@ -20,78 +15,27 @@ import {max} from "@cloudinary/url-gen/actions/roundCorners";
 import MyReviews from "./MyReviews";
 
 const MyProfileScreen = ({navigation}) => {
-    const loggedIn = useSelector(isLoggedIn);
-    const [user, setUser] = useState({
-        username: "", firstName: "", lastName: "", phone: ""});
-    const [movieLists, setMovieLists] = useState([]);
-    const [reviews, setReviews] = useState([]);
     const navigate = useNavigate();
+    const loggedIn = useSelector(isLoggedIn);
+    const [user, setUser] = useState({username: "", firstName: "", lastName: "", phone: ""});
     const location = useLocation();
-    const editFileUploadHandler = (e, field) => {
-        if (e.target.files) {
-            const tempUser = {...user}
-            tempUser[field] = e.target.files[0];
-            setUser(tempUser);
-        }
-    }
-    const editInputOnChangeHandler = (e, field) => {
-        const tempUser = {...user};
-        tempUser[field] = e.target.value;
-        setUser(tempUser);
-    }
-    const editSaveOnClickHandler = async (e) => {
-        if (user.profilePhoto instanceof File) {
-            const formData = new FormData();
-            formData.append("file", user.profilePhoto);
-            formData.append("upload_preset", UPLOAD_PRESET);
-            const res = await cloudServices.uploadImage(formData).catch(alert);
-            user.profilePhoto = res.public_id;
-        }
-        if (user.headerImage instanceof File) {
-            const formData = new FormData();
-            formData.append("file", user.headerImage);
-            formData.append("upload_preset", UPLOAD_PRESET);
-            const res = await cloudServices.uploadImage(formData).catch(alert);
-            user.headerImage = res.public_id;
-        }
-        await userServices.updateUser(MY, user).catch(err => alert(err.response.data.error));
-        navigate("/profile");
-        alert("Profile updated!");
-        await findProfile();
-    }
     const findProfile = useCallback(
         () => {
             authService.profile().then((u) => {
                 // remove password
                 delete u["password"];
                 setUser(u);
-            }).catch(e => alert(e.response.data.error));
+            }).catch(errorServices.alertError);
         }, []
     );
-    const findLists = useCallback(
-        () => {
-            listServices.findAllListsOwnedByUserWithMovieDetails(MY)
-                .then(lists => setMovieLists(lists))
-                .catch(errorServices.alertError);
-        }, []
-    );
-    const findReviews = useCallback(
-        () => {
-            reviewServices.findAllReviewsOwnedByUserWithMovieDetails(MY)
-                .then(rs => setReviews(rs))
-                .catch(errorServices.alertError);
-        }, []
-    )
     const init = useCallback(
-        async () => {
+        () => {
             if (!loggedIn) {
-                await navigation.navigate("/login");
+                navigate("/login");
                 return;
             }
-            await findProfile();
-            await findLists();
-            await findReviews();
-        }, [findLists, findProfile, findReviews, loggedIn, navigation]
+            findProfile();
+        }, [findProfile, loggedIn, navigate]
     )
     useEffect(init, [init]);
     return (
@@ -122,11 +66,11 @@ const MyProfileScreen = ({navigation}) => {
                 </div>
             </div>
             <Routes>
-                <Route index element={<ProfileOverview user={user} />}/>
-                <Route path={"s/lists"} element={<MyLists lists={movieLists}/>}/>
+                <Route index element={<ProfileOverview user={user}/>}/>
+                <Route path={"s/lists"} element={<MyLists/>}/>
                 <Route path={"s/lists/:lid"} element={<MyListDetails/>}/>
-                <Route path={"s/edit"} element={<EditProfile user={user} inputOnChangeHandler={editInputOnChangeHandler} saveOnClickHandler={editSaveOnClickHandler} fileUploadHandler={editFileUploadHandler}/>}/>
-                <Route path={"s/reviews"} element={<MyReviews reviews={reviews} refresh={findReviews}/>}/>
+                <Route path={"s/edit"} element={<EditProfile refresh={findProfile}/>}/>
+                <Route path={"s/reviews"} element={<MyReviews/>}/>
             </Routes>
         </div>
     )
