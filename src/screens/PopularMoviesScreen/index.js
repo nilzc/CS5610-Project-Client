@@ -57,7 +57,14 @@ const PopularMoviesScreen = () => {
             {
                 movies.length > 0 &&
                 <div className={"border bg-light p-3"}>
-                    <MovieGallery movies={movies} posterOnClickHandler={(movie) => navigate(`/movies/${movie.id}`)}/>
+                    {
+                        movies.length > 0 &&
+                        <MovieGallery movies={movies} posterOnClickHandler={(movie) => navigate(`/movies/${movie.id}`)}/>
+                    }
+                    {
+                        movies.length === 0 &&
+                        <div className={"fs-5 text-center"}>Sorry, no movies are found</div>
+                    }
                     <nav className={"p-4 pb-1"}>
                         <ul className="pagination justify-content-center">
                             <li className="page-item">

@@ -3,7 +3,7 @@ import {isLoggedIn} from "../../redux/selectors";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import * as listServices from "../../services/listServices";
-import {MY} from "../../services/constants";
+import {MY} from "../../services/utils";
 import Search from "../../components/Search";
 import * as movieServices from "../../services/movieServices";
 import MovieGallery from "../../components/MovieGallery";

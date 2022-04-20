@@ -2,10 +2,11 @@ import {useSelector} from "react-redux";
 import {getUserId} from "../../redux/selectors";
 import * as reviewServices from "../../services/reviewServices";
 import * as errorServices from "../../services/errorServices";
-import {MY} from "../../services/constants";
 import { useLocation, useNavigate } from "react-router-dom";
 import MyListItem from "../MyListItem";
 import MyListReviewItem from "../MyListReviewItem";
+import {MY} from "../../services/utils";
+
 
 const MovieReviewItem = ({
                              review = {

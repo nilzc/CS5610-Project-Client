@@ -17,6 +17,10 @@ export const findAllListsOwnedByUser = (uid) => {
     return api.get(`${USER_URL}/${uid}/movie-lists`)
         .then(response => response.data);
 }
+export const findListById = (lid) => {
+    return api.get(`${LIST_URL}/${lid}`)
+        .then(response => response.data);
+}
 export const findAllListsOwnedByUserWithMovieDetails = async (uid) => {
     let lists = await findAllListsOwnedByUser(uid)
     lists = await Promise.all(lists.map(async l => {
@@ -24,4 +28,9 @@ export const findAllListsOwnedByUserWithMovieDetails = async (uid) => {
         return l;
     }))
     return lists;
+}
+export const findListByIdWithMovieDetails = async (lid) => {
+    let list = await findListById(lid);
+    list.movies = await Promise.all(list.movies.map(async mid => await movieServices.findMovieDetail(mid)));
+    return list;
 }

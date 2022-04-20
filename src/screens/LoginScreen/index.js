@@ -1,9 +1,9 @@
-import {useDispatch, useSelector} from "react-redux";
-import {getUserState} from "../../redux/selectors";
+import {useDispatch} from "react-redux";
 import {useState} from "react";
 import {login} from "../../redux/actions";
 import {useNavigate} from "react-router-dom";
-import {ADMIN, USER} from "../../services/constants";
+import {ADMIN, USER} from "../../services/utils";
+import * as errorServices from "../../services/errorServices";
 
 const LoginScreen = () => {
     let [userCredential, setUserCredential] = useState({});
@@ -13,8 +13,14 @@ const LoginScreen = () => {
     const loginButtonOnClick = () => {
         userCredential.role = isAdmin ? ADMIN : USER;
         login(dispatch, userCredential)
-            .then(() => navigate("/home"))
-            .catch(err => alert(err.response.data.error));
+            .then(() => {
+                if (userCredential.role === ADMIN) {
+                    navigate("/admin");
+                } else {
+                    navigate("/home");
+                }
+            })
+            .catch(errorServices.alertError);
     }
     return (
         <div className={`row m-3 p-2 justify-content-center`}>

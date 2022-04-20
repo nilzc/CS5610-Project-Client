@@ -7,6 +7,7 @@ import MovieItem from "../../components/MovieItem";
 import MovieReviews from "../../components/MovieReviews";
 import CreateReview from "../../components/CreateReview";
 import MovieGallery from "../../components/MovieGallery";
+import {resetScrollToTop} from "../../services/utils";
 
 const MovieDetailsScreen = () => {
     let params = useParams();
@@ -38,6 +39,7 @@ const MovieDetailsScreen = () => {
     )
     const init = useCallback(
         async () => {
+            resetScrollToTop();
             await findMovie();
             await findReviews();
             await findRecommendations();
