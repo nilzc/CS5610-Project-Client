@@ -61,7 +61,6 @@ const HomeScreen = () => {
     )
     const init = useCallback(
         async () => {
-            resetScrollToTop()
             await refresh(dispatch).catch(errorServices.alertError);
             if (loggedIn) {
                 await findMyLists().catch(errorServices.alertError);
