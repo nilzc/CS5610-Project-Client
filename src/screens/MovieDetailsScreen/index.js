@@ -43,8 +43,11 @@ const MovieDetailsScreen = () => {
             await findRecommendations();
         }, [findMovie, findRecommendations, findReviews]
     )
-    
-    useEffect(init, [init])
+    const resetScrollToTop = () => {
+        window.scrollTo(0,0);
+    }
+    useEffect(init, [init]);
+    useEffect(resetScrollToTop, [resetScrollToTop]);
     return (
         <div className={"row justify-content-between p-3"}>
             <div className={"col-3"}>
