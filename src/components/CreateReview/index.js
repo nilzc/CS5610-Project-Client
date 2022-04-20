@@ -16,6 +16,7 @@ const CreateReview = ({movieId, refresh}) => {
         reviewServices.createReview(MY, review)
             .then((res) => refresh())
             .catch(errorServices.alertError);
+            setReview({movieId: movieId, rating: "0", review: ""});
     }
     return (
         <div className={"row mt-4"}>

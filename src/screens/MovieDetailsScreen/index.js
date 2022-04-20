@@ -43,6 +43,7 @@ const MovieDetailsScreen = () => {
             await findRecommendations();
         }, [findMovie, findRecommendations, findReviews]
     )
+    
     useEffect(init, [init])
     return (
         <div className={"row justify-content-between p-3"}>
@@ -53,7 +54,7 @@ const MovieDetailsScreen = () => {
             <div className={"bg-light border p-2"}>
                 <div className={'m-3'}>
                     <h3 className={`text-primary`}>Reviews</h3>
-                    <MovieReviews reviews={reviews} refresh={findReviews}/>
+                    <MovieReviews reviews={reviews.slice(0,5)} refresh={findReviews}/>
                 </div>
                 <div className={'m-3'}>
                     <h3 className={"text-primary mt-5"}>Add My Review</h3>
