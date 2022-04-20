@@ -18,7 +18,7 @@ const CreateReview = ({movieId, refresh}) => {
             .catch(errorServices.alertError);
     }
     return (
-        <div className={"row m-3 mt-4"}>
+        <div className={"row mt-4"}>
 
             <label className={"col-12 fw-bold m-1"}>
                 Rating: {review.rating}
