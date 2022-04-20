@@ -17,9 +17,9 @@ import MyProfileScreen from "./screens/MyProfileScreen";
 import createPersistStore from "./redux/store";
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/integration/react";
-import DummyComponentShowcaseScreen from "./screens/DummyComponentShowcaseScreen";
 import CreateNewListScreen from "./screens/CreateNewListScreen";
 import PopularMoviesScreen from "./screens/PopularMoviesScreen";
+import AdminScreen from "./screens/AdminScreen";
 
 const {store, persistor} = createPersistStore();
 
@@ -32,6 +32,7 @@ ReactDOM.render(
                     <Route path={"/"} element={<App/>}>
                         <Route index element={<HomeScreen/>}/>
                         <Route path={"home"} element={<HomeScreen/>}/>
+                        <Route path={"admin"} element={<AdminScreen/>}/>
                         <Route path={"profile/:uid"} element={<ProfileScreen/>}/>
                         <Route path={"profile/*"} element={<MyProfileScreen/>}/>
                         <Route path={"list/new"} element={<CreateNewListScreen/>}/>
@@ -42,7 +43,6 @@ ReactDOM.render(
                         <Route path={"login"} element={<LoginScreen/>}/>
                         <Route path={"register"} element={<RegisterScreen/>}/>
                         <Route path={"privacy"} element={<PrivacyScreen/>}/>
-                        <Route path={"components"} element={<DummyComponentShowcaseScreen/>}/>
                         <Route path={"*"} element={<NoMatchScreen/>}/>
                     </Route>
                 </Routes>

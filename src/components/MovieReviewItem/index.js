@@ -2,8 +2,7 @@ import {useSelector} from "react-redux";
 import {getUserId} from "../../redux/selectors";
 import * as reviewServices from "../../services/reviewServices";
 import * as errorServices from "../../services/errorServices";
-import {MY} from "../../services/constants";
-import MovieItem from "../MovieItem";
+import {MY} from "../../services/utils";
 
 const MovieReviewItem = ({
                              review = {

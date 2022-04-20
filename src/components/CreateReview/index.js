@@ -3,7 +3,7 @@ import {isLoggedIn} from "../../redux/selectors";
 import {useState} from "react";
 import * as reviewServices from "../../services/reviewServices";
 import * as errorServices from "../../services/errorServices";
-import {MY} from "../../services/constants";
+import {MY} from "../../services/utils";
 
 const CreateReview = ({movieId, refresh}) => {
     const loggedIn = useSelector(isLoggedIn);

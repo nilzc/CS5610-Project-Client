@@ -9,7 +9,7 @@ import * as listServices from "../../services/listServices";
 import * as userServices from "../../services/userService";
 import * as reviewServices from "../../services/reviewServices";
 import * as errorServices from "../../services/errorServices";
-import {MY} from "../../services/constants";
+import {MY} from "../../services/utils";
 import EditProfile from "./EditProfile";
 import MovieReviews from "../../components/MovieReviews";
 
