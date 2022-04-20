@@ -17,6 +17,7 @@ import MyListDetails from "./MyListDetails";
 import "./style.css";
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import {max} from "@cloudinary/url-gen/actions/roundCorners";
+import MyReviews from "./MyReviews";
 
 const MyProfileScreen = ({navigation}) => {
     const loggedIn = useSelector(isLoggedIn);
@@ -125,7 +126,7 @@ const MyProfileScreen = ({navigation}) => {
                 <Route path={"s/lists"} element={<MyLists lists={movieLists}/>}/>
                 <Route path={"s/lists/:lid"} element={<MyListDetails/>}/>
                 <Route path={"s/edit"} element={<EditProfile user={user} inputOnChangeHandler={editInputOnChangeHandler} saveOnClickHandler={editSaveOnClickHandler} fileUploadHandler={editFileUploadHandler}/>}/>
-                <Route path={"s/reviews"} element={<MovieReviews reviews={reviews} refresh={findReviews}/>}/>
+                <Route path={"s/reviews"} element={<MyReviews reviews={reviews} refresh={findReviews}/>}/>
             </Routes>
         </div>
     )

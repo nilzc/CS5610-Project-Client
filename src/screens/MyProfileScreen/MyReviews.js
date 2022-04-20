@@ -1,17 +1,18 @@
-import MovieReviewItem from "../MovieReviewItem";
+import MovieReviewItem from "../../components/MovieReviewItem";
+import MyReviewItem from "./MyReviewItem";
 
-const MovieReviews = ({reviews=[], refresh}) => {
+const MyReviews = ({reviews, refresh}) => {
     return (
         <div className={"row m-3"}>
             {
                 reviews.length > 0 &&
                 reviews.map((r, nth) =>
                     <div key={nth + "div"} className={"col-12 p-0"}>
-                        <MovieReviewItem key={nth} review={r} refresh={refresh}/>
+                        <MyReviewItem key={nth} review={r} refresh={refresh}/>
                     </div>
                 )
             }
         </div>
     )
 };
-export default MovieReviews;
+export default MyReviews;

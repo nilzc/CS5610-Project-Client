@@ -7,7 +7,6 @@ import MovieItem from "../../components/MovieItem";
 import MovieReviews from "../../components/MovieReviews";
 import CreateReview from "../../components/CreateReview";
 import MovieGallery from "../../components/MovieGallery";
-import {resetScrollToTop} from "../../services/utils";
 
 const MovieDetailsScreen = () => {
     let params = useParams();
@@ -33,29 +32,24 @@ const MovieDetailsScreen = () => {
     const findReviews = useCallback(
         () => {
             reviewServices.findAllReviewsOfMovie(movieId)
-                .then(reviews => setReviews(reviews))
+                .then(reviews => setReviews(reviews.slice(0,3)))
                 .catch(errorServices.alertError)
         }, [movieId]
     )
     const init = useCallback(
         async () => {
-            resetScrollToTop();
             await findMovie();
             await findReviews();
             await findRecommendations();
         }, [findMovie, findRecommendations, findReviews]
     )
-    const resetScrollToTop = () => {
-        window.scrollTo(0,0);
-    }
-    useEffect(init, [init]);
-    useEffect(resetScrollToTop, [resetScrollToTop]);
+    useEffect(init, [init])
     return (
         <div className={"row justify-content-between p-3"}>
             <div className={"col-3"}>
                 <MovieItem movie={movie} posterOnClickHandler={() => {}} addMovieOnClickHandler={() => {}}/>
             </div>
-            <div class="ps-4 col-9">
+            <div className="ps-4 col-9">
             <div className={"bg-light border p-2"}>
                 <div className={'m-3'}>
                     <h3 className={`text-primary`}>Reviews</h3>
