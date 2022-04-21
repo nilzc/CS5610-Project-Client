@@ -53,7 +53,7 @@ const EditProfile = ({refresh}) => {
     useEffect(findProfile, [findProfile]);
     return (
         <>
-            <div className={`row`}>
+            <div className={"row"}>
                 <div className={"col-12"}>
                     <div className={"row justify-content-center"}>
                         <div className={"col-4 bg-light p-3"}>

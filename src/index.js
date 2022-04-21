@@ -17,9 +17,10 @@ import MyProfileScreen from "./screens/MyProfileScreen";
 import createPersistStore from "./redux/store";
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/integration/react";
-import CreateNewListScreen from "./screens/CreateNewListScreen";
 import MoviesCategoryScreen from "./screens/MoviesCategoryScreen";
 import AdminScreen from "./screens/AdminScreen";
+import EditListScreen from "./screens/EditListScreen";
+import CreateNewListScreen from "./screens/CreateNewListScreen";
 
 const {store, persistor} = createPersistStore();
 
@@ -35,7 +36,8 @@ ReactDOM.render(
                         <Route path={"admin"} element={<AdminScreen/>}/>
                         <Route path={"profile/:uid"} element={<ProfileScreen/>}/>
                         <Route path={"profile/*"} element={<MyProfileScreen/>}/>
-                        <Route path={"list/new"} element={<CreateNewListScreen/>}/>
+                        <Route path={"lists/new"} element={<CreateNewListScreen/>}/>
+                        <Route path={"lists/:lid"} element={<EditListScreen/>}/>
                         <Route path={"search"} element={<SearchScreen/>}/>
                         <Route path={"search/results"} element={<SearchResultsScreen/>}/>
                         <Route path={"movies/:mid"} element={<MovieDetailsScreen/>}/>

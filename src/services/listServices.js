@@ -31,6 +31,16 @@ export const findAllListsOwnedByUserWithMovieDetails = async (uid) => {
 }
 export const findListByIdWithMovieDetails = async (lid) => {
     let list = await findListById(lid);
-    list.movies = await Promise.all(list.movies.map(async mid => await movieServices.findMovieDetail(mid)));
+    if (list) {
+        list.movies = await Promise.all(list.movies.map(async mid => await movieServices.findMovieDetail(mid)));
+    }
     return list;
+}
+export const deleteList = (lid) => {
+    return api.delete(`${LIST_URL}/${lid}`)
+        .then(response => response.data);
+}
+export const updateList = (uid, lid, movieList) => {
+    return api.put(`${USER_URL}/${uid}/movie-lists/${lid}`, movieList)
+        .then(response => response.data);
 }

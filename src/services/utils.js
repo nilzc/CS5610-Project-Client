@@ -8,6 +8,7 @@ export const USER = "user";
 export const IMAGE_PLACEHOLDER = "https://i.ibb.co/LrdpnJ5/movie-poster-coming-soon-2.png";
 export const CLOUD_NAME = "cs5610-project"
 export const UPLOAD_PRESET = "dulh2n67";
+export const INITIAL_PAGES = [1, 2, 3, 4, 5]
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 

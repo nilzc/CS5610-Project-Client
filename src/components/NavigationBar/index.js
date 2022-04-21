@@ -31,7 +31,7 @@ const NavigationBar = () => {
                 <Nav.Link  className={`nav-link ${location.pathname.indexOf('profile') >= 0 ? 'active':''}`}  href="/profile">
                 Profile
               </Nav.Link>
-              <Nav.Link  className={`nav-link ${location.pathname.indexOf('new') >= 0 ? 'active':''}`}  href="/list/new">
+              <Nav.Link  className={`nav-link ${location.pathname.indexOf('new') >= 0 ? 'active':''}`}  href="/lists/new">
               Create List
               </Nav.Link>
               </>}

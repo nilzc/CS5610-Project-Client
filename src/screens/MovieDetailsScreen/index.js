@@ -50,7 +50,7 @@ const MovieDetailsScreen = () => {
             <div className={"col-3"}>
                 {
                     movie &&
-                    <MovieItem movie={movie} posterOnClickHandler={() => {}} addMovieOnClickHandler={() => {}}/>
+                    <MovieItem movie={movie} posterOnClickHandler={() => {}}/>
                 }
             </div>
             <div className="col-9 ps-4">
@@ -70,7 +70,7 @@ const MovieDetailsScreen = () => {
             </div>
             {
                 recommendations.length > 0 &&
-                <div className={"col-12 p-4"}>
+                <div className={"col-12 mt-4"}>
                     <h4 className={"text-primary m-1 p-1"}>You May Also Like:</h4>
                     <div className={"col-12 bg-light m-2 p-4 border"}>
                         {

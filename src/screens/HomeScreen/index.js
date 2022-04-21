@@ -82,7 +82,7 @@ const HomeScreen = () => {
                 <>
                     <h3 className={`m-1 p-1 text-primary mt-3`}>
                         Start your journey by creating a new list!
-                        <span className={"ps-3"}><Link to={"/list/new"} className={"btn btn-primary"}>Take Me There</Link></span>
+                        <span className={"ps-3"}><Link to={"/lists/new"} className={"btn btn-primary"}>Take Me There</Link></span>
                     </h3>
                 </>
             }
