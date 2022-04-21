@@ -10,7 +10,7 @@ import MovieGallery from "../../components/MovieGallery";
 import {resetScrollToTop} from "../../services/utils";
 
 const MovieDetailsScreen = () => {
-    let params = useParams();
+    const params = useParams();
     const movieId = params.mid;
     const navigate = useNavigate();
     const [movie, setMovie] = useState({});

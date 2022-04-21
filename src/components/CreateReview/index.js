@@ -7,16 +7,16 @@ import {MY} from "../../services/utils";
 
 const CreateReview = ({movieId, refresh}) => {
     const loggedIn = useSelector(isLoggedIn);
-    const [review, setReview] = useState({movieId: movieId, rating: "0", review: ""});
+    const [review, setReview] = useState({rating: "0", review: ""});
     const createReview = () => {
         if (!loggedIn) {
             alert("Please login first")
             return;
         }
-        reviewServices.createReview(MY, review)
-            .then((res) => refresh())
+        reviewServices.createReview(MY, {...review, movieId: movieId})
+            .then(refresh)
             .catch(errorServices.alertError);
-            setReview({movieId: movieId, rating: "0", review: ""});
+        setReview({movieId: movieId, rating: "0", review: ""});
     }
     return (
         <div className={"row mt-4"}>
@@ -33,9 +33,12 @@ const CreateReview = ({movieId, refresh}) => {
                           onChange={(e) =>
                               setReview({...review, review: e.target.value})}/>
             </label>
-            <div className={"col-12 m-2"} align={`right`}>
-                <button className={"btn btn-primary"} onClick={createReview}>Submit</button>
-            </div>
+            {
+                movieId &&
+                <div className={"col-12 m-2"} align={`right`}>
+                    <button className={"btn btn-primary"} onClick={createReview}>Submit</button>
+                </div>
+            }
         </div>
     )
 };
