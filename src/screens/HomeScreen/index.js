@@ -87,7 +87,7 @@ const HomeScreen = () => {
                 </>
             }
             <div className={"row m-0 align-items-end"}>
-                <h3 className={`col text-primary m-1 p-1`}>Popular Movies</h3>
+                <h3 className={`col text-primary m-1 p-1`}>Popular</h3>
                 <Link to={"/movies/in/popular"} className={"col text-end pe-4"}>
                     <i className="fa-solid fa-ellipsis text-primary fs-3"/>
                 </Link>
@@ -117,7 +117,7 @@ const HomeScreen = () => {
                 <MovieSection movies={topRatedMovies}/>
             }
             <div className={"row m-0 align-items-end"}>
-                <h3 className={`col text-primary m-1 p-1`}>Upcoming Movies</h3>
+                <h3 className={`col text-primary m-1 p-1`}>Upcoming</h3>
                 <Link to={"/movies/in/upcoming"} className={"col text-end pe-4"}>
                     <i className="fa-solid fa-ellipsis text-primary fs-3"/>
                 </Link>

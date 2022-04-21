@@ -1,4 +1,4 @@
-const Pagination = ({currPage, setCurrPage, pages, setPages}) => {
+const Pagination = ({currPage, setCurrPage, pages, setPages, allowNextPages}) => {
     const pageOnClick = (e) => {
         const pageNum = parseInt(e.target.textContent);
         changePage(pageNum);
@@ -46,12 +46,12 @@ const Pagination = ({currPage, setCurrPage, pages, setPages}) => {
                 </li>
                 {
                     pages.map((p, nth) =>
-                        <li key={nth} className={`page-item ${currPage === p ? "active" : ""}`}>
+                        <li key={nth} className={`page-item ${currPage === p ? "active" : ""} ${!allowNextPages && p > currPage ? "disabled" : ""}`}>
                             <div className="page-link" onClick={pageOnClick}>{p}</div>
                         </li>)
                 }
-                <li className="page-item">
-                    <div className="page-link" onClick={nextOnClick}>Next</div>
+                <li className={`page-item ${allowNextPages ? "" : "disabled"}`}>
+                    <div className={"page-link"} onClick={nextOnClick}>Next</div>
                 </li>
             </ul>
         </nav>

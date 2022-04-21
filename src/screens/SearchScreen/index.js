@@ -5,10 +5,12 @@ const SearchScreen = () => {
     const navigate = useNavigate();
     let [searchParams, setSearchParams] = useSearchParams();
     const submitHandler = () => {
-        navigate({
-            pathname: "results",
-            search: searchParams.toString()
-        })
+        if (searchParams.toString()) {
+            navigate({
+                pathname: "results",
+                search: searchParams.toString()
+            })
+        }
     }
     const inputOnChangeHandler = (e) => {
         setSearchParams({query: e.target.value})

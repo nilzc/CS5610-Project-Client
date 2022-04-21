@@ -5,17 +5,21 @@ import MovieGallery from "../../components/MovieGallery";
 import Search from "../../components/Search";
 import Pagination from "../../components/Pagination";
 import {INITIAL_PAGES} from "../../services/utils";
+import NoMoviesFound from "../../components/NoMoviesFound";
 
 const SearchResultsScreen = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [currPage, setCurrPage] = useState(1);
     const [pages, setPages] = useState(INITIAL_PAGES);
+    const [allowNextPages, setAllowNextPages] = useState(false);
     const [results, setResults] = useState([]);
     const [inputString, setInputString] = useState("");
     const submitHandler = () => {
-        setSearchParams({query: inputString});
-        setCurrPage(1);
-        setPages(INITIAL_PAGES)
+        if (inputString){
+            setSearchParams({query: inputString});
+            setCurrPage(1);
+            setPages(INITIAL_PAGES)
+        }
     }
     const inputOnChangeHandler = (e) => {
         setInputString(e.target.value);
@@ -27,7 +31,10 @@ const SearchResultsScreen = () => {
     const searchMovies = useCallback(
         () => {
             movieServices.searchMovie(searchParams.get("query"), currPage)
-                .then(movies => setResults(movies))
+                .then(movies => {
+                    setResults(movies)
+                    setAllowNextPages(movies.length > 0);
+                })
                 .catch(err => alert(err.response.data.error));
         }, [currPage, searchParams]
     )
@@ -35,16 +42,16 @@ const SearchResultsScreen = () => {
     return (
         <>
             <Search submitHandler={submitHandler} inputOnChangeHandler={inputOnChangeHandler}/>
-            <div className={"bg-light p-4 border"}>
+            <div className={"bg-light m-3 p-4 border"}>
                 {
                     results.length > 0 &&
                     <MovieGallery movies={results} posterOnClickHandler={posterOnClickHandler}/>
                 }
                 {
                     results.length === 0 &&
-                    <div className={"fs-5 text-center"}>Sorry, no movies are found</div>
+                   <NoMoviesFound/>
                 }
-                <Pagination currPage={currPage} setCurrPage={setCurrPage} pages={pages} setPages={setPages}/>
+                <Pagination currPage={currPage} setCurrPage={setCurrPage} pages={pages} setPages={setPages} allowNextPages={allowNextPages}/>
             </div>
         </>
     )

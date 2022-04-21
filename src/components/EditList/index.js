@@ -7,6 +7,7 @@ import * as movieServices from "../../services/movieServices";
 import MovieGallery from "../MovieGallery";
 import {INITIAL_PAGES} from "../../services/utils";
 import Pagination from "../Pagination";
+import NoMoviesFound from "../NoMoviesFound";
 
 
 const EditList = ({currList={listName: "", movies: []}, submitHandler}) => {
@@ -16,13 +17,17 @@ const EditList = ({currList={listName: "", movies: []}, submitHandler}) => {
     const [searchResults, setSearchResults] = useState([]);
     const [currPage, setCurrPage] = useState(1);
     const [pages, setPages] = useState(INITIAL_PAGES);
+    const [allowNextPages, setAllowNextPages] = useState(false);
     const [movieSelected, setMovieSelected] = useState(currList.movies);
     const [query, setQuery] = useState("");
     const searchMovie = useCallback(
         () => {
             if (query) {
                 movieServices.searchMovie(query, currPage)
-                    .then(results => setSearchResults(results))
+                    .then(results => {
+                        setSearchResults(results)
+                        setAllowNextPages(results.length > 0);
+                    })
                     .catch(err => alert(err.response.data.error));
             }
         }, [currPage, query]
@@ -75,16 +80,16 @@ const EditList = ({currList={listName: "", movies: []}, submitHandler}) => {
                 </div>
             </div>
             <Search inputOnChangeHandler={searchInputOnChangeHandler} />
-            <div className={"m-3"}>
+            <div className={"m-4 bg-light p-4 border"}>
                 {
                     searchResults.length > 0 &&
                     <MovieGallery movies={searchResults} posterOnClickHandler={(arg) => {}} addMovieOnClickHandler={addMovieOnClickHandler}/>
                 }
                 {
                     searchResults.length === 0 &&
-                    <div className={"fs-5 text-center"}>Sorry, no movies are found</div>
+                    <NoMoviesFound/>
                 }
-                <Pagination currPage={currPage} setCurrPage={setCurrPage} setPages={setPages} pages={pages}/>
+                <Pagination currPage={currPage} setCurrPage={setCurrPage} setPages={setPages} pages={pages} allowNextPages={allowNextPages}/>
             </div>
 
             <div className={"col-12 m-3"}>
