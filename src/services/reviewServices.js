@@ -41,3 +41,25 @@ export const findAllReviewsOwnedByUserWithMovieDetails = async (uid) => {
     }));
     return reviews;
 }
+export const findAllReviewsLikedByUserWithMovieDetails = async (uid) => {
+    let reviews = await findReviewsLikedByUser(uid);
+    reviews = reviews.map(r => r.review);
+    reviews = await Promise.all(reviews.map(async r => {
+        r.movie = await movieServices.findMovieDetail(r.movieId);
+        return r;
+    }));
+    return reviews;
+}
+export const userLikesReview = (uid, rid) => {
+    return api.post(`${USER_URL}/${uid}/review-likes/${rid}`)
+        .then(response => response.data);
+}
+export const findUserLikesReview = (uid, rid) => {
+    return api.get(`${USER_URL}/${uid}/review-likes/${rid}`,
+        {headers: {"Cache-Control": "no-cache"}})   // disable cache, otherwise the previous result will be used
+        .then(response => response.data);
+}
+export const findReviewsLikedByUser = (uid) => {
+    return api.get(`${USER_URL}/${uid}/review-likes`)
+        .then(response => response.data);
+}

@@ -10,6 +10,7 @@ import MyLists from "./MyLists";
 import MyListDetails from "./MyListDetails";
 import MyReviews from "./MyReviews";
 import ProfileImages from "../../components/ProfileImages";
+import MyLikes from "../../components/MyLikes";
 
 const MyProfileScreen = () => {
     const navigate = useNavigate();
@@ -55,6 +56,9 @@ const MyProfileScreen = () => {
                     <Link to="s/reviews"
                           className={`col text-center nav-link ${location.pathname.indexOf('reviews') >= 0 ? 'active':''}`}>
                         My Reviews</Link>
+                    <Link to="s/likes"
+                          className={`col text-center nav-link ${location.pathname.indexOf('likes') >= 0 ? 'active':''}`}>
+                        My Likes</Link>
                 </div>
             </div>
             <Routes>
@@ -63,6 +67,7 @@ const MyProfileScreen = () => {
                 <Route path={"s/lists/:lid"} element={<MyListDetails/>}/>
                 <Route path={"s/edit"} element={<EditProfile refresh={findProfile}/>}/>
                 <Route path={"s/reviews"} element={<MyReviews/>}/>
+                <Route path={"s/likes"} element={<MyLikes uid={user._id}/>}/>
             </Routes>
         </div>
     )

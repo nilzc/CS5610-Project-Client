@@ -8,10 +8,9 @@ const MovieListItem = ({
                            }
                            , onClickHandler
                        }) => {
-    const posterPath = list.movies.length > 0 && list.movies[0].poster_path ? `${process.env.REACT_APP_MOVIE_BASE_URL}/w342${list.movies[0].poster_path}` :
+    const posterPath = list.movies && list.movies.length > 0 && list.movies[0].poster_path ? `${process.env.REACT_APP_MOVIE_BASE_URL}/w342${list.movies[0].poster_path}` :
         "https://mdbcdn.b-cdn.net/img/new/fluid/nature/015.webp";
     return (
-
         <div className="col-6" onClick={() => onClickHandler(list)}>
             <div className="list-container 
                         d-flex flex-column 
@@ -19,7 +18,7 @@ const MovieListItem = ({
                         align-items-center
                         rounded" style={{backgroundImage: `url(${posterPath})`}}>
                 <h4 className="position-relative text-white">List Name: {list.listName}</h4>
-                <h4 className="position-relative text-white">{list.movies.length} Items</h4>
+                <h4 className="position-relative text-white">{list.movies && list.movies.length} Items</h4>
             </div>
         </div>
     )

@@ -1,4 +1,3 @@
-import MovieReviewItem from "../../components/MovieReviewItem";
 import MyReviewItem from "./MyReviewItem";
 import {useCallback, useEffect, useState} from "react";
 import * as reviewServices from "../../services/reviewServices";
