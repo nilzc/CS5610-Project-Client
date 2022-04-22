@@ -49,7 +49,7 @@ const MovieDetailsScreen = () => {
             <div className={"col-3"}>
                 {
                     movie &&
-                    <MovieItem movie={movie} posterOnClickHandler={() => {}}/>
+                    <MovieItem movieLikeBadge={true} movie={movie} posterOnClickHandler={() => {}}/>
                 }
             </div>
             <div className="col-9 ps-4">

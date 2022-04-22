@@ -8,7 +8,7 @@ const MovieSection = ({movies}) => {
     }
     return (
         <div className={`list-group-item bg-light m-2 p-4`}>
-            <MovieGallery  movies={movies} posterOnClickHandler={posterOnClickHandler}/>
+            <MovieGallery movies={movies} posterOnClickHandler={posterOnClickHandler}/>
         </div>
 
     )

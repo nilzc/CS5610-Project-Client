@@ -9,7 +9,6 @@ import ProfileImages from "../../components/ProfileImages";
 import Followings from "../../components/Followings";
 import Followers from "../../components/Followers";
 import {MY, PROFILE_URL} from "../../services/utils";
-import {userAAlreadyFollowsUserB} from "../../services/userService";
 
 const ProfileScreen = () => {
     const loggedIn = useSelector(isLoggedIn);
