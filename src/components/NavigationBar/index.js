@@ -4,7 +4,7 @@ import {logout} from "../../redux/actions";
 import {useLocation} from "react-router-dom";
 import React from "react";
 import {Nav, Navbar, Container} from "react-bootstrap";
-import {ADMIN, MY_PROFILE_URL} from "../../services/utils";
+import {ADMIN, MY_PROFILE_URL, SUPER} from "../../services/utils";
 
 const NavigationBar = () => {
     const loggedIn = useSelector(isLoggedIn);
@@ -43,7 +43,7 @@ const NavigationBar = () => {
                                     Create List
                                 </Nav.Link>
                                 {
-                                    profile.role === ADMIN &&
+                                    (profile.role === ADMIN || profile.role === SUPER) &&
                                     <Nav.Link
                                         className={`nav-link ${location.pathname.indexOf('admin') >= 0 ? 'active' : ''}`}
                                         href="/admin">

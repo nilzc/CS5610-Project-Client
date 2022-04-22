@@ -7,23 +7,27 @@ import {MY} from "../../services/utils";
 
 const CreateReview = ({movieId, refresh}) => {
     const loggedIn = useSelector(isLoggedIn);
-    const [review, setReview] = useState({rating: "0", review: ""});
+    const [review, setReview] = useState({review: ""});
     const createReview = () => {
         if (!loggedIn) {
             alert("Please login first")
             return;
         }
+        if (!review.rating || !review.review) {
+            alert("Please enter your review and rating");
+            return;
+        }
         reviewServices.createReview(MY, {...review, movieId: movieId})
             .then(refresh)
             .catch(errorServices.alertError);
-        setReview({movieId: movieId, rating: "0", review: ""});
+        setReview({movieId: movieId, review: ""});
     }
     return (
         <div className={"row mt-4"}>
 
             <label className={"col-12 fw-bold m-1"}>
-                Rating: {review.rating}
-                <input type="range" className="form-range" min="0" max="10" value={review.rating}
+                Rating: {review.rating ? review.rating : 0}
+                <input type="range" className="form-range" min="0" max="10" value={review.rating ? review.rating : 0}
                        onChange={(e) =>
                            setReview({...review, rating: e.target.value})}/>
             </label>

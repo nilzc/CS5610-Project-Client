@@ -7,11 +7,11 @@ import * as errorServices from "../../services/errorServices";
 
 const LoginScreen = () => {
     let [userCredential, setUserCredential] = useState({});
-    let [isAdmin, setIsAdmin] = useState(false);
+    let [role, setRole] = useState(USER);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const loginButtonOnClick = () => {
-        userCredential.role = isAdmin ? ADMIN : USER;
+        userCredential.role = role;
         login(dispatch, userCredential)
             .then(() => navigate(-1))
             .catch(errorServices.alertError);
@@ -49,15 +49,15 @@ const LoginScreen = () => {
             </div>
             <div className={"col-12"}>
                 <div className={"row justify-content-center"}>
-                    <div className={"col-4"}>
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id="flexCheckDefault" checked={isAdmin}
-                                   onChange={() => setIsAdmin(!isAdmin)}/>
-                            <label className="form-check-label" htmlFor="flexCheckDefault">
-                                Administrator
-                            </label>
-                        </div>
-                    </div>
+                    <label className={"col-4 form-label fw-bold m-1"}>
+                        Role:
+                        <select defaultValue={"user"} className="w-50 form-select form-select-sm m-1" aria-label="Default select example"
+                                onChange={(e) => setRole(e.target.value)}>
+                            <option value="user">Select Role</option>
+                            <option value="admin">Admin</option>
+                            <option value="super">Super</option>
+                        </select>
+                    </label>
                 </div>
             </div>
             <div className={"col-12"}>

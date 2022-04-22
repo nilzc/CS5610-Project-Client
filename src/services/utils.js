@@ -5,6 +5,7 @@ import {max} from "@cloudinary/url-gen/actions/roundCorners";
 export const MY = "my";
 export const ADMIN = "admin";
 export const USER = "user";
+export const SUPER = "super";
 export const IMAGE_PLACEHOLDER = "https://i.ibb.co/LrdpnJ5/movie-poster-coming-soon-2.png";
 export const CLOUD_NAME = "cs5610-project"
 export const UPLOAD_PRESET = "dulh2n67";

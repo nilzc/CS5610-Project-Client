@@ -32,7 +32,7 @@ const MovieDetailsScreen = () => {
     const findReviews = useCallback(
         () => {
             reviewServices.findAllReviewsOfMovie(movieId)
-                .then(rs => setReviews(rs.slice(0,3)))
+                .then(rs => setReviews(rs.slice(0,5)))
                 .catch(errorServices.alertError)
         }, [movieId]
     )

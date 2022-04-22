@@ -1,6 +1,6 @@
 import {Link, Route, useNavigate, Routes, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {isLoggedIn} from "../../redux/selectors";
+import {getUserId, isLoggedIn} from "../../redux/selectors";
 import {useCallback, useEffect, useState} from "react";
 import * as userServices from "../../services/userService";
 import * as errorServices from "../../services/errorServices";
@@ -13,6 +13,7 @@ import {userAAlreadyFollowsUserB} from "../../services/userService";
 
 const ProfileScreen = () => {
     const loggedIn = useSelector(isLoggedIn);
+    const loggedInUserId = useSelector(getUserId);
     let params = useParams();
     const navigate = useNavigate();
     const profileOwnerId = params.uid;
@@ -20,12 +21,15 @@ const ProfileScreen = () => {
     const [profileOwner, setProfileOwner] = useState({});
     const [followers, setFollowers] = useState([]);
     const [alreadyFollowed, setAlreadyFollowed] = useState(false);
+    const isMe = loggedIn && loggedInUserId && loggedInUserId === profileOwnerId;
     const findUserAFollowsUserB = useCallback(
         () => {
-            userServices.userAAlreadyFollowsUserB(MY, profileOwnerId)
-                .then(res => setAlreadyFollowed(!!res))
-                .catch(errorServices.alertError);
-        }, [profileOwnerId]
+            if (loggedIn) {
+                userServices.userAAlreadyFollowsUserB(MY, profileOwnerId)
+                    .then(res => setAlreadyFollowed(!!res))
+                    .catch(errorServices.alertError);
+            }
+        }, [loggedIn, profileOwnerId]
     )
     const findFollowers = useCallback(
         () => {
@@ -88,18 +92,21 @@ const ProfileScreen = () => {
                         <span className={"fw-bold pe-2"}>{profileOwner.stats && profileOwner.stats.follower}</span>
                         <Link to={"followers"} className={"text-decoration-none text-black"}>Followers</Link>
                     </div>
-                    <div className={"col-2 text-end"}>
-                        {
-                            !alreadyFollowed &&
-                            <button className={"w-75 btn btn-dark rounded-pill"}
-                                    onClick={follow}>Follow</button>
-                        }
-                        {
-                            alreadyFollowed &&
-                            <button className={"w-75 btn btn-outline-dark rounded-pill"}
-                                    onClick={follow}>Unfollow</button>
-                        }
-                    </div>
+                    {
+                        !isMe &&
+                        <div className={"col-2 text-end"}>
+                            {
+                                !alreadyFollowed &&
+                                <button className={"w-75 btn btn-dark rounded-pill"}
+                                        onClick={follow}>Follow</button>
+                            }
+                            {
+                                alreadyFollowed &&
+                                <button className={"w-75 btn btn-outline-dark rounded-pill"}
+                                        onClick={follow}>Unfollow</button>
+                            }
+                        </div>
+                    }
                 </div>
             </div>
             <div className="col-12 m-5 pt-3 ps-5 pe-5 nav-pills fs-4">

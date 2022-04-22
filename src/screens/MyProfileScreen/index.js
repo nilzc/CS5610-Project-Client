@@ -81,19 +81,19 @@ const MyProfileScreen = () => {
             <div className="col-12 m-5 pt-3 ps-5 pe-5 nav-pills fs-4">
                 <div className={"row gx-5"}>
                     <Link to=""
-                          className={`col text-center nav-link ${(location.pathname.indexOf('profile/') < 0 ) && (location.pathname.indexOf('edit') < 0 ) && (location.pathname.indexOf('reviews') < 0 ) ? 'active':''}`}>
+                          className={`col text-center nav-link ${location.pathname.match(/my-profile$/) ? "active" : ""}`}>
                         My Profile</Link>
                     <Link to="lists"
-                          className={`col text-center nav-link ${location.pathname.indexOf('lists') >= 0 ? 'active':''}`}>
+                          className={`col text-center nav-link ${location.pathname.match(/my-profile\/lists/) ? "active" : ""}`}>
                         My Lists</Link>
                     <Link to="edit"
-                          className={`col text-center nav-link ${location.pathname.indexOf('edit') >= 0 ? 'active':''}`}>
+                          className={`col text-center nav-link ${location.pathname.match(/my-profile\/edit/) ? "active" : ""}`}>
                         Edit Profile</Link>
                     <Link to="reviews"
-                          className={`col text-center nav-link ${location.pathname.indexOf('reviews') >= 0 ? 'active':''}`}>
+                          className={`col text-center nav-link ${location.pathname.match(/my-profile\/reviews/) ? "active" : ""}`}>
                         My Reviews</Link>
                     <Link to="likes"
-                          className={`col text-center nav-link ${location.pathname.indexOf('likes') >= 0 ? 'active':''}`}>
+                          className={`col text-center nav-link ${location.pathname.match(/my-profile\/likes/) ? "active" : ""}`}>
                         My Likes</Link>
                 </div>
             </div>

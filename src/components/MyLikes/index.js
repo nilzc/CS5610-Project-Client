@@ -28,7 +28,6 @@ const MyLikes = ({uid}) => {
                         onChange={(e) => setCategory(e.target.value)}>
                     <option value="review">Reviews</option>
                     <option value="list">Lists</option>
-                    <option value="movie">Movies</option>
                 </select>
             </div>
             <div className={"col-12"}>
@@ -40,7 +39,7 @@ const MyLikes = ({uid}) => {
                                 category === "review" &&
                                 items.map((r, nth) =>
                                     <div key={nth + "div"} className={"col-12"}>
-                                        <MovieReviewItem key={nth} review={r} refresh={findItems}/>
+                                        <MovieReviewItem key={nth} review={r} refresh={findItems} hasMovieDetail={true}/>
                                     </div>
                                 )
                             }

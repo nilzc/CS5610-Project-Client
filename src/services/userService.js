@@ -2,7 +2,9 @@ import axios from "axios";
 import {responsive} from "@cloudinary/react";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-const USER_URL = `${BASE_URL}/api/users`
+const USER_URL = `${BASE_URL}/api/users`;
+const ADMIN_URL = `${BASE_URL}/api/admins`;
+const SUPER_URL = `${BASE_URL}/api/supers`;
 
 const api = axios.create({
     withCredentials: true
@@ -35,4 +37,19 @@ export const userAFollowsUserB = (uidA, uidB) => {
 export const userAAlreadyFollowsUserB = (uidA, uidB) => {
     return api.get(`${USER_URL}/${uidA}/follows/${uidB}`)
         .then(response => response.data);
+}
+export const findAllAdmins = () => {
+    return api.get(ADMIN_URL)
+        .then(response => response.data);
+}
+export const createAdmin = (uname) => {
+    return api.post((`${ADMIN_URL}/${uname}`))
+        .then(response => response.data);
+}
+export const deleteAdmin = (uname) => {
+    return api.delete((`${ADMIN_URL}/${uname}`))
+        .then(response => response.data);
+}
+export const findAllSupers = () => {
+    return api.get(SUPER_URL).then(response => response.data);
 }
