@@ -36,18 +36,11 @@ const HomeScreen = () => {
     )
     const findRecommendations = useCallback(
         async () => {
-            const lists = await listServices.findAllListsOwnedByUserWithMovieDetails(MY).catch(alert);
-            setMyLists(lists);
-            let latestMovie;
-            for (const list of lists) {
-                if (list.movies && list.movies.length > 0) {
-                    latestMovie = list.movies[0].id;
-                    setMyLatestMovie(list.movies[0].title);
-                    break;
-                }
-            }
-            if (latestMovie) {
-                const recommendMovies = await movieServices.getRecommendationsByMovie(latestMovie, 1).catch(alert);
+            const likedMovies = await movieServices.findAllMoviesLikedByUserWithMovieDetails(MY)
+                .catch(errorServices.alertError);
+            if (likedMovies.length > 0) {
+                setMyLatestMovie(likedMovies[0].title)
+                const recommendMovies = await movieServices.getRecommendationsByMovie(likedMovies[0].id, 1).catch(alert);
                 setRecommendations(recommendMovies.slice(0, 5));
             }
         }, []
