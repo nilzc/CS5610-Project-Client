@@ -51,7 +51,7 @@ const LoginScreen = () => {
                 <div className={"row justify-content-center"}>
                     <div className={"col-4"}>
                         <div className="form-check">
-                            <input className="form-check-input" type="checkbox" value={""} id="flexCheckDefault" checked={isAdmin}
+                            <input className="form-check-input" type="checkbox" id="flexCheckDefault" checked={isAdmin}
                                    onChange={() => setIsAdmin(!isAdmin)}/>
                             <label className="form-check-label" htmlFor="flexCheckDefault">
                                 Administrator

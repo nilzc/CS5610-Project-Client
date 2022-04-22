@@ -1,3 +1,7 @@
 export const alertError = (err) => {
-    alert(err.response.data.error);
+    if (err && err.response && err.response.data) {
+        alert(err.response.data.error);
+    } else {
+        alert(err);
+    }
 }

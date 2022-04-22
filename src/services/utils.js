@@ -26,3 +26,10 @@ export const cloud = new Cloudinary({cloud: {cloudName: CLOUD_NAME}});
 export const getAvatar = (profilePhoto) => {
     return cloud.image(profilePhoto).resize(fill(300, 300)).roundCorners(max()).toURL()
 }
+
+export const MY_PROFILE_URL = "/my-profile";
+export const PROFILE_URL = "/profile";
+
+export const goToUserProfile = (navigate, uid) => {
+    navigate(`${PROFILE_URL}/${uid}`);
+}

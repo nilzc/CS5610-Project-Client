@@ -1,12 +1,14 @@
 import {useDispatch, useSelector} from "react-redux";
-import {isLoggedIn} from "../../redux/selectors";
+import {getProfile, isLoggedIn} from "../../redux/selectors";
 import {logout} from "../../redux/actions";
-import {Link, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import React from "react";
 import {Nav, Navbar, Container} from "react-bootstrap";
+import {ADMIN, MY_PROFILE_URL} from "../../services/utils";
 
 const NavigationBar = () => {
     const loggedIn = useSelector(isLoggedIn);
+    const profile = useSelector(getProfile);
     const dispatch = useDispatch();
     const logoutButtonOnClick = () => {
         logout(dispatch)
@@ -32,7 +34,7 @@ const NavigationBar = () => {
                             {loggedIn && <>
                                 <Nav.Link
                                     className={`nav-link ${location.pathname.indexOf('profile') >= 0 ? 'active' : ''}`}
-                                    href="/profile">
+                                    href={MY_PROFILE_URL}>
                                     Profile
                                 </Nav.Link>
                                 <Nav.Link
@@ -40,11 +42,14 @@ const NavigationBar = () => {
                                     href="/lists/new">
                                     Create List
                                 </Nav.Link>
-                                <Nav.Link
-                                    className={`nav-link ${location.pathname.indexOf('new') >= 0 ? 'active' : ''}`}
-                                    href="/admin">
-                                    Admin Tool
-                                </Nav.Link>
+                                {
+                                    profile.role === ADMIN &&
+                                    <Nav.Link
+                                        className={`nav-link ${location.pathname.indexOf('admin') >= 0 ? 'active' : ''}`}
+                                        href="/admin">
+                                        Admin Tool
+                                    </Nav.Link>
+                                }
                             </>}
                         </Nav>
                         {loggedIn &&

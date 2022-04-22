@@ -21,6 +21,7 @@ import MoviesCategoryScreen from "./screens/MoviesCategoryScreen";
 import AdminScreen from "./screens/AdminScreen";
 import EditListScreen from "./screens/EditListScreen";
 import CreateNewListScreen from "./screens/CreateNewListScreen";
+import {MY_PROFILE_URL, PROFILE_URL} from "./services/utils";
 
 const {store, persistor} = createPersistStore();
 
@@ -34,8 +35,8 @@ ReactDOM.render(
                         <Route index element={<HomeScreen/>}/>
                         <Route path={"home"} element={<HomeScreen/>}/>
                         <Route path={"admin"} element={<AdminScreen/>}/>
-                        <Route path={"profile/:uid"} element={<ProfileScreen/>}/>
-                        <Route path={"profile/*"} element={<MyProfileScreen/>}/>
+                        <Route path={`${PROFILE_URL}/:uid/*`} element={<ProfileScreen/>}/>
+                        <Route path={`${MY_PROFILE_URL}/*`} element={<MyProfileScreen/>}/>
                         <Route path={"lists/new"} element={<CreateNewListScreen/>}/>
                         <Route path={"lists/:lid"} element={<EditListScreen/>}/>
                         <Route path={"search"} element={<SearchScreen/>}/>
