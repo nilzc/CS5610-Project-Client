@@ -1,4 +1,4 @@
-import {CLOUD_NAME, getDateYYYYMMDD, MY, UPLOAD_PRESET} from "../../services/utils";
+import {CLOUD_NAME, getDateYYYYMMDD, MY, MY_PROFILE_URL, UPLOAD_PRESET} from "../../services/utils";
 import {useCallback, useEffect, useState} from "react";
 import * as authService from "../../services/authServices";
 import * as cloudServices from "../../services/cloudinaryServices";
@@ -47,7 +47,7 @@ const EditProfile = ({refresh}) => {
         }
         await userServices.updateUser(MY, user).catch(err => alert(err.response.data.error));
         await refresh()
-        navigate("/profile");
+        navigate(MY_PROFILE_URL);
         alert("Profile updated!");
     }
     useEffect(findProfile, [findProfile]);

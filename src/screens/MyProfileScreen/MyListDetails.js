@@ -6,6 +6,7 @@ import MovieGallery from "../../components/MovieGallery";
 import {useSelector} from "react-redux";
 import {getUserId, isLoggedIn} from "../../redux/selectors";
 import MovieItem from "../../components/MovieItem";
+import {MY_PROFILE_URL} from "../../services/utils";
 
 const MyListDetails = () => {
     const loggedIn = useSelector(isLoggedIn);
@@ -19,14 +20,14 @@ const MyListDetails = () => {
                 if (ls) {
                     setListDetails(ls)
                 } else {
-                    navigate("/profile/s/lists")
+                    navigate(`${MY_PROFILE_URL}/lists`)
                     alert("List does not exist!")
                 }
             })
             .catch(errorServices.alertError);
     }
     const goBackClickHandler = () => {
-        navigate("/profile/s/lists")
+        navigate(`${MY_PROFILE_URL}/lists`)
     }
     const posterOnClickHandler = (movie) => {
         navigate('/movies/'+ movie.id)
@@ -34,7 +35,7 @@ const MyListDetails = () => {
     const deleteOnClickHandler = () => {
         listServices.deleteList(listDetails._id)
             .then((status) => {
-                navigate("/profile/s/lists");
+                navigate(`${MY_PROFILE_URL}/lists`);
                 alert("Movie list deleted!")
             })
             .catch(errorServices.alertError);

@@ -3,7 +3,7 @@ import * as listServices from "../../services/listServices";
 import * as errorServices from "../../services/errorServices";
 import {useEffect, useState} from "react";
 import EditList from "../../components/EditList";
-import {MY} from "../../services/utils";
+import {MY, MY_PROFILE_URL} from "../../services/utils";
 
 const EditListScreen = () => {
     const params = useParams();
@@ -18,7 +18,7 @@ const EditListScreen = () => {
     const submitHandler = (movieList) => {
         listServices.updateList(MY, listId, movieList)
             .then((response) => {
-                navigate("/profile");
+                navigate(MY_PROFILE_URL);
                 alert("Movie list updated!");
             }).catch(errorServices.alertError);
     }
