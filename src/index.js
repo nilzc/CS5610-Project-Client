@@ -22,6 +22,9 @@ import AdminScreen from "./screens/AdminScreen";
 import EditListScreen from "./screens/EditListScreen";
 import CreateNewListScreen from "./screens/CreateNewListScreen";
 import {MY_PROFILE_URL, PROFILE_URL} from "./services/utils";
+import Index from "./screens/MovieReviewsScreen";
+import MovieReviewsScreen from "./screens/MovieReviewsScreen";
+import MovieRecommendationScreen from "./screens/MovieRecommendationScreen";
 
 const {store, persistor} = createPersistStore();
 
@@ -42,6 +45,8 @@ ReactDOM.render(
                         <Route path={"search"} element={<SearchScreen/>}/>
                         <Route path={"search/results"} element={<SearchResultsScreen/>}/>
                         <Route path={"movies/:mid"} element={<MovieDetailsScreen/>}/>
+                        <Route path={"movies/:mid/reviews"} element={<MovieReviewsScreen/>}/>
+                        <Route path={"movies/:mid/recommendations"} element={<MovieRecommendationScreen/>}/>
                         <Route path={"movies/in/:category"} element={<MoviesCategoryScreen/>}/>
                         <Route path={"login"} element={<LoginScreen/>}/>
                         <Route path={"register"} element={<RegisterScreen/>}/>

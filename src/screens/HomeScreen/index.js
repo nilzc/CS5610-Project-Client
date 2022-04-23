@@ -8,16 +8,17 @@ import * as userServices from "../../services/userService";
 import {useCallback, useEffect, useState} from "react";
 import {refresh} from "../../redux/actions";
 import {MY} from "../../services/utils";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import UserLists from "../../components/UserLists";
 
 const HomeScreen = () => {
     const loggedIn = useSelector(isLoggedIn);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [myLists, setMyLists] = useState([])
     const [recommendations, setRecommendations] = useState([]);
-    const [myLatestMovie, setMyLatestMovie] = useState("");
+    const [myLatestMovie, setMyLatestMovie] = useState({});
     const [popularMovies, setPopularMovies] = useState([]);
     const [topRatedMovies, setTopRatedMovies] = useState([]);
     const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
@@ -39,7 +40,7 @@ const HomeScreen = () => {
             const likedMovies = await movieServices.findAllMoviesLikedByUserWithMovieDetails(MY)
                 .catch(errorServices.alertError);
             if (likedMovies.length > 0) {
-                setMyLatestMovie(likedMovies[0].title)
+                setMyLatestMovie(likedMovies[0])
                 const recommendMovies = await movieServices.getRecommendationsByMovie(likedMovies[0].id, 1).catch(alert);
                 setRecommendations(recommendMovies.slice(0, 5));
             }
@@ -64,16 +65,22 @@ const HomeScreen = () => {
             {
                 loggedIn && recommendations && recommendations.length > 0 &&
                 <>
-                    <h3 className={`text-primary m-1 p-1 mt-3`}>
-                        You liked <span className={"fst-italic fw-bold"}>{myLatestMovie}</span>, you may also like:
-                    </h3>
+                    <div className={"row align-items-end m-0"}>
+                        <h3 className={`col text-black m-1 p-1 mt-3`}>
+                            You liked <span className={"fst-italic fw-bold text-primary"}>{myLatestMovie.title}</span>, you may also like:
+                        </h3>
+                        <div className={"col text-end pe-4"}>
+                            <i role={"button"} className="fa-solid fa-ellipsis fs-3"
+                               onClick={() => navigate(`/movies/${myLatestMovie.id}/recommendations`)}/>
+                        </div>
+                    </div>
                     <MovieSection movies={recommendations}/>
                 </>
             }
             {
                 loggedIn && recommendations && recommendations.length === 0 &&
                 <>
-                    <h3 className={`m-1 p-1 text-primary mt-3`}>
+                    <h3 className={`m-1 p-1 text-black mt-3`}>
                         Start your journey by creating a new list!
                         <span className={"ps-3"}><Link to={"/lists/new"} className={"btn btn-primary"}>Take Me There</Link></span>
                     </h3>
@@ -81,9 +88,10 @@ const HomeScreen = () => {
             }
             <div className={"row m-0 align-items-end"}>
                 <h3 className={`col text-primary m-1 p-1`}>Popular</h3>
-                <Link to={"/movies/in/popular"} className={"col text-end pe-4"}>
-                    <i className="fa-solid fa-ellipsis text-primary fs-3"/>
-                </Link>
+                <div className={"col text-end pe-4"}>
+                    <i role={"button"} className="fa-solid fa-ellipsis text-primary fs-3"
+                       onClick={() => navigate("/movies/in/popular")}/>
+                </div>
             </div>
             {
                 popularMovies.length > 0 &&
@@ -91,9 +99,10 @@ const HomeScreen = () => {
             }
             <div className={"row m-0 align-items-end"}>
                 <h3 className={`col text-primary m-1 p-1`}>Now Playing</h3>
-                <Link to={"/movies/in/now-playing"} className={"col text-end pe-4"}>
-                    <i className="fa-solid fa-ellipsis text-primary fs-3"/>
-                </Link>
+                <div className={"col text-end pe-4"}>
+                    <i role={"button"} className="fa-solid fa-ellipsis text-primary fs-3"
+                       onClick={() => navigate("/movies/in/now-playing")}/>
+                </div>
             </div>
             {
                 nowPlayingMovies.length > 0 &&
@@ -101,9 +110,10 @@ const HomeScreen = () => {
             }
             <div className={"row m-0 align-items-end"}>
                 <h3 className={`col text-primary m-1 p-1`}>Top Rated</h3>
-                <Link to={"/movies/in/top-rated"} className={"col text-end pe-4"}>
-                    <i className="fa-solid fa-ellipsis text-primary fs-3"/>
-                </Link>
+                <div className={"col text-end pe-4"}>
+                    <i role={"button"} className="fa-solid fa-ellipsis text-primary fs-3"
+                       onClick={() => navigate("/movies/in/top-rated")}/>
+                </div>
             </div>
             {
                 topRatedMovies.length > 0 &&
@@ -111,9 +121,10 @@ const HomeScreen = () => {
             }
             <div className={"row m-0 align-items-end"}>
                 <h3 className={`col text-primary m-1 p-1`}>Upcoming</h3>
-                <Link to={"/movies/in/upcoming"} className={"col text-end pe-4"}>
-                    <i className="fa-solid fa-ellipsis text-primary fs-3"/>
-                </Link>
+                <div className={"col text-end pe-4"}>
+                    <i role={"button"} className="fa-solid fa-ellipsis text-primary fs-3"
+                       onClick={() => navigate("/movies/in/upcoming")}/>
+                </div>
             </div>
             {
                 upcomingMovies.length > 0 &&

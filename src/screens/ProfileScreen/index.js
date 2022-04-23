@@ -83,6 +83,10 @@ const ProfileScreen = () => {
             <ProfileImages profileOwner={profileOwner}/>
             <div className={"col-12 fs-5"}>
                 <div className={"row justify-content-end align-items-center"}>
+                    <div className={"col-3"}>
+                        <i className="fa-solid fa-address-card pe-2"/>
+                        <span className={"fw-bold"}>{profileOwner.username}</span>'s Profile
+                    </div>
                     <div className={"col-2 text-end"}>
                         <span className={"fw-bold pe-2"}>{profileOwner.stats && profileOwner.stats.following}</span>
                         <Link to={"followings"} className={"text-decoration-none text-black"}>Followings</Link>
