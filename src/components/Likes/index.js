@@ -12,7 +12,7 @@ const CATEGORY_ITEMS = {
     "reviews": {"func": reviewServices.findAllReviewsLikedByUserWithMovieDetails},
     "movies": {"func": movieServices.findAllMoviesLikedByUserWithMovieDetails}
 }
-const Likes = ({uid}) => {
+const Likes = ({uid, showPrivate}) => {
     const [category, setCategory] = useState("movies")
     const [items, setItems] = useState([]);
     const navigate = useNavigate();
@@ -42,7 +42,7 @@ const Likes = ({uid}) => {
                         items && items.length > 0 && category === "reviews" &&
                         items.map((r, nth) =>
                             <div key={nth + "div"} className={"col-12"}>
-                                <MovieReviewItem key={nth} review={r} refresh={findItems} hasMovieDetail={true}/>
+                                <MovieReviewItem key={nth} review={r} refresh={findItems} hasMovieDetail={true} showPrivate={showPrivate}/>
                             </div>
                         )
                     }
@@ -50,7 +50,7 @@ const Likes = ({uid}) => {
                 <div className={"row m-0"}>
                     {
                         items && items.length > 0 && category === "movies" &&
-                        <MovieGallery movieLikeBadge={true} movies={items} posterOnClickHandler={goToMovieDetails} refresh={findItems}/>
+                        <MovieGallery movieLikeBadge={true} movies={items} posterOnClickHandler={goToMovieDetails} refresh={findItems} showPrivate={showPrivate}/>
                     }
                 </div>
             </div>

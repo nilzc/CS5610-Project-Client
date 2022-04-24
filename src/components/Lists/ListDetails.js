@@ -8,7 +8,7 @@ import {getUserId, isLoggedIn} from "../../redux/selectors";
 import MovieItem from "../MovieItem";
 import {MY_PROFILE_URL} from "../../services/utils";
 
-const ListDetails = (profileUrl) => {
+const ListDetails = ({profileUrl, showPrivate}) => {
     const loggedIn = useSelector(isLoggedIn);
     const loggedInUserId = useSelector(getUserId);
     const params = useParams();
@@ -52,7 +52,7 @@ const ListDetails = (profileUrl) => {
                         </div>
                     </div>
                     {
-                        loggedIn && listDetails && listDetails.ownedBy && loggedInUserId === listDetails.ownedBy._id &&
+                        loggedIn && listDetails && listDetails.ownedBy && loggedInUserId === listDetails.ownedBy._id && showPrivate &&
                         <div className={"col-2 text-end"}>
                             <button className={"btn btn-danger"} onClick={deleteOnClickHandler}>Delete</button>
                         </div>
@@ -63,11 +63,13 @@ const ListDetails = (profileUrl) => {
                 <div className={"row row-cols-5 gy-3"}>
                     {
                         listDetails.movies && listDetails.movies.map((movie, nth) =>
-                            <MovieItem key={nth} movie={movie} posterOnClickHandler={posterOnClickHandler}/>
+                            <MovieItem key={nth} movie={movie} posterOnClickHandler={posterOnClickHandler} showPrivate={showPrivate}/>
                         )
                     }
-                    <div className={"col align-self-center text-center"}>
+                    <div className={"col align-self-center text-center"}> {
+                        loggedIn && listDetails && listDetails.ownedBy && loggedInUserId === listDetails.ownedBy._id && showPrivate &&
                         <Link to={`/lists/${listDetails._id}`} className={"btn btn-primary"}>Add Movie</Link>
+                    }
                     </div>
                 </div>
             </div>

@@ -13,9 +13,11 @@ const Lists = ({uid}) => {
         navigate(`${list._id}`);
     }
     const findLists = useCallback(() => {
+        if(uid){
             listServices.findAllListsOwnedByUserWithMovieDetails(uid)
                 .then(lists => setLists(lists))
                 .catch(errorServices.alertError);
+        }
         },[uid]);
 
     useEffect(findLists, [findLists])

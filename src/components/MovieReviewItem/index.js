@@ -12,7 +12,7 @@ const MovieReviewItem = ({
                              review = {
                                  review: "dummy", postedBy: {username: "bob"}
                              },
-                             refresh, hasMovieDetail=false
+                             refresh, hasMovieDetail=false, showPrivate = true
                          }) => {
     const loggedIn = useSelector(isLoggedIn);
     const loggedInUserId = useSelector(getUserId);
@@ -58,7 +58,7 @@ const MovieReviewItem = ({
                     {
                         hasMovieDetail &&
                         <div className={"col-2 p-2"}>
-                            <MovieItem movie={review.movie} posterOnClickHandler={goToMovieDetails}/>
+                            <MovieItem movie={review.movie} posterOnClickHandler={goToMovieDetails} showPrivate={showPrivate}/>
                         </div>
                     }
                     <div className="col">
@@ -70,7 +70,7 @@ const MovieReviewItem = ({
                             </h5>
                             <div className="col-2 text-end pe-0">
                                 {
-                                    isMyReview &&
+                                    isMyReview && showPrivate &&
                                     <button className={"btn btn-danger"}
                                             onClick={deleteReview}>Delete
                                     </button>
@@ -84,10 +84,10 @@ const MovieReviewItem = ({
                                 <div className={"row align-items-center"}>
                                     {
                                         liked &&
-                                        <i className={`col-6 fa-solid fa-bookmark`} onClick={likeReview}/>
+                                        <i className={`col-6 fa-solid fa-bookmark`} onClick={showPrivate? likeReview : undefined}/>
                                     }
                                     {
-                                        !liked &&
+                                        !liked && showPrivate &&
                                         <i className={`col-6 fa-regular fa-bookmark`} onClick={likeReview}/>
                                     }
                                     <span className={"col-6"}>{review.stats && review.stats.likes}</span>
