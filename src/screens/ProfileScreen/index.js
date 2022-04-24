@@ -1,4 +1,4 @@
-import {Link, Route, useNavigate, Routes, useParams} from "react-router-dom";
+import {Link, Route, useNavigate, Routes, useParams, useLocation} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {getUserId, isLoggedIn} from "../../redux/selectors";
 import {useCallback, useEffect, useState} from "react";
@@ -9,12 +9,17 @@ import ProfileImages from "../../components/ProfileImages";
 import Followings from "../../components/Followings";
 import Followers from "../../components/Followers";
 import {MY, PROFILE_URL} from "../../services/utils";
+import ListDetails from "../../components/Lists/ListDetails";
+import Reviews from "../../components/Reviews/Reviews";
+import Likes from "../../components/Likes";
+import Lists from "../../components/Lists/Lists";
 
 const ProfileScreen = () => {
     const loggedIn = useSelector(isLoggedIn);
     const loggedInUserId = useSelector(getUserId);
     let params = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
     const profileOwnerId = params.uid;
     const [followings, setFollowings] = useState([]);
     const [profileOwner, setProfileOwner] = useState({});
@@ -113,10 +118,27 @@ const ProfileScreen = () => {
                 </div>
             </div>
             <div className="col-12 m-5 pt-3 ps-5 pe-5 nav-pills fs-4">
-                Navbar
+                <div className={"row gx-5"}>
+                    <Link to=""
+                          className={`col text-center nav-link ${location.pathname.match(/profile$/) ? "active" : ""}`}>
+                        {profileOwner.username}'s Profile</Link>
+                    <Link to="lists"
+                          className={`col text-center nav-link ${location.pathname.match(/profile\/lists/) ? "active" : ""}`}>
+                        {profileOwner.username}'s Lists</Link>
+                    <Link to="reviews"
+                          className={`col text-center nav-link ${location.pathname.match(/profile\/reviews/) ? "active" : ""}`}>
+                        {profileOwner.username}'s Reviews</Link>
+                    <Link to="likes"
+                          className={`col text-center nav-link ${location.pathname.match(/profile\/likes/) ? "active" : ""}`}>
+                        {profileOwner.username}'s Likes</Link>
+                </div>
             </div>
             <Routes>
                 <Route index element={<ProfileOverview profileOwner={profileOwner}/>}/>
+                <Route path={"lists"} element={<Lists uid={profileOwner._id}/>}/>
+                <Route path={"lists/:lid"} element={<ListDetails profileUrl={PROFILE_URL}/>}/>
+                <Route path={"reviews"} element={<Reviews uid={profileOwner._id}/>}/>
+                <Route path={"likes"} element={<Likes uid={profileOwner._id}/>}/>
                 <Route path={"followings"} element={<Followings baseUrl={`${PROFILE_URL}/${profileOwnerId}`} profileOwnerId={profileOwnerId} refresh={init} followings={followings}/>}/>
                 <Route path={"followers"} element={<Followers baseUrl={`${PROFILE_URL}/${profileOwnerId}`} followers={followers}/>}/>
             </Routes>

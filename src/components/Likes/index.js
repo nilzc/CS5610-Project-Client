@@ -12,7 +12,7 @@ const CATEGORY_ITEMS = {
     "reviews": {"func": reviewServices.findAllReviewsLikedByUserWithMovieDetails},
     "movies": {"func": movieServices.findAllMoviesLikedByUserWithMovieDetails}
 }
-const MyLikes = ({uid}) => {
+const Likes = ({uid}) => {
     const [category, setCategory] = useState("movies")
     const [items, setItems] = useState([]);
     const navigate = useNavigate();
@@ -57,4 +57,4 @@ const MyLikes = ({uid}) => {
         </div>
     )
 };
-export default MyLikes;
+export default Likes;

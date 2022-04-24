@@ -2,13 +2,13 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import * as listServices from "../../services/listServices";
 import * as errorServices from "../../services/errorServices";
 import {useEffect, useState} from "react";
-import MovieGallery from "../../components/MovieGallery";
+import MovieGallery from "../MovieGallery";
 import {useSelector} from "react-redux";
 import {getUserId, isLoggedIn} from "../../redux/selectors";
-import MovieItem from "../../components/MovieItem";
+import MovieItem from "../MovieItem";
 import {MY_PROFILE_URL} from "../../services/utils";
 
-const MyListDetails = () => {
+const ListDetails = (profileUrl) => {
     const loggedIn = useSelector(isLoggedIn);
     const loggedInUserId = useSelector(getUserId);
     const params = useParams();
@@ -20,14 +20,14 @@ const MyListDetails = () => {
                 if (ls) {
                     setListDetails(ls)
                 } else {
-                    navigate(`${MY_PROFILE_URL}/lists`)
+                    navigate(`${profileUrl}/lists`)
                     alert("List does not exist!")
                 }
             })
             .catch(errorServices.alertError);
     }
     const goBackClickHandler = () => {
-        navigate(`${MY_PROFILE_URL}/lists`)
+        navigate(`${profileUrl}/lists`)
     }
     const posterOnClickHandler = (movie) => {
         navigate('/movies/'+ movie.id)
@@ -35,7 +35,7 @@ const MyListDetails = () => {
     const deleteOnClickHandler = () => {
         listServices.deleteList(listDetails._id)
             .then((status) => {
-                navigate(`${MY_PROFILE_URL}/lists`);
+                navigate(`${profileUrl}/lists`);
                 alert("Movie list deleted!")
             })
             .catch(errorServices.alertError);
@@ -74,4 +74,4 @@ const MyListDetails = () => {
         </div>
     )
 };
-export default MyListDetails;
+export default ListDetails;
