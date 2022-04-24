@@ -2,7 +2,7 @@ import {useSelector} from "react-redux";
 import {getProfile, getUserId, isLoggedIn} from "../../redux/selectors";
 import * as reviewServices from "../../services/reviewServices";
 import * as errorServices from "../../services/errorServices";
-import {ADMIN, getDate, goToMovieDetails, MY, SUPER} from "../../services/utils";
+import {ADMIN, getDate, goToMovieDetails, goToUserProfile, MY, SUPER} from "../../services/utils";
 import React, {useEffect, useState} from "react";
 import MovieItem from "../MovieItem";
 import {useNavigate} from "react-router-dom";
@@ -49,6 +49,7 @@ const MovieReviewItem = ({
     const goToMovieDetails = (movie) => {
         navigate(`/movies/${movie.id}`);
     }
+
     useEffect(userAlreadyLikesReview, [loggedIn, review]);
     return (
         <div className={"row justify-content-between bg-light border p-0"}>
@@ -63,7 +64,7 @@ const MovieReviewItem = ({
                     <div className="col">
                         <div className={"row m-0 pt-2 pb-2 justify-content-between"}>
                             <h5 className="col p-1">Written by
-                                <span className="text-success fw-bold text-decoration-underline ps-1">
+                                <span className="text-success fw-bold text-decoration-underline ps-1" onClick={() => goToUserProfile(navigate, review.postedBy._id)}>
                                     {review.postedBy && review.postedBy.username}
                                 </span> on {getDate(review.postedOn)}
                             </h5>
