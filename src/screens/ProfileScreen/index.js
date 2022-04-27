@@ -136,9 +136,9 @@ const ProfileScreen = () => {
             <Routes>
                 <Route index element={<ProfileOverview profileOwner={profileOwner} showPrivate={false}/>}/>
                 <Route path={"lists"} element={<Lists uid={profileOwner._id}/>}/>
-                <Route path={"lists/:lid"} element={<ListDetails profileUrl={PROFILE_URL} showPrivate={false}/>}/>
-                <Route path={"reviews"} element={<Reviews uid={profileOwner._id} showPrivate={false}/>}/>
-                <Route path={"likes"} element={<Likes uid={profileOwner._id} showPrivate={false}/>}/>
+                <Route path={"lists/:lid"} element={<ListDetails profileUrl={PROFILE_URL} allowAdd={false} allowDelete={false}/>}/>
+                <Route path={"reviews"} element={<Reviews uid={profileOwner._id} allowDelete={false}/>}/>
+                <Route path={"likes"} element={<Likes uid={profileOwner._id} allowLike={false} allowDelete={false}/>}/>
                 <Route path={"followings"} element={<Followings baseUrl={`${PROFILE_URL}/${profileOwnerId}`} profileOwnerId={profileOwnerId} refresh={init} followings={followings}/>}/>
                 <Route path={"followers"} element={<Followers baseUrl={`${PROFILE_URL}/${profileOwnerId}`} followers={followers}/>}/>
             </Routes>

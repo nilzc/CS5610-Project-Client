@@ -8,7 +8,7 @@ import {getUserId, isLoggedIn} from "../../redux/selectors";
 import MovieItem from "../MovieItem";
 import {MY_PROFILE_URL} from "../../services/utils";
 
-const ListDetails = ({profileUrl, showPrivate}) => {
+const ListDetails = ({profileUrl, allowAdd = true, allowDelete = true}) => {
     const loggedIn = useSelector(isLoggedIn);
     const loggedInUserId = useSelector(getUserId);
     const params = useParams();
@@ -52,7 +52,7 @@ const ListDetails = ({profileUrl, showPrivate}) => {
                         </div>
                     </div>
                     {
-                        loggedIn && listDetails && listDetails.ownedBy && loggedInUserId === listDetails.ownedBy._id && showPrivate &&
+                        loggedIn && listDetails && listDetails.ownedBy && loggedInUserId === listDetails.ownedBy._id && allowDelete &&
                         <div className={"col-2 text-end"}>
                             <button className={"btn btn-danger"} onClick={deleteOnClickHandler}>Delete</button>
                         </div>
@@ -63,11 +63,11 @@ const ListDetails = ({profileUrl, showPrivate}) => {
                 <div className={"row row-cols-5 gy-3"}>
                     {
                         listDetails.movies && listDetails.movies.map((movie, nth) =>
-                            <MovieItem key={nth} movie={movie} posterOnClickHandler={posterOnClickHandler} showPrivate={showPrivate}/>
+                            <MovieItem key={nth} movie={movie} posterOnClickHandler={posterOnClickHandler}/>
                         )
                     }
                     <div className={"col align-self-center text-center"}> {
-                        loggedIn && listDetails && listDetails.ownedBy && loggedInUserId === listDetails.ownedBy._id && showPrivate &&
+                        loggedIn && listDetails && listDetails.ownedBy && loggedInUserId === listDetails.ownedBy._id && allowAdd &&
                         <Link to={`/lists/${listDetails._id}`} className={"btn btn-primary"}>Add Movie</Link>
                     }
                     </div>
