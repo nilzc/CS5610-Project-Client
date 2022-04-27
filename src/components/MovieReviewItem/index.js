@@ -12,7 +12,7 @@ const MovieReviewItem = ({
                              review = {
                                  review: "dummy", postedBy: {username: "bob"}
                              },
-                             refresh, hasMovieDetail=false
+                             refresh, hasMovieDetail=false, allowDelete = true, allowLike = true
                          }) => {
     const loggedIn = useSelector(isLoggedIn);
     const loggedInUserId = useSelector(getUserId);
@@ -70,7 +70,7 @@ const MovieReviewItem = ({
                             </h5>
                             <div className="col-2 text-end pe-0">
                                 {
-                                    isMyReview &&
+                                    isMyReview && allowDelete &&
                                     <button className={"btn btn-danger"}
                                             onClick={deleteReview}>Delete
                                     </button>
@@ -84,11 +84,11 @@ const MovieReviewItem = ({
                                 <div className={"row align-items-center"}>
                                     {
                                         liked &&
-                                        <i className={`col-6 fa-solid fa-bookmark`} onClick={likeReview}/>
+                                        <i className={`col-6 fa-solid fa-bookmark`} onClick={allowLike? likeReview : undefined}/>
                                     }
                                     {
                                         !liked &&
-                                        <i className={`col-6 fa-regular fa-bookmark`} onClick={likeReview}/>
+                                        <i className={`col-6 fa-regular fa-bookmark`} onClick={allowLike? likeReview : undefined}/>
                                     }
                                     <span className={"col-6"}>{review.stats && review.stats.likes}</span>
                                 </div>

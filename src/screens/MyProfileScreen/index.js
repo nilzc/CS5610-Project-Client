@@ -6,11 +6,11 @@ import * as authService from "../../services/authServices";
 import ProfileOverview from "../../components/ProfileOverview";
 import * as errorServices from "../../services/errorServices";
 import EditProfile from "./EditProfile";
-import MyLists from "./MyLists";
-import MyListDetails from "./MyListDetails";
-import MyReviews from "./MyReviews";
+import Lists from "../../components/Lists/Lists";
+import ListDetails from "../../components/Lists/ListDetails";
+import Reviews from "../../components/Reviews/Reviews";
 import ProfileImages from "../../components/ProfileImages";
-import MyLikes from "../../components/MyLikes";
+import Likes from "../../components/Likes";
 import Followings from "../../components/Followings";
 import Followers from "../../components/Followers";
 import {MY_PROFILE_URL} from "../../services/utils";
@@ -103,11 +103,11 @@ const MyProfileScreen = () => {
             </div>
             <Routes>
                 <Route index element={<ProfileOverview profileOwner={user}/>}/>
-                <Route path={"lists"} element={<MyLists/>}/>
-                <Route path={"lists/:lid"} element={<MyListDetails/>}/>
+                <Route path={"lists"} element={<Lists uid={user._id}/>}/>
+                <Route path={"lists/:lid"} element={<ListDetails profileUrl={MY_PROFILE_URL} />}/>
                 <Route path={"edit"} element={<EditProfile refresh={findProfile}/>}/>
-                <Route path={"reviews"} element={<MyReviews/>}/>
-                <Route path={"likes"} element={<MyLikes uid={user._id}/>}/>
+                <Route path={"reviews"} element={<Reviews uid={user._id} />}/>
+                <Route path={"likes"} element={<Likes uid={user._id} allowDelete={false}/> }/>
                 <Route path={"followings"} element={<Followings baseUrl={MY_PROFILE_URL} followings={followings} profileOwnerId={user._id} refresh={init}/>}/>
                 <Route path={"followers"} element={<Followers baseUrl={MY_PROFILE_URL} followers={followers}/>}/>
             </Routes>

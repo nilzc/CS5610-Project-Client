@@ -10,7 +10,7 @@ const MovieItem = ({
                            title: "Spider-Man: No Way Home",
                            release_date: "2021-12-15",
                            poster_path: "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"
-                       }, posterOnClickHandler, addMovieOnClickHandler, movieLikeBadge=false, refresh=() => {}
+                       }, posterOnClickHandler, addMovieOnClickHandler, movieLikeBadge=false, refresh=() => {}, allowLike =true
                    }) => {
     const loggedIn = useSelector(isLoggedIn);
     const [stats, setStats] = useState({});
@@ -74,7 +74,7 @@ const MovieItem = ({
                 {
                     movieLikeBadge &&
                     <div className={"position-absolute badge rounded-pill bg-danger fs-6"} style={{top: "-0.5rem", right: "-1rem"}}
-                         onClick={likeMovie}>
+                        onClick={allowLike? likeMovie: undefined}>
                         {
                             !liked &&
                             <i className={"fa-regular fa-heart"}/>

@@ -1,11 +1,12 @@
 import {useSelector} from "react-redux";
-import {isLoggedIn} from "../../redux/selectors";
+import {getUserId, isLoggedIn} from "../../redux/selectors";
 import {getDate} from "../../services/utils";
 const ProfileOverview = ({
                              profileOwner =
-                                 {username: "Dummy", firstName: "Harry", lastName: "Potter", phone: "", dateOfBirth: ""}
+                                 {username: "Dummy", firstName: "Harry", lastName: "Potter", phone: "", dateOfBirth: ""}, showPrivate
                          }) => {
     const loggedIn = useSelector(isLoggedIn);
+    const loggedInUserId = useSelector(getUserId);
     return (
         <div className={"row justify-content-center"}>
             <div className={"col-4"}>
@@ -36,7 +37,7 @@ const ProfileOverview = ({
                         </div>
                     }
                     {
-                        loggedIn &&
+                        loggedIn && loggedInUserId === profileOwner._id && showPrivate &&
                         <>
                             <h4 className={"text-primary mt-3"}>Private:</h4>
                             {profileOwner.phone &&

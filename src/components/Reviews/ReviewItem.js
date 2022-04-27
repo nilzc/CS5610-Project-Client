@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 import * as reviewServices from "../../services/reviewServices";
 import * as errorServices from "../../services/errorServices";
 
-const MyReviewItem = ({review, refresh}) => {
+const ReviewItem = ({review, refresh, allowDelete = true}) => {
     const loggedInUserId = useSelector(getUserId);
     const isMyReview = review.postedBy && loggedInUserId ? review.postedBy._id === loggedInUserId : false;
     const deleteReview = () => {
@@ -33,7 +33,7 @@ const MyReviewItem = ({review, refresh}) => {
                             <h5 className="col p-1">{review.movie && review.movie.title}</h5>
                             <div className="col-1">
                                 {
-                                    isMyReview &&
+                                    isMyReview && allowDelete &&
                                     <button className={"btn btn-danger"}
                                             onClick={deleteReview}>Delete</button>
                                 }
@@ -48,4 +48,4 @@ const MyReviewItem = ({review, refresh}) => {
 
     )
 };
-export default MyReviewItem;
+export default ReviewItem;
