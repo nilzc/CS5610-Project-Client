@@ -1,9 +1,10 @@
 import {useSelector} from "react-redux";
 import {getUserId, isLoggedIn} from "../../redux/selectors";
-import {getDate} from "../../services/utils";
+import {getDate, PUBLIC_FIELDS} from "../../services/utils";
 const ProfileOverview = ({
                              profileOwner =
-                                 {username: "Dummy", firstName: "Harry", lastName: "Potter", phone: "", dateOfBirth: ""}, showPrivate
+                                 {username: "Dummy", firstName: "Harry", lastName: "Potter", phone: "", dateOfBirth: ""},
+                             showPrivate=false
                          }) => {
     const loggedIn = useSelector(isLoggedIn);
     const loggedInUserId = useSelector(getUserId);
@@ -12,35 +13,35 @@ const ProfileOverview = ({
             <div className={"col-4"}>
                 <div className={"row list-group"}>
                     <h4 className={"col-12 text-primary"}>Public:</h4>
-                    {profileOwner.username &&
-                        <div className={"col-12 list-group-item bg-light"}>
-                            <div className={"row"}>
-                                <div className={`col-4 fw-bold`}>Username:</div>
-                                <div className={"col-8"}>{profileOwner.username}</div>
-                            </div>
-                        </div>
-                    }
-                    {profileOwner.firstName &&
-                        <div className={"col-12 list-group-item bg-light"}>
-                            <div className={"row"}>
-                                <div className={`col-4 fw-bold`}>First Name:</div>
-                                <div className={"col-8"}>{profileOwner.firstName}</div>
-                            </div>
-                        </div>
-                    }
-                    {profileOwner.lastName &&
-                        <div className={"col-12 list-group-item bg-light"}>
-                            <div className={"row"}>
-                                <div className={`col-4 fw-bold`}>Last Name:</div>
-                                <div className={"col-8"}>{profileOwner.lastName}</div>
-                            </div>
-                        </div>
+                    {
+                        PUBLIC_FIELDS.map((f, nth) =>
+                            <>
+                                {
+                                    profileOwner[f] &&
+                                    <div className={"col-12 list-group-item bg-light"}>
+                                        <div className={"row"}>
+                                            <div className={`col-4 fw-bold`}>{f.charAt(0).toUpperCase() + f.slice(1)}:</div>
+                                            <div className={"col-8"}>{profileOwner[f]}</div>
+                                        </div>
+                                    </div>
+                                }
+                            </>)
                     }
                     {
                         loggedIn && loggedInUserId === profileOwner._id && showPrivate &&
                         <>
                             <h4 className={"text-primary mt-3"}>Private:</h4>
+                            {profileOwner.email &&
+
+                                <div className={"col-12 list-group-item bg-light"}>
+                                    <div className={"row"}>
+                                        <div className={`col-4 fw-bold`}>Email:</div>
+                                        <div className={"col-8"}>{profileOwner.email}</div>
+                                    </div>
+                                </div>
+                            }
                             {profileOwner.phone &&
+
                                 <div className={"col-12 list-group-item bg-light"}>
                                     <div className={"row"}>
                                         <div className={`col-4 fw-bold`}>Phone:</div>

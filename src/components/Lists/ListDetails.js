@@ -2,13 +2,13 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import * as listServices from "../../services/listServices";
 import * as errorServices from "../../services/errorServices";
 import {useEffect, useState} from "react";
-import MovieGallery from "../MovieGallery";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getUserId, isLoggedIn} from "../../redux/selectors";
 import MovieItem from "../MovieItem";
-import {MY_PROFILE_URL} from "../../services/utils";
+import {MOVIE_DETAIL_URL} from "../../services/utils";
 
 const ListDetails = ({profileUrl, allowAdd = true, allowDelete = true}) => {
+    const dispatch = useDispatch();
     const loggedIn = useSelector(isLoggedIn);
     const loggedInUserId = useSelector(getUserId);
     const params = useParams();
@@ -30,7 +30,7 @@ const ListDetails = ({profileUrl, allowAdd = true, allowDelete = true}) => {
         navigate(`${profileUrl}/lists`)
     }
     const posterOnClickHandler = (movie) => {
-        navigate('/movies/'+ movie.id)
+        navigate(`${MOVIE_DETAIL_URL}/${movie.id}`);
     }
     const deleteOnClickHandler = () => {
         listServices.deleteList(listDetails._id)
@@ -38,9 +38,9 @@ const ListDetails = ({profileUrl, allowAdd = true, allowDelete = true}) => {
                 navigate(`${profileUrl}/lists`);
                 alert("Movie list deleted!")
             })
-            .catch(errorServices.alertError);
+            .catch((e) => errorServices.alertError(e, dispatch));
     }
-    useEffect(findListDetails, [navigate, params.lid])
+    useEffect(findListDetails, [navigate, params.lid, profileUrl])
     return (
         <div className="row">
             <div className={"col-12 ps-3"}>

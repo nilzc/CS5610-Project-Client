@@ -45,6 +45,9 @@ const EditProfile = ({refresh}) => {
             const res = await cloudServices.uploadImage(formData).catch(alert);
             user.headerImage = res.public_id;
         }
+        if (!user.password || !user.password.trim()) {
+            delete user.password;
+        }
         await userServices.updateUser(MY, user).catch(err => alert(err.response.data.error));
         await refresh()
         navigate(MY_PROFILE_URL);
@@ -61,28 +64,45 @@ const EditProfile = ({refresh}) => {
                                 <label className={"col-10 form-label fw-bold"}>
                                     <div className={"mb-2"}>Username:</div>
                                     <input className={"form-control"} type={"text"} value={user.username ? user.username : ""}
-                                           onChange={(e) => inputOnChangeHandler(e, "username")}/>
+                                           onChange={(e) => inputOnChangeHandler(e, "username")}
+                                           placeholder={"username"}/>
+                                </label>
+                                <label className={"col-10 form-label fw-bold"}>
+                                    <div className={"mb-2"}>Password:</div>
+                                    <input className={"form-control"} type={"password"} value={user.password ? user.password : ""}
+                                           onChange={(e) => inputOnChangeHandler(e, "password")}
+                                           placeholder={"password"}/>
                                 </label>
                                 <label className={"col-10 form-label fw-bold"}>
                                     <div className={"mb-2"}>First Name:</div>
                                     <input className={"form-control"} type={"text"} value={user.firstName ? user.firstName : ""}
-                                           onChange={(e) => inputOnChangeHandler(e, "firstName")}/>
+                                           onChange={(e) => inputOnChangeHandler(e, "firstName")}
+                                           placeholder={"first name"}/>
                                 </label>
                                 <label className={"col-10 form-label fw-bold"}>
                                     <div className={"mb-2"}>Last Name:</div>
                                     <input className={"form-control"} type={"text"} value={user.lastName ? user.lastName : ""}
-                                           onChange={(e) => inputOnChangeHandler(e, "lastName")}/>
+                                           onChange={(e) => inputOnChangeHandler(e, "lastName")}
+                                           placeholder={"last name"}/>
+                                </label>
+                                <label className={"col-10 form-label fw-bold"}>
+                                    <div className={"mb-2"}>Email:</div>
+                                    <input className={"form-control"} type={"email"} value={user.email ? user.email : ""}
+                                           onChange={(e) => inputOnChangeHandler(e, "email")}
+                                           placeholder={"email"}/>
                                 </label>
                                 <label className={"col-10 form-label fw-bold"}>
                                     <div className={"mb-2"}>Phone:</div>
                                     <input className={"form-control"} type={"text"} value={user.phone ? user.phone : ""}
-                                           onChange={(e) => inputOnChangeHandler(e, "phone")}/>
+                                           onChange={(e) => inputOnChangeHandler(e, "phone")}
+                                           placeholder={"phone"}/>
                                 </label>
                                 <label className={"col-10 form-label fw-bold"}>
                                     <div className={"mb-2"}>Date of Birth:</div>
                                     <input className="form-control"
                                            type="date" value={user.dateOfBirth ? getDateYYYYMMDD(user.dateOfBirth) : ""}
-                                           onChange={(e) => inputOnChangeHandler(e, "dateOfBirth")}/>
+                                           onChange={(e) => inputOnChangeHandler(e, "dateOfBirth")}
+                                           placeholder={"date of birth"}/>
                                 </label>
                                 <label className={"col-10 form-label fw-bold"}>
                                     <div className={"mb-2"}>Profile Photo:</div>

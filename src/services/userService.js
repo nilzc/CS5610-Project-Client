@@ -1,6 +1,4 @@
 import axios from "axios";
-import {responsive} from "@cloudinary/react";
-
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 const USER_URL = `${BASE_URL}/api/users`;
 const ADMIN_URL = `${BASE_URL}/api/admins`;

@@ -1,23 +1,24 @@
-import {MY} from "../../services/utils";
+import {MOVIE_DETAIL_URL, MY} from "../../services/utils";
 import React from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getUserId} from "../../redux/selectors";
 import {useNavigate} from "react-router-dom";
 import * as reviewServices from "../../services/reviewServices";
 import * as errorServices from "../../services/errorServices";
 
 const ReviewItem = ({review, refresh, allowDelete = true}) => {
+    const dispatch = useDispatch();
     const loggedInUserId = useSelector(getUserId);
     const isMyReview = review.postedBy && loggedInUserId ? review.postedBy._id === loggedInUserId : false;
     const deleteReview = () => {
         reviewServices.deleteReview(MY, review._id)
             .then((res) => refresh())
-            .catch(errorServices.alertError);
+            .catch((e) => errorServices.alertError(e, dispatch));
 
     }
     const navigate = useNavigate();
     const goToMovieDetails = (movie) => {
-        navigate('/movies/' + movie.id);
+        navigate(`${MOVIE_DETAIL_URL}/${movie.id}`);
     }
     return (
         <div className={"row d-flex justify-content-between bg-light border p-0"}>

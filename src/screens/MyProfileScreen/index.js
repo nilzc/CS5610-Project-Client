@@ -1,4 +1,4 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {isLoggedIn} from "../../redux/selectors";
 import {Link, Route, Routes, useNavigate, useLocation} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
@@ -18,6 +18,7 @@ import * as userServices from "../../services/userService";
 
 const MyProfileScreen = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const loggedIn = useSelector(isLoggedIn);
     const [user, setUser] = useState({username: "", firstName: "", lastName: "", phone: ""});
     const [followings, setFollowings] = useState([]);
@@ -29,8 +30,8 @@ const MyProfileScreen = () => {
                 // remove password
                 delete u["password"];
                 setUser(u);
-            }).catch(errorServices.alertError);
-        }, []
+            }).catch((e) => errorServices.alertError(e, dispatch))
+        }, [dispatch]
     );
     const findFollowers = useCallback(
         () => {
@@ -47,15 +48,15 @@ const MyProfileScreen = () => {
         }, [user._id]
     )
     const init = useCallback(
-        async () => {
+        () => {
             if (!loggedIn) {
                 navigate("/login");
                 return;
             }
-            await findProfile();
+            findProfile();
             if (user._id) {
-                await findFollowings();
-                await findFollowers();
+                findFollowings();
+                findFollowers();
             }
         }, [findFollowers, findFollowings, findProfile, loggedIn, navigate, user._id]
     )
@@ -85,24 +86,24 @@ const MyProfileScreen = () => {
             <div className="col-12 m-5 pt-3 ps-5 pe-5 nav-pills fs-4">
                 <div className={"row gx-5"}>
                     <Link to=""
-                          className={`col text-center nav-link ${location.pathname.match(/my-profile$/) ? "active" : ""}`}>
+                          className={`col text-center nav-link ${location.pathname.match(/profile\/my$/) ? "active" : ""}`}>
                         My Profile</Link>
                     <Link to="lists"
-                          className={`col text-center nav-link ${location.pathname.match(/my-profile\/lists/) ? "active" : ""}`}>
+                          className={`col text-center nav-link ${location.pathname.match(/profile\/my\/lists/) ? "active" : ""}`}>
                         My Lists</Link>
                     <Link to="edit"
-                          className={`col text-center nav-link ${location.pathname.match(/my-profile\/edit/) ? "active" : ""}`}>
+                          className={`col text-center nav-link ${location.pathname.match(/profile\/my\/edit/) ? "active" : ""}`}>
                         Edit Profile</Link>
                     <Link to="reviews"
-                          className={`col text-center nav-link ${location.pathname.match(/my-profile\/reviews/) ? "active" : ""}`}>
+                          className={`col text-center nav-link ${location.pathname.match(/profile\/my\/reviews/) ? "active" : ""}`}>
                         My Reviews</Link>
                     <Link to="likes"
-                          className={`col text-center nav-link ${location.pathname.match(/my-profile\/likes/) ? "active" : ""}`}>
+                          className={`col text-center nav-link ${location.pathname.match(/profile\/my\/likes/) ? "active" : ""}`}>
                         My Likes</Link>
                 </div>
             </div>
             <Routes>
-                <Route index element={<ProfileOverview profileOwner={user}/>}/>
+                <Route index element={<ProfileOverview profileOwner={user} showPrivate={true}/>}/>
                 <Route path={"lists"} element={<Lists uid={user._id}/>}/>
                 <Route path={"lists/:lid"} element={<ListDetails profileUrl={MY_PROFILE_URL} />}/>
                 <Route path={"edit"} element={<EditProfile refresh={findProfile}/>}/>

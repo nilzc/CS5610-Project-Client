@@ -7,6 +7,7 @@ import MovieListItem from "../MovieListItem";
 import MovieReviewItem from "../MovieReviewItem";
 import MovieGallery from "../MovieGallery";
 import {useNavigate} from "react-router-dom";
+import {MOVIE_DETAIL_URL} from "../../services/utils";
 
 const CATEGORY_ITEMS = {
     "reviews": {"func": reviewServices.findAllReviewsLikedByUserWithMovieDetails},
@@ -24,7 +25,7 @@ const Likes = ({uid, allowLike = true, allowDelete = true}) => {
         }
     }
     const goToMovieDetails = (movie) => {
-        navigate(`/movies/${movie.id}`);
+        navigate(`${MOVIE_DETAIL_URL}/${movie.id}`);
     }
     useEffect(findItems, [category, uid]);
     return (

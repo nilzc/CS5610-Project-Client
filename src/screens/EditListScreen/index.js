@@ -4,9 +4,11 @@ import * as errorServices from "../../services/errorServices";
 import {useEffect, useState} from "react";
 import EditList from "../../components/EditList";
 import {MY, MY_PROFILE_URL} from "../../services/utils";
+import {useDispatch} from "react-redux";
 
 const EditListScreen = () => {
     const params = useParams();
+    const dispatch = useDispatch();
     const listId = params.lid;
     const navigate = useNavigate();
     const [listDetails, setListDetails] = useState();
@@ -20,7 +22,7 @@ const EditListScreen = () => {
             .then((response) => {
                 navigate(MY_PROFILE_URL);
                 alert("Movie list updated!");
-            }).catch(errorServices.alertError);
+            }).catch((e) => errorServices.alertError(e, dispatch));
     }
     useEffect(findListDetails, [listId]);
     return (

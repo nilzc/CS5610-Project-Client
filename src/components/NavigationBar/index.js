@@ -54,11 +54,9 @@ const NavigationBar = () => {
                         </Nav>
                         {loggedIn &&
                             <Nav>
+                                <Nav.Link href={MY_PROFILE_URL}>Hi, {profile.username}</Nav.Link>
                                 <Nav.Link onClick={logoutButtonOnClick}>Logout</Nav.Link>
-
-                                <Nav.Link
-                                    href="https://github.com/ZhuochengLin/CS5610-Project-Client"
-                                >
+                                <Nav.Link href="https://github.com/ZhuochengLin/CS5610-Project-Client">
                                     <i className="fab fa-github"/>
                                 </Nav.Link>
                             </Nav>}

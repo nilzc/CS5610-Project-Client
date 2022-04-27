@@ -10,6 +10,8 @@ export const IMAGE_PLACEHOLDER = "https://i.ibb.co/LrdpnJ5/movie-poster-coming-s
 export const CLOUD_NAME = "cs5610-project"
 export const UPLOAD_PRESET = "dulh2n67";
 export const INITIAL_PAGES = [1, 2, 3, 4, 5]
+export const PUBLIC_FIELDS = ["username", "firstName", "lastName"];
+export const PRIVATE_FIELDS = ["email", "phone", "dateOfBirth"];
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -28,8 +30,9 @@ export const getAvatar = (profilePhoto) => {
     return cloud.image(profilePhoto).resize(fill(300, 300)).roundCorners(max()).toURL()
 }
 
-export const MY_PROFILE_URL = "/my-profile";
+export const MY_PROFILE_URL = "/profile/my";
 export const PROFILE_URL = "/profile";
+export const MOVIE_DETAIL_URL = "/movies/details";
 
 export const goToUserProfile = (navigate, uid) => {
     navigate(`${PROFILE_URL}/${uid}`);

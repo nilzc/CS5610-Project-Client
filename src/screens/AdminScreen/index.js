@@ -1,4 +1,4 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getProfile, isLoggedIn} from "../../redux/selectors";
 import {useNavigate} from "react-router-dom";
 import {SUPER, USER} from "../../services/utils";
@@ -8,6 +8,7 @@ import * as errorServices from "../../services/errorServices";
 
 const AdminScreen = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const loggedIn = useSelector(isLoggedIn);
     const profile = useSelector(getProfile);
     const [users, setUsers] = useState([]);
@@ -16,30 +17,27 @@ const AdminScreen = () => {
     const findUsers = () => {
         userServices.findAllUsers()
             .then(us => setUsers(us))
-            .catch(errorServices.alertError);
     }
     const findSupers = () => {
         userServices.findAllSupers()
             .then(s => setSupers(s))
-            .catch(errorServices.alertError);
     }
     const findAdmins = () => {
         userServices.findAllAdmins()
             .then(as => setAdmins(as))
-            .catch(errorServices.alertError);
     }
     const createAdmin = (uname) => {
         userServices.createAdmin(uname)
             .then(findAdmins)
-            .catch(errorServices.alertError);
+            .catch((e) => errorServices.alertError(e, dispatch));
     }
     const deleteAdmin = (uname) => {
         userServices.deleteAdmin(uname)
             .then(findAdmins)
-            .catch(errorServices.alertError)
+            .catch((e) => errorServices.alertError(e, dispatch));
     }
     const init = useCallback(
-        () => {
+        async () => {
             if (!loggedIn) {
                 navigate("/login");
                 alert("Please login first.");
@@ -49,10 +47,15 @@ const AdminScreen = () => {
                 navigate("/home");
                 alert("Only administrators are allowed.");
             }
-            findUsers();
-            findAdmins();
-            findSupers();
-        }, [loggedIn, navigate, profile.role]
+            try {
+                await findUsers();
+                await findAdmins();
+                await findSupers();
+            } catch (e) {
+                errorServices.alertError(e, dispatch)
+            }
+
+        }, [dispatch, loggedIn, navigate, profile.role]
     )
     useEffect(init, [init]);
     return (

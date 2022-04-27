@@ -4,7 +4,7 @@ import {useCallback, useEffect, useState} from "react";
 import MovieGallery from "../../components/MovieGallery";
 import Search from "../../components/Search";
 import Pagination from "../../components/Pagination";
-import {INITIAL_PAGES} from "../../services/utils";
+import {INITIAL_PAGES, MOVIE_DETAIL_URL} from "../../services/utils";
 import NoMoviesFound from "../../components/NoMoviesFound";
 
 const SearchResultsScreen = () => {
@@ -25,8 +25,8 @@ const SearchResultsScreen = () => {
         setInputString(e.target.value);
     }
     const navigate = useNavigate();
-    const posterOnClickHandler = (li) => {
-        navigate('/movies/'+li.id)
+    const posterOnClickHandler = (movie) => {
+        navigate(`${MOVIE_DETAIL_URL}/${movie.id}`)
     }
     const searchMovies = useCallback(
         () => {
@@ -45,7 +45,7 @@ const SearchResultsScreen = () => {
             <div className={"bg-light m-3 p-4 border"}>
                 {
                     results.length > 0 &&
-                    <MovieGallery movies={results} posterOnClickHandler={posterOnClickHandler}/>
+                    <MovieGallery movies={results} posterOnClickHandler={posterOnClickHandler} allowLike={true} movieLikeBadge={true}/>
                 }
                 {
                     results.length === 0 &&

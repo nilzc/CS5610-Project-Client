@@ -4,7 +4,7 @@ import * as errorServices from "../../services/errorServices";
 import MovieGallery from "../../components/MovieGallery";
 import {useNavigate, useParams} from "react-router-dom";
 import Pagination from "../../components/Pagination";
-import {INITIAL_PAGES} from "../../services/utils";
+import {INITIAL_PAGES, MOVIE_DETAIL_URL} from "../../services/utils";
 import NoMoviesFound from "../../components/NoMoviesFound";
 
 const CATEGORY_ITEMS = {
@@ -38,7 +38,7 @@ const MoviesCategoryScreen = () => {
             <div className={"border bg-light p-3 mt-4"}>
                 {
                     movies.length > 0 &&
-                    <MovieGallery movies={movies} posterOnClickHandler={(movie) => navigate(`/movies/${movie.id}`)}/>
+                    <MovieGallery movies={movies} posterOnClickHandler={(movie) => navigate(`${MOVIE_DETAIL_URL}/${movie.id}`)}/>
                 }
                 {
                     movies.length === 0 &&

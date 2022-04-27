@@ -1,8 +1,8 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getProfile, getUserId, isLoggedIn} from "../../redux/selectors";
 import * as reviewServices from "../../services/reviewServices";
 import * as errorServices from "../../services/errorServices";
-import {ADMIN, getDate, goToMovieDetails, goToUserProfile, MY, SUPER} from "../../services/utils";
+import {ADMIN, getDate, goToMovieDetails, goToUserProfile, MOVIE_DETAIL_URL, MY, SUPER} from "../../services/utils";
 import React, {useEffect, useState} from "react";
 import MovieItem from "../MovieItem";
 import {useNavigate} from "react-router-dom";
@@ -15,6 +15,7 @@ const MovieReviewItem = ({
                              refresh, hasMovieDetail=false, allowDelete = true, allowLike = true
                          }) => {
     const loggedIn = useSelector(isLoggedIn);
+    const dispatch = useDispatch();
     const loggedInUserId = useSelector(getUserId);
     const navigate = useNavigate();
     const profile = useSelector(getProfile);
@@ -26,7 +27,7 @@ const MovieReviewItem = ({
     const deleteReview = () => {
         reviewServices.deleteReview(MY, review._id)
             .then(refresh)
-            .catch(errorServices.alertError);
+            .catch((e) => errorServices.alertError(e, dispatch));
     }
     const likeReview = () => {
         if (!loggedIn) {
@@ -35,22 +36,22 @@ const MovieReviewItem = ({
         }
         reviewServices.userLikesReview(MY, review._id)
             .then(refresh)
-            .catch(errorServices.alertError);
+            .catch((e) => errorServices.alertError(e, dispatch));
     }
     const userAlreadyLikesReview = () => {
         if (loggedIn && review._id) {
             reviewServices.findUserLikesReview(MY, review._id)
                 .then(res => setLiked(!!res))
-                .catch(errorServices.alertError);
+                .catch((e) => errorServices.alertError(e, dispatch));
         } else {
             setLiked(false)
         }
     }
     const goToMovieDetails = (movie) => {
-        navigate(`/movies/${movie.id}`);
+        navigate(`${MOVIE_DETAIL_URL}/${movie.id}`);
     }
 
-    useEffect(userAlreadyLikesReview, [loggedIn, review]);
+    useEffect(userAlreadyLikesReview, [dispatch, loggedIn, review]);
     return (
         <div className={"row justify-content-between bg-light border p-0"}>
             <div className="col-12">
@@ -64,7 +65,7 @@ const MovieReviewItem = ({
                     <div className="col">
                         <div className={"row m-0 pt-2 pb-2 justify-content-between"}>
                             <h5 className="col p-1">Written by
-                                <span className="text-success fw-bold text-decoration-underline ps-1" onClick={() => goToUserProfile(navigate, review.postedBy._id)}>
+                                <span role={"button"} className="text-success fw-bold text-decoration-underline ps-1" onClick={() => goToUserProfile(navigate, review.postedBy._id)}>
                                     {review.postedBy && review.postedBy.username}
                                 </span> on {getDate(review.postedOn)}
                             </h5>

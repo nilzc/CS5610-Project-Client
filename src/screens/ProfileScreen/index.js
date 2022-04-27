@@ -120,16 +120,16 @@ const ProfileScreen = () => {
             <div className="col-12 m-5 pt-3 ps-5 pe-5 nav-pills fs-4">
                 <div className={"row gx-5"}>
                     <Link to=""
-                          className={`col text-center nav-link ${location.pathname.match(/profile$/) ? "active" : ""}`}>
+                          className={`col text-center nav-link ${location.pathname.match(/profile\/.{24}$/) ? "active" : ""}`}>
                         Profile</Link>
                     <Link to="lists"
-                          className={`col text-center nav-link ${location.pathname.match(/profile\/lists/) ? "active" : ""}`}>
+                          className={`col text-center nav-link ${location.pathname.match(/profile\/.{24}\/lists/) ? "active" : ""}`}>
                         Lists</Link>
                     <Link to="reviews"
-                          className={`col text-center nav-link ${location.pathname.match(/profile\/reviews/) ? "active" : ""}`}>
+                          className={`col text-center nav-link ${location.pathname.match(/profile\/.{24}\/reviews/) ? "active" : ""}`}>
                         Reviews</Link>
                     <Link to="likes"
-                          className={`col text-center nav-link ${location.pathname.match(/profile\/likes/) ? "active" : ""}`}>
+                          className={`col text-center nav-link ${location.pathname.match(/profile\/.{24}\/likes/) ? "active" : ""}`}>
                         Likes</Link>
                 </div>
             </div>
@@ -138,7 +138,7 @@ const ProfileScreen = () => {
                 <Route path={"lists"} element={<Lists uid={profileOwner._id}/>}/>
                 <Route path={"lists/:lid"} element={<ListDetails profileUrl={PROFILE_URL} allowAdd={false} allowDelete={false}/>}/>
                 <Route path={"reviews"} element={<Reviews uid={profileOwner._id} allowDelete={false}/>}/>
-                <Route path={"likes"} element={<Likes uid={profileOwner._id} allowLike={false} allowDelete={false}/>}/>
+                <Route path={"likes"} element={<Likes uid={profileOwner._id} allowDelete={false}/>}/>
                 <Route path={"followings"} element={<Followings baseUrl={`${PROFILE_URL}/${profileOwnerId}`} profileOwnerId={profileOwnerId} refresh={init} followings={followings}/>}/>
                 <Route path={"followers"} element={<Followers baseUrl={`${PROFILE_URL}/${profileOwnerId}`} followers={followers}/>}/>
             </Routes>

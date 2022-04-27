@@ -44,7 +44,7 @@ ReactDOM.render(
                         <Route path={"lists/:lid"} element={<EditListScreen/>}/>
                         <Route path={"search"} element={<SearchScreen/>}/>
                         <Route path={"search/results"} element={<SearchResultsScreen/>}/>
-                        <Route path={"movies/:mid"} element={<MovieDetailsScreen/>}/>
+                        <Route path={"movies/details/:mid"} element={<MovieDetailsScreen/>}/>
                         <Route path={"movies/:mid/reviews"} element={<MovieReviewsScreen/>}/>
                         <Route path={"movies/:mid/recommendations"} element={<MovieRecommendationScreen/>}/>
                         <Route path={"movies/in/:category"} element={<MoviesCategoryScreen/>}/>
