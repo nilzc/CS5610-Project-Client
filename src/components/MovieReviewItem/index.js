@@ -69,7 +69,7 @@ const MovieReviewItem = ({
                                     {review.postedBy && review.postedBy.username}
                                 </span> on {getDate(review.postedOn)}
                             </h5>
-                            <div className="col-2 text-end pe-0">
+                            <div className="col-md-2 text-end pe-0">
                                 {
                                     isMyReview && allowDelete &&
                                     <button className={"btn btn-danger"}
