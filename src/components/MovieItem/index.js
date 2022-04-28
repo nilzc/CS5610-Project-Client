@@ -63,7 +63,7 @@ const MovieItem = ({
             <div className={"h-100 shadow position-relative"}>
                 <div className={"overflow-hidden bg-black rounded-top"} style={{width: "100%", height: "0", paddingBottom: "150%"}}
                      onClick={() => posterOnClickHandler(movie)}>
-                    <img className={"img-fluid"} src={posterPath} alt={"Poster Not Found"}/>
+                    <img className={"img-fluid w-100"} src={posterPath} alt={"Poster Not Found"}/>
                 </div>
                 <div className={"p-2 ps-lg-3 pe-md-3 rounded-bottom bg-white overflow-hidden"}>
                     <div>
