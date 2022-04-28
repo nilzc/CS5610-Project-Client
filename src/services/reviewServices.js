@@ -63,3 +63,7 @@ export const findReviewsLikedByUser = (uid) => {
     return api.get(`${USER_URL}/${uid}/review-likes`)
         .then(response => response.data);
 }
+export const findReviewById = (rid) => {
+    return api.get(`${BASE_URL}/movie-reviews/${rid}`)
+        .then(response => response.data);
+}

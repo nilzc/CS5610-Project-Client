@@ -41,7 +41,7 @@ const Pagination = ({currPage, setCurrPage, pages, setPages, allowNextPages}) =>
                 <li className="page-item">
                     <div className="page-link" onClick={firstOnClick}>First</div>
                 </li>
-                <li className="page-item">
+                <li className="d-none d-md-block page-item">
                     <div className="page-link" onClick={previousOnClick}>Previous</div>
                 </li>
                 {
@@ -50,7 +50,7 @@ const Pagination = ({currPage, setCurrPage, pages, setPages, allowNextPages}) =>
                             <div className="page-link" onClick={pageOnClick}>{p}</div>
                         </li>)
                 }
-                <li className={`page-item ${allowNextPages ? "" : "disabled"}`}>
+                <li className={`d-none d-md-block page-item ${allowNextPages ? "" : "disabled"}`}>
                     <div className={"page-link"} onClick={nextOnClick}>Next</div>
                 </li>
             </ul>

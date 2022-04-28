@@ -60,7 +60,7 @@ const MovieItem = ({
     useEffect(init, [findIAlreadyLikedMovie, findMovieStats, loggedIn, movie]);
     return (
         <div className={"col"}>
-            <div className={"h-100 shadow position-relative"}>
+            <div className={"h-100 shadow position-relative bg-white"}>
                 <div className={"overflow-hidden bg-black rounded-top"} style={{width: "100%", height: "0", paddingBottom: "150%"}}
                      onClick={() => posterOnClickHandler(movie)}>
                     <img className={"img-fluid w-100"} src={posterPath} alt={"Poster Not Found"}/>
@@ -88,8 +88,8 @@ const MovieItem = ({
                 }
                 {
                     addMovieOnClickHandler &&
-                    <div className={"row justify-content-center pb-3"}>
-                        <button className={"col-8 btn btn-primary"} onClick={() => addMovieOnClickHandler(movie)}>Add Movie</button>
+                    <div role={"button"} className={"position-absolute"} onClick={() => addMovieOnClickHandler(movie)} style={{bottom: "-0.5rem", right: "-0.5rem", zIndex: 100}}>
+                        <i className={"fa-solid fs-2 fa-circle-plus text-danger"}/>
                     </div>
                 }
             </div>

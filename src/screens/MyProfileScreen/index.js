@@ -69,7 +69,8 @@ const MyProfileScreen = () => {
             }
             <div className={"col-12 fs-5"}>
                 <div className={"row justify-content-end align-items-center"}>
-                    <div className={"col-12 col-md-3 col-lg-3 text-end"}>
+                    <div className={"col-12 mt-4"}/>
+                    <div className={"col-12 col-md-4 col-lg-3 text-end"}>
                         <i className="fa-solid fa-address-card pe-2"/>
                         <span className={"fw-bold"}>{user.username}</span>'s Profile
                     </div>

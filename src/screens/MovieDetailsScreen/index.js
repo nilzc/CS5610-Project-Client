@@ -66,13 +66,13 @@ const MovieDetailsScreen = () => {
     useEffect(findInfo, [findInfo])
     return (
         <div className={"row justify-content-between p-3"}>
-            <div className={"col-lg-3 col-md-6"}>
+            <div className={"col-8 col-md-6 col-lg-3"}>
                 {
                     movie &&
                     <MovieItem movieLikeBadge={true} movie={movie} posterOnClickHandler={() => {}}/>
                 }
             </div>
-            <div className="col-lg-9 col-md-12 ps-4">
+            <div className="col-12 col-lg-9 ps-4">
                 <div className={"pt-4 pb-4"}>
                     <h3>Overview</h3>
                     <div className={"pt-2 pb-2 text-secondary"}>
@@ -103,7 +103,7 @@ const MovieDetailsScreen = () => {
                             <div className={"col"}>
                                 <h3 className={`text-primary`}>Reviews</h3>
                             </div>
-                            <div className={"col-1 text-end pe-3"}>
+                            <div className={"col-2 col-md-1 text-end pe-3"}>
                                 <i role={"button"} className="fa-solid fa-ellipsis text-primary fs-3"
                                    onClick={goToMovieReviews}/>
                             </div>

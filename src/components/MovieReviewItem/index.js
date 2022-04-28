@@ -69,7 +69,7 @@ const MovieReviewItem = ({
                                     {review.postedBy && review.postedBy.username}
                                 </span> on {getDate(review.postedOn)}
                             </h5>
-                            <div className="col-md-2 text-end pe-0">
+                            <div className="d-none d-md-block col-2 text-end pe-0">
                                 {
                                     isMyReview && allowDelete &&
                                     <button className={"btn btn-danger"}
@@ -77,8 +77,14 @@ const MovieReviewItem = ({
                                     </button>
                                 }
                             </div>
+                            <div className="d-block d-md-none col-2 text-end pe-0">
+                                {
+                                    isMyReview && allowDelete &&
+                                    <i role={"button"} className={"fa-solid fa-xmark"} style={{color: "red"}} onClick={deleteReview}/>
+                                }
+                            </div>
                         </div>
-                        <p className="p-1 overflow-hidden" style={{maxHeight: "8rem"}}>{review.review}</p>
+                        <p className="p-1 overflow-hidden">{review.review}</p>
                         <div className={"row m-0 align-items-center"}>
                             <h6 className="col text-muted p-1 ">Rating: {review.rating}/10</h6>
                             <span className={"col-3 col-md-2 col-lg-1"}>

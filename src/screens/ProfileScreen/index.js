@@ -88,7 +88,7 @@ const ProfileScreen = () => {
             <ProfileImages profileOwner={profileOwner}/>
             <div className={"col-12 fs-5 pt-4"}>
                 <div className={"row justify-content-end align-items-center"}>
-                    <div className={"col-12 col-md-3 col-lg-3 text-end"}>
+                    <div className={"col-12 col-md-4 col-lg-3 text-end"}>
                         <i className="fa-solid fa-address-card pe-2"/>
                         <span className={"fw-bold"}>{profileOwner.username}</span>'s Profile
                     </div>
@@ -102,7 +102,7 @@ const ProfileScreen = () => {
                     </div>
                     {
                         !isMe &&
-                        <div className={"col-6 col-md-3 col-lg-2 text-end"}>
+                        <div className={"col-6 col-md-2 col-lg-2 text-end"}>
                             {
                                 !alreadyFollowed &&
                                 <button className={"w-75 btn-sm btn-dark rounded-pill"}

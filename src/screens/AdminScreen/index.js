@@ -64,32 +64,23 @@ const AdminScreen = () => {
                 Welcome, {profile.username}
             </h1>
             <div className={"col-12"}>
-                <div className={"row"}>
-                    <div className={"col-6"}>
-                        <div className={"row m-0"}>
-                            <h3 className={"col-12 p-2 ps-0"}>User list:</h3>
-                            {
-                                users.length > 0 &&
-                                users.map((u, nth) =>
-                                    <div key={nth} className={"col-12 border bg-light p-2 align-content-center"}>
-                                        <div className={"row align-items-center justify-content-between"}>
-                                            <div className={"col-4"}>
-                                                Username: <span className={"fw-bold"}>{u.username}</span>
-                                            </div>
-                                            <div className={"col-4 text-end"}>
-                                                {
-                                                    profile.role === SUPER && admins.map(a => a.username).indexOf(u.username) < 0 &&
-                                                    <button className={"btn btn-warning"}
-                                                            onClick={() => createAdmin(u.username)}>Make Admin</button>
-                                                }
-                                            </div>
+                <div className={"row row-cols-1 row-cols-md-2 row-cols-lg-3"}>
+                    <div className={"col"}>
+                        <h3 className={"p-2 ps-0"}>Super list:</h3>
+                        {
+                            supers.length > 0 &&
+                            supers.map((u, nth) =>
+                                <div key={nth} className={"col-12 border bg-light p-2 align-content-center"}>
+                                    <div className={"row align-items-center justify-content-between"}>
+                                        <div className={"col-4"}>
+                                            Username: <span className={"fw-bold"}>{u.username}</span>
                                         </div>
-                                    </div>)
-                            }
-                        </div>
+                                    </div>
+                                </div>)
+                        }
                     </div>
-                    <div className={"col-6"}>
-                        <h3 className={"col-12 p-2 ps-0"}>Admin list:</h3>
+                    <div className={"col"}>
+                        <h3 className={"p-2 ps-0"}>Admin list:</h3>
                         {
                             admins.length > 0 &&
                             admins.map((u, nth) =>
@@ -98,7 +89,7 @@ const AdminScreen = () => {
                                         <div className={"col-4"}>
                                             Username: <span className={"fw-bold"}>{u.username}</span>
                                         </div>
-                                        <div className={"col-4 text-end"}>
+                                        <div className={"col-8 col-md-6 col-lg-5 text-end"}>
                                             {
                                                 profile.role === SUPER &&
                                                 <button className={"btn btn-warning"}
@@ -108,14 +99,23 @@ const AdminScreen = () => {
                                     </div>
                                 </div>)
                         }
-                        <h3 className={"col-12 p-2 ps-0"}>Super list:</h3>
+                    </div>
+                    <div className={"col"}>
+                        <h3 className={"p-2 ps-0"}>User list:</h3>
                         {
-                            supers.length > 0 &&
-                            supers.map((u, nth) =>
+                            users.length > 0 &&
+                            users.map((u, nth) =>
                                 <div key={nth} className={"col-12 border bg-light p-2 align-content-center"}>
                                     <div className={"row align-items-center justify-content-between"}>
                                         <div className={"col-4"}>
-                                            Username: <span className={"fw-bold"}>{u.username}</span>
+                                            Username: <div className={"fw-bold"}>{u.username}</div>
+                                        </div>
+                                        <div className={"col-8 col-md-6 col-lg-5 text-end"}>
+                                            {
+                                                profile.role === SUPER && admins.map(a => a.username).indexOf(u.username) < 0 &&
+                                                <button className={"btn btn-warning"}
+                                                        onClick={() => createAdmin(u.username)}>Make Admin</button>
+                                            }
                                         </div>
                                     </div>
                                 </div>)

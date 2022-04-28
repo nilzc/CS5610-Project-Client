@@ -70,7 +70,7 @@ const EditList = ({currList={listName: "", movies: []}, submitHandler}) => {
     useEffect(init, [loggedIn, navigate, searchMovie]);
     return (
         <div className={"row"}>
-            <div className={"m-3"}>
+            <div className={"m-3 mb-0"}>
                 <div className={"search"}>
                     <h4 className="text-primary">List Name</h4>
                     <div className={"d-inline-block"}>
@@ -80,47 +80,50 @@ const EditList = ({currList={listName: "", movies: []}, submitHandler}) => {
                 </div>
             </div>
             <Search inputOnChangeHandler={searchInputOnChangeHandler} />
-            <div className={"m-4 bg-light p-4 border"}>
-                {
-                    searchResults.length > 0 &&
-                    <MovieGallery movies={searchResults} posterOnClickHandler={(arg) => {}} addMovieOnClickHandler={addMovieOnClickHandler}/>
-                }
-                {
-                    searchResults.length === 0 &&
-                    <NoMoviesFound/>
-                }
-                <Pagination currPage={currPage} setCurrPage={setCurrPage} setPages={setPages} pages={pages} allowNextPages={allowNextPages}/>
-            </div>
-
-            <div className={"col-12 m-3"}>
-                <h3 className="mt-3 text-primary">Movies In Your List</h3>
-                <div className="row bg-light">
-                    {movieSelected &&
-                        movieSelected.map((litem, t) => {
-                            return (
-                                <div className="col-12 border p-3" key={t}>
-                                    <div className={"row align-items-start"}>
-                                        <div className={"col-1 pt-1"}>
-                                            <img src={`${litem.poster_path ? `${process.env.REACT_APP_MOVIE_BASE_URL}/w342/${litem.poster_path}` : ""}`} className="img-fluid" alt="Poster Not Found" />
-                                        </div>
-                                        <div className="col-11">
-                                            <div className={"row align-items-center"}>
-                                                <h4 className="col fs-4">{litem.title}</h4>
-                                                <i className="col-1 fas fa-times text-center" style={{color: 'red'}} onClick={() => deleteMSOnClickHandler(litem)}/>
+            <div className={"col-12"}>
+                <h4 className="ps-3 text-primary">Movies In Your List</h4>
+                <div className={"p-4"}>
+                    <div className="row bg-light">
+                        {movieSelected &&
+                            movieSelected.map((litem, t) => {
+                                return (
+                                    <div className="col-12 border p-3" key={t}>
+                                        <div className={"row align-items-start"}>
+                                            <div className={"d-none d-md-block col-md-2 col-lg-1 pt-1"}>
+                                                <img src={`${litem.poster_path ? `${process.env.REACT_APP_MOVIE_BASE_URL}/w342/${litem.poster_path}` : ""}`} className="img-fluid" alt="Poster Not Found" />
                                             </div>
-                                            <p className="fs-6"> Release Date: {litem.release_date}</p>
-                                            {litem.overview && <p className="fs-6">Description: <span className={"text-secondary"}>{litem.overview}</span></p>}
+                                            <div className="col">
+                                                <div className={"row align-items-center"}>
+                                                    <h4 className="col fs-4">{litem.title}</h4>
+                                                    <i className="col-2 col-md-1 fas fa-times text-center" style={{color: 'red'}} onClick={() => deleteMSOnClickHandler(litem)}/>
+                                                </div>
+                                                <p className="fs-6"> Release Date: {litem.release_date}</p>
+                                                {litem.overview && <p className="fs-6">Description: <span className={"text-secondary"}>{litem.overview}</span></p>}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            );
-                        })}
+                                );
+                            })}
+                    </div>
                 </div>
             </div>
-            <div className={"col-2 m-3"}>
+            <div className={"col-4 col-md-2 m-3"}>
                 <button className="btn btn-primary rounded-pill w-100"
                         onClick={() => submitHandler({listName: listName, movies: movieSelected.map(m => m.id)})}>Submit</button>
+            </div>
+            <div className={"col-12 p-4"}>
+                <div className={"bg-light p-4 border"}>
+                    {
+                        searchResults.length > 0 &&
+                        <MovieGallery movies={searchResults} posterOnClickHandler={(arg) => {}} addMovieOnClickHandler={addMovieOnClickHandler}/>
+                    }
+                    {
+                        searchResults.length === 0 &&
+                        <NoMoviesFound/>
+                    }
+                    <Pagination currPage={currPage} setCurrPage={setCurrPage} setPages={setPages} pages={pages} allowNextPages={allowNextPages}/>
+                </div>
             </div>
         </div>
     )

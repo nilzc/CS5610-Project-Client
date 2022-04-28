@@ -6,7 +6,6 @@ import * as reviewServices from "../../services/reviewServices";
 import MovieItem from "../../components/MovieItem";
 import MovieReviews from "../../components/MovieReviews";
 import CreateReview from "../../components/CreateReview";
-import MovieGallery from "../../components/MovieGallery";
 
 const MovieReviewsScreen = () => {
     const params = useParams();
@@ -36,13 +35,13 @@ const MovieReviewsScreen = () => {
     useEffect(findInfo, [findInfo])
     return (
         <div className={"row justify-content-between p-3"}>
-            <div className={"col-3"}>
+            <div className={"col-8 col-md-6 col-lg-3"}>
                 {
                     movie &&
                     <MovieItem movieLikeBadge={true} movie={movie} posterOnClickHandler={() => {}}/>
                 }
             </div>
-            <div className="col-9 ps-4">
+            <div className="col-12 col-lg-9 ps-4">
                 <div className={"pt-4 pb-4"}>
                     <h3>Overview</h3>
                     <div className={"pt-2 pb-2 text-secondary"}>
