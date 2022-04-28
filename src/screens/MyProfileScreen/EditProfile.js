@@ -1,4 +1,4 @@
-import {CLOUD_NAME, getDateYYYYMMDD, MY, MY_PROFILE_URL, UPLOAD_PRESET} from "../../services/utils";
+import {CLOUD_NAME, getDateYYYYMMDD, MY, MY_PROFILE_URL, PUBLIC_FIELDS, UPLOAD_PRESET} from "../../services/utils";
 import {useCallback, useEffect, useState} from "react";
 import * as authService from "../../services/authServices";
 import * as cloudServices from "../../services/cloudinaryServices";
@@ -59,57 +59,61 @@ const EditProfile = ({refresh}) => {
             <div className={"row"}>
                 <div className={"col-12"}>
                     <div className={"row justify-content-center"}>
-                        <div className={"col-4 bg-light p-3"}>
+                        <div className={"col-12 col-md-6 col-lg-4 bg-light p-3"}>
                             <div className={"row justify-content-center"}>
-                                <label className={"col-10 form-label fw-bold"}>
-                                    <div className={"mb-2"}>Username:</div>
+                                <div className={"col-12 text-end"} onClick={() => navigate(-1)}>
+                                    <i className="fas fa-angle-left"/>
+                                    <span className="ps-2">Go Back</span>
+                                </div>
+                                <label className={"col-12 form-label fw-bold"}>
+                                    <div className={"mb-2"}>Username: </div>
                                     <input className={"form-control"} type={"text"} value={user.username ? user.username : ""}
                                            onChange={(e) => inputOnChangeHandler(e, "username")}
                                            placeholder={"username"}/>
                                 </label>
-                                <label className={"col-10 form-label fw-bold"}>
+                                <label className={"col-12 form-label fw-bold"}>
                                     <div className={"mb-2"}>Password:</div>
                                     <input className={"form-control"} type={"password"} value={user.password ? user.password : ""}
                                            onChange={(e) => inputOnChangeHandler(e, "password")}
                                            placeholder={"password"}/>
                                 </label>
-                                <label className={"col-10 form-label fw-bold"}>
+                                <label className={"col-12 form-label fw-bold"}>
                                     <div className={"mb-2"}>First Name:</div>
                                     <input className={"form-control"} type={"text"} value={user.firstName ? user.firstName : ""}
                                            onChange={(e) => inputOnChangeHandler(e, "firstName")}
                                            placeholder={"first name"}/>
                                 </label>
-                                <label className={"col-10 form-label fw-bold"}>
+                                <label className={"col-12 form-label fw-bold"}>
                                     <div className={"mb-2"}>Last Name:</div>
                                     <input className={"form-control"} type={"text"} value={user.lastName ? user.lastName : ""}
                                            onChange={(e) => inputOnChangeHandler(e, "lastName")}
                                            placeholder={"last name"}/>
                                 </label>
-                                <label className={"col-10 form-label fw-bold"}>
+                                <label className={"col-12 form-label fw-bold"}>
                                     <div className={"mb-2"}>Email:</div>
                                     <input className={"form-control"} type={"email"} value={user.email ? user.email : ""}
                                            onChange={(e) => inputOnChangeHandler(e, "email")}
                                            placeholder={"email"}/>
                                 </label>
-                                <label className={"col-10 form-label fw-bold"}>
+                                <label className={"col-12 form-label fw-bold"}>
                                     <div className={"mb-2"}>Phone:</div>
                                     <input className={"form-control"} type={"text"} value={user.phone ? user.phone : ""}
                                            onChange={(e) => inputOnChangeHandler(e, "phone")}
                                            placeholder={"phone"}/>
                                 </label>
-                                <label className={"col-10 form-label fw-bold"}>
+                                <label className={"col-12 form-label fw-bold"}>
                                     <div className={"mb-2"}>Date of Birth:</div>
                                     <input className="form-control"
                                            type="date" value={user.dateOfBirth ? getDateYYYYMMDD(user.dateOfBirth) : ""}
                                            onChange={(e) => inputOnChangeHandler(e, "dateOfBirth")}
                                            placeholder={"date of birth"}/>
                                 </label>
-                                <label className={"col-10 form-label fw-bold"}>
+                                <label className={"col-12 form-label fw-bold"}>
                                     <div className={"mb-2"}>Profile Photo:</div>
                                     <input type="file" accept={".jpg,.jpeg,.png"} className="form-control"
                                            onChange={(e) => fileUploadHandler(e, "profilePhoto")}/>
                                 </label>
-                                <label className={"col-10 form-label fw-bold"}>
+                                <label className={"col-12 form-label fw-bold"}>
                                     <div className={"mb-2"}>Header Image:</div>
                                     <input type="file" accept={".jpg,.jpeg,.png"} className="form-control"
                                            onChange={(e) => fileUploadHandler(e, "headerImage")}/>
