@@ -21,18 +21,18 @@ const ReviewItem = ({review, refresh, allowDelete = true}) => {
         navigate(`${MOVIE_DETAIL_URL}/${movie.id}`);
     }
     return (
-        <div className={"row d-flex justify-content-between bg-light border p-0"}>
+        <div className={"row justify-content-between bg-light border p-0"}>
             <div className="col-12 bg-light">
                 <div className="row p-3">
-                    <div className="col-2 align-self-start pt-2" onClick={() => goToMovieDetails(review.movie)}>
+                    <div className="d-none d-md-block col-md-3 col-lg-2 align-self-start pt-2" onClick={() => goToMovieDetails(review.movie)}>
                         <img
                             src={`${review.movie && review.movie.poster_path ? `${process.env.REACT_APP_MOVIE_BASE_URL}/w342/${review.movie.poster_path}` : ""}`}
                             className="img-fluid" alt="Poster Not Found"/>
                     </div>
-                    <div className="col-10">
+                    <div className="col col-md-9 col-lg-10">
                         <div className={"row m-0 align-self-center justify-content-between"}>
-                            <h5 className="col p-1">{review.movie && review.movie.title}</h5>
-                            <div className="col-1">
+                            <h5 className="col p-0">{review.movie && review.movie.title}</h5>
+                            <div className="col-3 col-md-2 col-lg-1">
                                 {
                                     isMyReview && allowDelete &&
                                     <button className={"btn btn-danger"}
@@ -40,8 +40,8 @@ const ReviewItem = ({review, refresh, allowDelete = true}) => {
                                 }
                             </div>
                         </div>
-                        <h6 className="text-muted p-1 ">Rating: {review.rating}/10</h6>
-                        <p className=" p-1">{review.review}</p>
+                        <h6 className="text-muted p-0">Rating: {review.rating}/10</h6>
+                        <p className=" p-0">{review.review}</p>
                     </div>
                 </div>
             </div>

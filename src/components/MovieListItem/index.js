@@ -11,7 +11,7 @@ const MovieListItem = ({
     const posterPath = list.movies && list.movies.length > 0 && list.movies[0].poster_path ? `${process.env.REACT_APP_MOVIE_BASE_URL}/w342${list.movies[0].poster_path}` :
         "https://mdbcdn.b-cdn.net/img/new/fluid/nature/015.webp";
     return (
-        <div className="col-6" onClick={() => onClickHandler(list)}>
+        <div className="col" onClick={() => onClickHandler(list)}>
             <div className="list-container 
                         d-flex flex-column 
                         justify-content-center 

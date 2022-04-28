@@ -60,20 +60,20 @@ const MovieItem = ({
     useEffect(init, [findIAlreadyLikedMovie, findMovieStats, loggedIn, movie]);
     return (
         <div className={"col"}>
-            <div className={"shadow position-relative"}>
+            <div className={"h-100 shadow position-relative"}>
                 <div className={"overflow-hidden bg-black rounded-top"} style={{width: "100%", height: "0", paddingBottom: "150%"}}
                      onClick={() => posterOnClickHandler(movie)}>
                     <img className={"img-fluid"} src={posterPath} alt={"Poster Not Found"}/>
                 </div>
-                <div className={"p-2 ps-3 pe-3 rounded-bottom bg-white overflow-hidden"}>
-                    <div style={{width: "100%", height: "0", paddingBottom: "60%"}}>
+                <div className={"p-2 ps-lg-3 pe-md-3 rounded-bottom bg-white overflow-hidden"}>
+                    <div>
                         <div className={"fs-6 fw-bold"}>{movie.title}</div>
-                        <div className={"fs-6 text-secondary"}>{movie.release_date}</div>
+                        <div className={"fs-6 text-secondary d-none d-lg-block"}>{movie.release_date}</div>
                     </div>
                 </div>
                 {
                     movieLikeBadge &&
-                    <div className={"position-absolute badge rounded-pill bg-danger fs-6"} style={{top: "-0.5rem", right: "-1rem"}}
+                    <div className={"position-absolute badge rounded-pill bg-danger fs-6"} style={{top: "-0.5rem", right: "-1rem", zIndex: 100}}
                         onClick={allowLike? likeMovie: undefined}>
                         {
                             !liked &&

@@ -86,31 +86,31 @@ const ProfileScreen = () => {
     return (
         <div className={"row m-3 justify-content-center"}>
             <ProfileImages profileOwner={profileOwner}/>
-            <div className={"col-12 fs-5"}>
+            <div className={"col-12 fs-5 pt-4"}>
                 <div className={"row justify-content-end align-items-center"}>
-                    <div className={"col-3"}>
+                    <div className={"col-12 col-md-3 col-lg-3 text-end"}>
                         <i className="fa-solid fa-address-card pe-2"/>
                         <span className={"fw-bold"}>{profileOwner.username}</span>'s Profile
                     </div>
-                    <div className={"col-2 text-end"}>
+                    <div className={"col-6 col-md-3 col-lg-2 text-end"}>
                         <span className={"fw-bold pe-2"}>{profileOwner.stats && profileOwner.stats.following}</span>
                         <Link to={"followings"} className={"text-decoration-none text-black"}>Followings</Link>
                     </div>
-                    <div className={"col-2 text-end"}>
+                    <div className={"col-6 col-md-3 col-lg-2 text-end"}>
                         <span className={"fw-bold pe-2"}>{profileOwner.stats && profileOwner.stats.follower}</span>
                         <Link to={"followers"} className={"text-decoration-none text-black"}>Followers</Link>
                     </div>
                     {
                         !isMe &&
-                        <div className={"col-2 text-end"}>
+                        <div className={"col-6 col-md-3 col-lg-2 text-end"}>
                             {
                                 !alreadyFollowed &&
-                                <button className={"w-75 btn btn-dark rounded-pill"}
+                                <button className={"w-75 btn-sm btn-dark rounded-pill"}
                                         onClick={follow}>Follow</button>
                             }
                             {
                                 alreadyFollowed &&
-                                <button className={"w-75 btn btn-outline-dark rounded-pill"}
+                                <button className={"w-75 btn-sm btn-outline-dark rounded-pill"}
                                         onClick={follow}>Unfollow</button>
                             }
                         </div>
@@ -118,7 +118,7 @@ const ProfileScreen = () => {
                 </div>
             </div>
             <div className="col-12 m-5 pt-3 ps-5 pe-5 nav-pills fs-4">
-                <div className={"row gx-5"}>
+                <div className={"row row-cols-1 row-cols-md-3 row-cols-lg-5 gx-5"}>
                     <Link to=""
                           className={`col text-center nav-link ${location.pathname.match(/profile\/.{24}$/) ? "active" : ""}`}>
                         Profile</Link>
@@ -138,7 +138,7 @@ const ProfileScreen = () => {
                 <Route path={"lists"} element={<Lists uid={profileOwner._id}/>}/>
                 <Route path={"lists/:lid"} element={<ListDetails profileUrl={PROFILE_URL} allowAdd={false} allowDelete={false}/>}/>
                 <Route path={"reviews"} element={<Reviews uid={profileOwner._id} allowDelete={false}/>}/>
-                <Route path={"likes"} element={<Likes uid={profileOwner._id} allowDelete={false}/>}/>
+                <Route path={"likes"} element={<Likes uid={profileOwner._id} allowLike={false} allowDelete={false}/>}/>
                 <Route path={"followings"} element={<Followings baseUrl={`${PROFILE_URL}/${profileOwnerId}`} profileOwnerId={profileOwnerId} refresh={init} followings={followings}/>}/>
                 <Route path={"followers"} element={<Followers baseUrl={`${PROFILE_URL}/${profileOwnerId}`} followers={followers}/>}/>
             </Routes>

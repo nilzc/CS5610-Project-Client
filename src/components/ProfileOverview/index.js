@@ -10,7 +10,7 @@ const ProfileOverview = ({
     const loggedInUserId = useSelector(getUserId);
     return (
         <div className={"row justify-content-center"}>
-            <div className={"col-4"}>
+            <div className={"col-12 col-md-6 col-lg-4"}>
                 <div className={"row list-group"}>
                     <h4 className={"col-12 text-primary"}>Public:</h4>
                     {

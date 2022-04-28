@@ -20,12 +20,12 @@ const LoginScreen = () => {
         <div className={`row m-3 p-2 justify-content-center`}>
             <div className={"col-12"}>
                 <div className={"row justify-content-center"}>
-                    <h1 className={`col-4 text-center text-primary`}>Login</h1>
+                    <h1 className={`col-6 col-md-4 text-center text-primary`}>Login</h1>
                 </div>
             </div>
             <div className={"col-12"}>
                 <div className={"row justify-content-center"}>
-                    <label className={"col-4 form-label fw-bold m-1"}>
+                    <label className={"col-6 col-md-4 form-label fw-bold m-1"}>
                         Username:
                         <input className={"form-control m-1"} type={"text"}
                                onChange={(e) =>
@@ -37,7 +37,7 @@ const LoginScreen = () => {
             </div>
             <div className={"col-12"}>
                 <div className={"row justify-content-center"}>
-                    <label className={"col-4 form-label fw-bold m-1"}>
+                    <label className={"col-6 col-md-4 form-label fw-bold m-1"}>
                         Password:
                         <input className={"form-control m-1"} type={"password"}
                                onChange={(e) =>
@@ -49,9 +49,9 @@ const LoginScreen = () => {
             </div>
             <div className={"col-12"}>
                 <div className={"row justify-content-center"}>
-                    <label className={"col-4 form-label fw-bold m-1"}>
+                    <label className={"col-6 col-md-4 form-label fw-bold m-1"}>
                         Role:
-                        <select defaultValue={"user"} className="w-50 form-select form-select-sm m-1" aria-label="Default select example"
+                        <select defaultValue={"user"} className="form-select form-select-sm m-1" aria-label="Default select example"
                                 onChange={(e) => setRole(e.target.value)}>
                             <option value="user">Select Role</option>
                             <option value="admin">Admin</option>
@@ -62,7 +62,7 @@ const LoginScreen = () => {
             </div>
             <div className={"col-12"}>
                 <div className={"row justify-content-center"}>
-                    <button className={"col-2 btn btn-primary m-3"} onClick={loginButtonOnClick}>Login</button>
+                    <button className={"col-4 col-md-2 btn btn-primary m-3"} onClick={loginButtonOnClick}>Login</button>
                 </div>
             </div>
         </div>

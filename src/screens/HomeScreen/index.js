@@ -72,7 +72,7 @@ const HomeScreen = () => {
                         <h3 className={`col text-black m-1 p-1 mt-3`}>
                             You liked <span className={"fst-italic fw-bold text-primary"}>{myLatestMovie.title}</span>, you may also like:
                         </h3>
-                        <div className={"col text-end pe-4"}>
+                        <div className={"col-2 text-end pe-4"}>
                             <i role={"button"} className="fa-solid fa-ellipsis fs-3"
                                onClick={() => navigate(`/movies/${myLatestMovie.id}/recommendations`)}/>
                         </div>
@@ -91,7 +91,7 @@ const HomeScreen = () => {
             }
             <div className={"row m-0 align-items-end"}>
                 <h3 className={`col text-primary m-1 p-1`}>Popular</h3>
-                <div className={"col text-end pe-4"}>
+                <div className={"col-2 text-end pe-4"}>
                     <i role={"button"} className="fa-solid fa-ellipsis text-primary fs-3"
                        onClick={() => navigate("/movies/in/popular")}/>
                 </div>
@@ -102,7 +102,7 @@ const HomeScreen = () => {
             }
             <div className={"row m-0 align-items-end"}>
                 <h3 className={`col text-primary m-1 p-1`}>Now Playing</h3>
-                <div className={"col text-end pe-4"}>
+                <div className={"col-2 text-end pe-4"}>
                     <i role={"button"} className="fa-solid fa-ellipsis text-primary fs-3"
                        onClick={() => navigate("/movies/in/now-playing")}/>
                 </div>
@@ -113,7 +113,7 @@ const HomeScreen = () => {
             }
             <div className={"row m-0 align-items-end"}>
                 <h3 className={`col text-primary m-1 p-1`}>Top Rated</h3>
-                <div className={"col text-end pe-4"}>
+                <div className={"col-2 text-end pe-4"}>
                     <i role={"button"} className="fa-solid fa-ellipsis text-primary fs-3"
                        onClick={() => navigate("/movies/in/top-rated")}/>
                 </div>
@@ -124,7 +124,7 @@ const HomeScreen = () => {
             }
             <div className={"row m-0 align-items-end"}>
                 <h3 className={`col text-primary m-1 p-1`}>Upcoming</h3>
-                <div className={"col text-end pe-4"}>
+                <div className={"col-2 text-end pe-4"}>
                     <i role={"button"} className="fa-solid fa-ellipsis text-primary fs-3"
                        onClick={() => navigate("/movies/in/upcoming")}/>
                 </div>

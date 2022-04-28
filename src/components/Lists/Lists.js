@@ -22,7 +22,7 @@ const Lists = ({uid}) => {
 
     useEffect(findLists, [findLists])
     return (
-        <div className="row g-2">
+        <div className="row row-cols-1 row-cols-lg-2 g-2">
             {lists && lists.map((l, nth) => <MovieListItem key={nth} list={l} onClickHandler={listClickHandler}/>)}
         </div>
     )

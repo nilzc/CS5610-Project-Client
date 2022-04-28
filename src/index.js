@@ -22,7 +22,6 @@ import AdminScreen from "./screens/AdminScreen";
 import EditListScreen from "./screens/EditListScreen";
 import CreateNewListScreen from "./screens/CreateNewListScreen";
 import {MY_PROFILE_URL, PROFILE_URL} from "./services/utils";
-import Index from "./screens/MovieReviewsScreen";
 import MovieReviewsScreen from "./screens/MovieReviewsScreen";
 import MovieRecommendationScreen from "./screens/MovieRecommendationScreen";
 

@@ -27,7 +27,7 @@ const ListDetails = ({profileUrl, allowAdd = true, allowDelete = true}) => {
             .catch(errorServices.alertError);
     }
     const goBackClickHandler = () => {
-        navigate(`${profileUrl}/lists`)
+        navigate(-1)
     }
     const posterOnClickHandler = (movie) => {
         navigate(`${MOVIE_DETAIL_URL}/${movie.id}`);
@@ -45,32 +45,33 @@ const ListDetails = ({profileUrl, allowAdd = true, allowDelete = true}) => {
         <div className="row">
             <div className={"col-12 ps-3"}>
                 <div className={"row align-items-center justify-content-between"}>
-                    <div className={"col-2"}>
+                    <div className={"col"}>
                         <div className="fs-4" onClick={goBackClickHandler}>
                             <i className="fas fa-angle-left"/>
                             <span className="ps-2">Go Back</span>
                         </div>
                     </div>
                     {
+                        loggedIn && listDetails && listDetails.ownedBy && loggedInUserId === listDetails.ownedBy._id && allowAdd &&
+                        <div className={"col-3 col-md-2 col-xxl-1 text-end"}>
+                            <Link to={`/lists/${listDetails._id}`} className={"w-100 btn btn-primary"}>Add</Link>
+                        </div>
+                    }
+                    {
                         loggedIn && listDetails && listDetails.ownedBy && loggedInUserId === listDetails.ownedBy._id && allowDelete &&
-                        <div className={"col-2 text-end"}>
-                            <button className={"btn btn-danger"} onClick={deleteOnClickHandler}>Delete</button>
+                        <div className={"col-4 col-md-2 col-xxl-1 text-end"}>
+                            <button className={"w-100 btn btn-danger"} onClick={deleteOnClickHandler}>Delete</button>
                         </div>
                     }
                 </div>
             </div>
             <div className={"col-12 mt-3"}>
-                <div className={"row row-cols-5 gy-3"}>
+                <div className={"row row-cols-2 row-cols-md-3 row-cols-lg-5 gy-3"}>
                     {
                         listDetails.movies && listDetails.movies.map((movie, nth) =>
                             <MovieItem key={nth} movie={movie} posterOnClickHandler={posterOnClickHandler}/>
                         )
                     }
-                    <div className={"col align-self-center text-center"}> {
-                        loggedIn && listDetails && listDetails.ownedBy && loggedInUserId === listDetails.ownedBy._id && allowAdd &&
-                        <Link to={`/lists/${listDetails._id}`} className={"btn btn-primary"}>Add Movie</Link>
-                    }
-                    </div>
                 </div>
             </div>
         </div>

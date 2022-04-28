@@ -69,22 +69,22 @@ const MyProfileScreen = () => {
             }
             <div className={"col-12 fs-5"}>
                 <div className={"row justify-content-end align-items-center"}>
-                    <div className={"col-3"}>
+                    <div className={"col-12 col-md-3 col-lg-3 text-end"}>
                         <i className="fa-solid fa-address-card pe-2"/>
                         <span className={"fw-bold"}>{user.username}</span>'s Profile
                     </div>
-                    <div className={"col-2"}>
+                    <div className={"col-6 col-md-3 col-lg-2 text-end"}>
                         <span className={"fw-bold pe-2"}>{user.stats && user.stats.following}</span>
                         <Link to={"followings"} className={"text-decoration-none text-black"}>Followings</Link>
                     </div>
-                    <div className={"col-2"}>
+                    <div className={"col-6 col-md-3 col-lg-2 text-end"}>
                         <span className={"fw-bold pe-2"}>{user.stats && user.stats.follower}</span>
                         <Link to={"followers"} className={"text-decoration-none text-black"}>Followers</Link>
                     </div>
                 </div>
             </div>
             <div className="col-12 m-5 pt-3 ps-5 pe-5 nav-pills fs-4">
-                <div className={"row gx-5"}>
+                <div className={"row row-cols-1 row-cols-md-3 row-cols-lg-5 gx-5"}>
                     <Link to=""
                           className={`col text-center nav-link ${location.pathname.match(/profile\/my$/) ? "active" : ""}`}>
                         My Profile</Link>

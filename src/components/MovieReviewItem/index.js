@@ -58,7 +58,7 @@ const MovieReviewItem = ({
                 <div className="row p-2">
                     {
                         hasMovieDetail &&
-                        <div className={"col-2 p-2"}>
+                        <div className={"d-none d-md-block col-md-3 col-lg-2 p-2"}>
                             <MovieItem movie={review.movie} posterOnClickHandler={goToMovieDetails}/>
                         </div>
                     }
@@ -80,8 +80,8 @@ const MovieReviewItem = ({
                         </div>
                         <p className="p-1 overflow-hidden" style={{maxHeight: "8rem"}}>{review.review}</p>
                         <div className={"row m-0 align-items-center"}>
-                            <h6 className="col-11 text-muted p-1 ">Rating: {review.rating}/10</h6>
-                            <span className={"col-1"}>
+                            <h6 className="col text-muted p-1 ">Rating: {review.rating}/10</h6>
+                            <span className={"col-3 col-md-2 col-lg-1"}>
                                 <div className={"row align-items-center"}>
                                     {
                                         liked &&

@@ -30,7 +30,7 @@ const Likes = ({uid, allowLike = true, allowDelete = true}) => {
     useEffect(findItems, [category, uid]);
     return (
         <div className={"row m-3"}>
-            <div className={"col-3 ps-4"}>
+            <div className={"col-6 col-md-3 ps-4"}>
                 <select className="form-select form-select mb-3"
                         onChange={(e) => setCategory(e.target.value)}>
                     <option value="movies">Movies</option>
@@ -51,7 +51,7 @@ const Likes = ({uid, allowLike = true, allowDelete = true}) => {
                 <div className={"row m-0"}>
                     {
                         items && items.length > 0 && category === "movies" &&
-                        <MovieGallery movieLikeBadge={true} movies={items} posterOnClickHandler={goToMovieDetails} refresh={findItems} allowLike={allowLike}/>
+                        <MovieGallery movies={items} posterOnClickHandler={goToMovieDetails} refresh={findItems} allowLike={allowLike}/>
                     }
                 </div>
             </div>
