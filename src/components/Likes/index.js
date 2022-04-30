@@ -1,9 +1,7 @@
 import * as reviewServices from "../../services/reviewServices";
 import * as movieServices from "../../services/movieServices";
-import * as listServices from "../../services/listServices";
 import {useEffect, useState} from "react";
 import * as errorServices from "../../services/errorServices";
-import MovieListItem from "../MovieListItem";
 import MovieReviewItem from "../MovieReviewItem";
 import MovieGallery from "../MovieGallery";
 import {useNavigate} from "react-router-dom";
@@ -30,7 +28,7 @@ const Likes = ({uid, allowLike = true, allowDelete = true}) => {
     useEffect(findItems, [category, uid]);
     return (
         <div className={"row m-3"}>
-            <div className={"col-6 col-md-3 ps-4"}>
+            <div className={"col-6 col-md-3 ps-3"}>
                 <select className="form-select form-select mb-3"
                         onChange={(e) => setCategory(e.target.value)}>
                     <option value="movies">Movies</option>
@@ -48,12 +46,10 @@ const Likes = ({uid, allowLike = true, allowDelete = true}) => {
                         )
                     }
                 </div>
-                <div className={"row m-0"}>
-                    {
-                        items && items.length > 0 && category === "movies" &&
-                        <MovieGallery movies={items} posterOnClickHandler={goToMovieDetails} refresh={findItems} allowLike={allowLike}/>
-                    }
-                </div>
+                {
+                    items && items.length > 0 && category === "movies" &&
+                    <MovieGallery movies={items} posterOnClickHandler={goToMovieDetails} refresh={findItems} allowLike={allowLike}/>
+                }
             </div>
         </div>
     )

@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getProfile, getUserId, isLoggedIn} from "../../redux/selectors";
 import * as reviewServices from "../../services/reviewServices";
 import * as errorServices from "../../services/errorServices";
-import {ADMIN, getDate, goToMovieDetails, goToUserProfile, MOVIE_DETAIL_URL, MY, SUPER} from "../../services/utils";
+import {ADMIN, getDate, goToUserProfile, MOVIE_DETAIL_URL, MY, SUPER} from "../../services/utils";
 import React, {useEffect, useState} from "react";
 import MovieItem from "../MovieItem";
 import {useNavigate} from "react-router-dom";

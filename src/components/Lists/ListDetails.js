@@ -54,7 +54,7 @@ const ListDetails = ({profileUrl, allowAdd = true, allowDelete = true}) => {
                     {
                         loggedIn && listDetails && listDetails.ownedBy && loggedInUserId === listDetails.ownedBy._id && allowAdd &&
                         <div className={"col-3 col-md-2 col-xxl-1 text-end"}>
-                            <Link to={`/lists/${listDetails._id}`} className={"w-100 btn btn-primary"}>Add</Link>
+                            <Link to={`/lists/${listDetails._id}`} className={"w-100 btn btn-primary"}>Edit</Link>
                         </div>
                     }
                     {

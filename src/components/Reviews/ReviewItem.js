@@ -31,7 +31,7 @@ const ReviewItem = ({review, refresh, allowDelete = true}) => {
                     </div>
                     <div className="col col-md-9 col-lg-10">
                         <div className={"row m-0 align-self-center justify-content-between"}>
-                            <h5 className="col p-0">{review.movie && review.movie.title}</h5>
+                            <h5 className="col p-0" role={"button"} onClick={() => goToMovieDetails(review.movie)}>{review.movie && review.movie.title}</h5>
                             <div className="col-3 col-md-2 col-lg-1">
                                 {
                                     isMyReview && allowDelete &&

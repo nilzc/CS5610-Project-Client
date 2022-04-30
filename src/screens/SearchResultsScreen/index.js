@@ -45,7 +45,7 @@ const SearchResultsScreen = () => {
             <div className={"bg-light m-3 p-4 border"}>
                 {
                     results.length > 0 &&
-                    <MovieGallery movies={results} posterOnClickHandler={posterOnClickHandler} allowLike={true} movieLikeBadge={true}/>
+                    <MovieGallery movies={results} posterOnClickHandler={posterOnClickHandler} allowLike={true}/>
                 }
                 {
                     results.length === 0 &&

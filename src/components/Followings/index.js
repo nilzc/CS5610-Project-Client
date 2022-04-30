@@ -17,11 +17,11 @@ const Followings = ({baseUrl, profileOwnerId, followings, refresh}) => {
     return (
         <div className={"row ps-5 pe-5"}>
             <div className={"col-12"}>
-                <div className={"row m-0"}>
-                    <Link to={`${baseUrl}/followings`} className={"col-6 btn btn-lg btn-dark"}>
+                <div className={"row row-cols-1 row-cols-sm-2 m-0"}>
+                    <Link to={`${baseUrl}/followings`} className={"col btn btn-lg btn-dark"}>
                         Followings
                     </Link>
-                    <Link to={`${baseUrl}/followers`} className={"col-6 btn btn-lg btn-light border"}>
+                    <Link to={`${baseUrl}/followers`} className={"col btn btn-lg btn-light border"}>
                         Followers
                     </Link>
                 </div>
@@ -33,7 +33,7 @@ const Followings = ({baseUrl, profileOwnerId, followings, refresh}) => {
                         followings.map((f, n) =>
                             <div key={n} className={"list-group-item p-4"}>
                                 <div className={"row align-items-center justify-content-between"}>
-                                    <div className={"col-1"}>
+                                    <div className={"col-6 col-md-2 col-lg-1"}>
                                         {f.user && <img role={"button"} className={"img-fluid"} src={getAvatar(f.user.profilePhoto)} alt={"..."}
                                                         onClick={() => goToUserProfile(navigate, f.user._id)}/>}
                                     </div>
@@ -41,7 +41,7 @@ const Followings = ({baseUrl, profileOwnerId, followings, refresh}) => {
                                         <span role={"button"} onClick={() => goToUserProfile(navigate, f.user._id)}>{f.user && f.user.username}</span>
                                     </div>
                                     <div className={"col"}/>
-                                    <div className={"col-2"}>
+                                    <div className={"col-12 col-md-3 col-lg-2 text-end"}>
                                         {
                                             loggedIn && loggedInUserId === profileOwnerId && f.user &&
                                             <button className={"btn rounded-pill btn-secondary"} onClick={() => unfollow(f.user._id)}>Unfollow</button>

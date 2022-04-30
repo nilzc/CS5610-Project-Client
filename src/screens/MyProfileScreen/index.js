@@ -85,7 +85,7 @@ const MyProfileScreen = () => {
                 </div>
             </div>
             <div className="col-12 m-5 pt-3 ps-5 pe-5 nav-pills fs-4">
-                <div className={"row row-cols-1 row-cols-md-3 row-cols-lg-5 gx-5"}>
+                <div className={"row row-cols-1 row-cols-md-3 row-cols-lg-5 gx-5 justify-content-center"}>
                     <Link to=""
                           className={`col text-center nav-link ${location.pathname.match(/profile\/my$/) ? "active" : ""}`}>
                         My Profile</Link>
@@ -109,7 +109,7 @@ const MyProfileScreen = () => {
                 <Route path={"lists/:lid"} element={<ListDetails profileUrl={MY_PROFILE_URL} />}/>
                 <Route path={"edit"} element={<EditProfile refresh={findProfile}/>}/>
                 <Route path={"reviews"} element={<Reviews uid={user._id} />}/>
-                <Route path={"likes"} element={<Likes uid={user._id} allowDelete={false}/> }/>
+                <Route path={"likes"} element={<Likes allowLike={true} uid={user._id} allowDelete={false}/> }/>
                 <Route path={"followings"} element={<Followings baseUrl={MY_PROFILE_URL} followings={followings} profileOwnerId={user._id} refresh={init}/>}/>
                 <Route path={"followers"} element={<Followers baseUrl={MY_PROFILE_URL} followers={followers}/>}/>
             </Routes>

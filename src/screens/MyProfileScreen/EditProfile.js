@@ -61,7 +61,7 @@ const EditProfile = ({refresh}) => {
                     <div className={"row justify-content-center"}>
                         <div className={"col-12 col-md-6 col-lg-4 bg-light p-3"}>
                             <div className={"row justify-content-center"}>
-                                <div className={"col-12 text-end"} onClick={() => navigate(-1)}>
+                                <div className={"col-12 text-end"} onClick={() => navigate(MY_PROFILE_URL)}>
                                     <i className="fas fa-angle-left"/>
                                     <span className="ps-2">Go Back</span>
                                 </div>

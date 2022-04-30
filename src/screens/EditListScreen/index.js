@@ -20,7 +20,7 @@ const EditListScreen = () => {
     const submitHandler = (movieList) => {
         listServices.updateList(MY, listId, movieList)
             .then((response) => {
-                navigate(MY_PROFILE_URL);
+                navigate(`${MY_PROFILE_URL}/lists`);
                 alert("Movie list updated!");
             }).catch((e) => errorServices.alertError(e, dispatch));
     }

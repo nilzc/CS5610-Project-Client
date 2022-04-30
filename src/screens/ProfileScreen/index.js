@@ -110,7 +110,7 @@ const ProfileScreen = () => {
                             }
                             {
                                 alreadyFollowed &&
-                                <button className={"w-75 btn-sm btn-outline-dark rounded-pill"}
+                                <button className={"w-100 btn-sm btn-outline-dark rounded-pill"}
                                         onClick={follow}>Unfollow</button>
                             }
                         </div>
@@ -118,7 +118,7 @@ const ProfileScreen = () => {
                 </div>
             </div>
             <div className="col-12 m-5 pt-3 ps-5 pe-5 nav-pills fs-4">
-                <div className={"row row-cols-1 row-cols-md-3 row-cols-lg-5 gx-5"}>
+                <div className={"row row-cols-1 row-cols-md-2 row-cols-lg-4 gx-5"}>
                     <Link to=""
                           className={`col text-center nav-link ${location.pathname.match(/profile\/.{24}$/) ? "active" : ""}`}>
                         Profile</Link>

@@ -2,7 +2,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
 import * as movieServices from "../../services/movieServices";
 import * as errorServices from "../../services/errorServices";
-import {INITIAL_PAGES} from "../../services/utils";
+import {INITIAL_PAGES, MOVIE_DETAIL_URL} from "../../services/utils";
 import MovieGallery from "../../components/MovieGallery";
 import NoMoviesFound from "../../components/NoMoviesFound";
 import Pagination from "../../components/Pagination";
@@ -46,7 +46,7 @@ const MovieRecommendationScreen = () => {
             <div className={"border bg-light p-3 mt-4"}>
                 {
                     recommendations.length > 0 &&
-                    <MovieGallery movies={recommendations} posterOnClickHandler={(movie) => navigate(`/movies/${movie.id}`)}/>
+                    <MovieGallery movies={recommendations} posterOnClickHandler={(movie) => navigate(`${MOVIE_DETAIL_URL}/${movie.id}`)}/>
                 }
                 {
                     recommendations.length === 0 &&

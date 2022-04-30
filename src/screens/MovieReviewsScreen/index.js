@@ -38,7 +38,7 @@ const MovieReviewsScreen = () => {
             <div className={"col-8 col-md-6 col-lg-3"}>
                 {
                     movie &&
-                    <MovieItem movieLikeBadge={true} movie={movie} posterOnClickHandler={() => {}}/>
+                    <MovieItem allowLike={true} movie={movie} posterOnClickHandler={() => {}}/>
                 }
             </div>
             <div className="col-12 col-lg-9 ps-4">

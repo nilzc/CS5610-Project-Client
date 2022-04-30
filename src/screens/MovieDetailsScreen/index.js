@@ -7,6 +7,7 @@ import MovieItem from "../../components/MovieItem";
 import MovieReviews from "../../components/MovieReviews";
 import CreateReview from "../../components/CreateReview";
 import MovieGallery from "../../components/MovieGallery";
+import {MOVIE_DETAIL_URL} from "../../services/utils";
 
 const MovieDetailsScreen = () => {
     const params = useParams();
@@ -69,7 +70,7 @@ const MovieDetailsScreen = () => {
             <div className={"col-8 col-md-6 col-lg-3"}>
                 {
                     movie &&
-                    <MovieItem movieLikeBadge={true} movie={movie} posterOnClickHandler={() => {}}/>
+                    <MovieItem allowLike={true} movie={movie} posterOnClickHandler={() => {}}/>
                 }
             </div>
             <div className="col-12 col-lg-9 ps-4">
@@ -134,7 +135,7 @@ const MovieDetailsScreen = () => {
                     <div className={"col-12 bg-light m-2 p-4 border"}>
                         {
                             recommendations.length > 0 &&
-                            <MovieGallery movies={recommendations} posterOnClickHandler={(movie) => navigate(`/movies/${movie.id}`)}/>
+                            <MovieGallery movies={recommendations} posterOnClickHandler={(movie) => navigate(`${MOVIE_DETAIL_URL}/${movie.id}`)}/>
                         }
                     </div>
                 </div>

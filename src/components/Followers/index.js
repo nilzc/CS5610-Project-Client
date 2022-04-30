@@ -9,11 +9,11 @@ const Followers = ({baseUrl, followers}) => {
     return (
         <div className={"row ps-5 pe-5"}>
             <div className={"col-12"}>
-                <div className={"row m-0"}>
-                    <Link to={`${baseUrl}/followings`} className={"col-6 btn btn-lg btn-light border"}>
+                <div className={"row row-cols-1 row-cols-sm-2 m-0"}>
+                    <Link to={`${baseUrl}/followings`} className={"col btn btn-lg btn-light border"}>
                         Followings
                     </Link>
-                    <Link to={`${baseUrl}/followers`} className={"col-6 btn btn-lg btn-dark"}>
+                    <Link to={`${baseUrl}/followers`} className={"col btn btn-lg btn-dark"}>
                         Followers
                     </Link>
                 </div>
@@ -25,7 +25,7 @@ const Followers = ({baseUrl, followers}) => {
                         followers.map((f, n) =>
                             <div key={n} className={"list-group-item p-4"}>
                                 <div className={"row align-items-center justify-content-start"}>
-                                    <div className={"col-1"}>
+                                    <div className={"col-6 col-md-2 col-lg-1"}>
                                         {f.followedBy && <img role={"button"} className={"img-fluid"} src={getAvatar(f.followedBy.profilePhoto)} alt={"..."}
                                                               onClick={() => goToUserProfile(navigate, f.followedBy._id)}/>}
                                     </div>

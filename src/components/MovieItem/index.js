@@ -10,7 +10,7 @@ const MovieItem = ({
                            title: "Spider-Man: No Way Home",
                            release_date: "2021-12-15",
                            poster_path: "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"
-                       }, posterOnClickHandler, addMovieOnClickHandler, movieLikeBadge=false, refresh=() => {}, allowLike =true
+                       }, posterOnClickHandler, addMovieOnClickHandler, refresh=() => {}, allowLike =false
                    }) => {
     const loggedIn = useSelector(isLoggedIn);
     const [stats, setStats] = useState({});
@@ -61,7 +61,7 @@ const MovieItem = ({
     return (
         <div className={"col"}>
             <div className={"h-100 shadow position-relative bg-white"}>
-                <div className={"overflow-hidden bg-black rounded-top"} style={{width: "100%", height: "0", paddingBottom: "150%"}}
+                <div role={"button"} className={"overflow-hidden bg-black rounded-top"} style={{width: "100%", height: "0", paddingBottom: "150%"}}
                      onClick={() => posterOnClickHandler(movie)}>
                     <img className={"img-fluid w-100"} src={posterPath} alt={"Poster Not Found"}/>
                 </div>
@@ -72,7 +72,7 @@ const MovieItem = ({
                     </div>
                 </div>
                 {
-                    movieLikeBadge &&
+                    allowLike &&
                     <div className={"position-absolute badge rounded-pill bg-danger fs-6"} style={{top: "-0.5rem", right: "-1rem", zIndex: 100}}
                         onClick={allowLike? likeMovie: undefined}>
                         {
