@@ -105,7 +105,7 @@ const MyProfileScreen = () => {
             </div>
             <Routes>
                 <Route index element={<ProfileOverview profileOwner={user} showPrivate={true}/>}/>
-                <Route path={"lists"} element={<Lists uid={user._id}/>}/>
+                <Route path={"lists"} element={<Lists uid={user._id} allowCreate={true}/>}/>
                 <Route path={"lists/:lid"} element={<ListDetails profileUrl={MY_PROFILE_URL} />}/>
                 <Route path={"edit"} element={<EditProfile refresh={findProfile}/>}/>
                 <Route path={"reviews"} element={<Reviews uid={user._id} />}/>

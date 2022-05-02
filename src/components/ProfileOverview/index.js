@@ -15,17 +15,16 @@ const ProfileOverview = ({
                     <h4 className={"col-12 text-primary"}>Public:</h4>
                     {
                         PUBLIC_FIELDS.map((f, nth) =>
-                            <>
+                            <div key={nth} className={"col-12 list-group-item bg-light"}>
                                 {
                                     profileOwner[f] &&
-                                    <div className={"col-12 list-group-item bg-light"}>
-                                        <div className={"row"}>
-                                            <div className={`col-4 fw-bold`}>{f.charAt(0).toUpperCase() + f.slice(1)}:</div>
-                                            <div className={"col-8"}>{profileOwner[f]}</div>
-                                        </div>
+                                    <div className={"row"}>
+                                        <div className={`col-4 fw-bold`}>{f.charAt(0).toUpperCase() + f.slice(1)}:</div>
+                                        <div className={"col-8"}>{profileOwner[f]}</div>
                                     </div>
                                 }
-                            </>)
+                            </div>
+                        )
                     }
                     {
                         loggedIn && loggedInUserId === profileOwner._id && showPrivate &&

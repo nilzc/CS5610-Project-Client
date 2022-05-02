@@ -110,7 +110,7 @@ const ProfileScreen = () => {
                             }
                             {
                                 alreadyFollowed &&
-                                <button className={"w-100 btn-sm btn-outline-dark rounded-pill"}
+                                <button className={"w-75 btn-sm btn-outline-dark rounded-pill"}
                                         onClick={follow}>Unfollow</button>
                             }
                         </div>
