@@ -51,7 +51,8 @@ export const userLikesMovie = (uid, mid) => {
         .then(response => response.data);
 }
 export const findAllMoviesLikedByUser = (uid) => {
-    return api.get(`${USER_URL}/${uid}/movie-likes`)
+    return api.get(`${USER_URL}/${uid}/movie-likes`,
+        {headers: {"Cache-Control": "no-cache"}})
         .then(response => response.data);
 }
 export const findAllMoviesLikedByUserWithMovieDetails = async (uid) => {

@@ -11,7 +11,7 @@ const CreateNewListScreen = () => {
     const submitHandler = (movieList) => {
         listServices.createList(MY, movieList)
             .then((response) => {
-                navigate(MY_PROFILE_URL);
+                navigate(`${MY_PROFILE_URL}/lists`);
                 alert("Movie list created!");
             }).catch((e) => errorServices.alertError(e, dispatch));
     }

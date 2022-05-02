@@ -51,3 +51,6 @@ export const deleteAdmin = (uname) => {
 export const findAllSupers = () => {
     return api.get(SUPER_URL).then(response => response.data);
 }
+export const deleteUser = (uid) => {
+    return api.delete(`${SUPER_URL}`)
+}

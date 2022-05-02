@@ -2,7 +2,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {isLoggedIn} from "../../redux/selectors";
 import MovieSection from "./MovieSection";
 import * as movieServices from "../../services/movieServices";
-import * as listServices from "../../services/listServices";
 import * as errorServices from "../../services/errorServices";
 import * as userServices from "../../services/userService";
 import {useCallback, useEffect, useState} from "react";
@@ -16,7 +15,6 @@ const HomeScreen = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
-    const [myLists, setMyLists] = useState([])
     const [recommendations, setRecommendations] = useState([]);
     const [myLatestMovie, setMyLatestMovie] = useState({});
     const [popularMovies, setPopularMovies] = useState([]);
@@ -65,6 +63,20 @@ const HomeScreen = () => {
     useEffect(init, [init])
     return (
         <div className={"col-12 list-group"}>
+            <div className={"row m-2 pt-5 pb-5 text-white rounded shadow"}
+                 style={{backgroundImage: "linear-gradient(#213462, #213462),url('https://image.tmdb.org/t/p/w1280/yzpCv8CCWondN7O5au1KGiqnC3A.jpg')",
+                     backgroundPositionX: "50%",
+                     backgroundPositionY: "20%",
+                     backgroundSize: "cover",
+                     backgroundBlendMode: "saturation"
+                 }}>
+                <h1 className={"col-12 ps-5 pe-5 fw-bolder fs-1 mt-5"}>
+                    Welcome!
+                </h1>
+                <h2 className={"col-12 ps-5 pe-5 fw-bolder fs-3 mb-5"}>
+                    Millions of movies and people to discover. Explore now.
+                </h2>
+            </div>
             {
                 loggedIn && recommendations && recommendations.length > 0 &&
                 <>
@@ -84,8 +96,8 @@ const HomeScreen = () => {
                 loggedIn && recommendations && recommendations.length === 0 &&
                 <>
                     <h3 className={`m-1 p-1 text-black mt-3`}>
-                        Start your journey by creating a new list!
-                        <span className={"ps-3"}><Link to={"/lists/new"} className={"btn btn-primary"}>Take Me There</Link></span>
+                        You haven't liked any movie. Go explore!
+                        <span className={"ps-3"}><Link to={"/movies/in/popular"} className={"btn btn-primary m-2"}>Take Me There</Link></span>
                     </h3>
                 </>
             }
