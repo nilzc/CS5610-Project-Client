@@ -1,7 +1,7 @@
 # CS5610 Project - Movie Database Website
 ## URLs:
 * ```/``` and ```/home``` Homepage
-* ```/profile``` My profile screen
+* ```/profile/my``` My profile screen
 * ```/profile/:uid``` User ```<uid>```'s profile
 * ```/search``` Search page
   * Search params:
@@ -9,9 +9,12 @@
 * ```/search/results``` Search results page
   * Search params:
     * ```query```: string
-* ```/list/:lid``` Movie list screen
-* ```/list/new``` Create new list screen
-* ```/details/:mid``` Movie's details page
+* ```/lists/:lid``` Movie list screen
+* ```/lists/new``` Create new list screen
+* ```movies/details/:mid``` Movie's details page
+* ```movies/:mid/reviews``` Movie review page
+* ```movies/:mid/recommendations``` Movie recommendations
+* ```movies/in/:category``` Movie category page
 * ```/login``` Login page
 * ```/register``` Register page
-* ```/privacy``` Privacy policy page
+* ```/admin``` Admin tool
