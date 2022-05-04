@@ -1,6 +1,7 @@
 import {useSelector} from "react-redux";
 import {getUserId, isLoggedIn} from "../../redux/selectors";
 import {getDate, PUBLIC_FIELDS} from "../../services/utils";
+import {Fragment} from "react";
 const ProfileOverview = ({
                              profileOwner =
                                  {username: "Dummy", firstName: "Harry", lastName: "Potter", phone: "", dateOfBirth: ""},
@@ -15,15 +16,17 @@ const ProfileOverview = ({
                     <h4 className={"col-12 text-primary"}>Public:</h4>
                     {
                         PUBLIC_FIELDS.map((f, nth) =>
-                            <div key={nth} className={"col-12 list-group-item bg-light"}>
+                            <Fragment key={nth}>
                                 {
                                     profileOwner[f] &&
-                                    <div className={"row"}>
-                                        <div className={`col-4 fw-bold`}>{f.charAt(0).toUpperCase() + f.slice(1)}:</div>
-                                        <div className={"col-8"}>{profileOwner[f]}</div>
+                                    <div className={"col-12 list-group-item bg-light"}>
+                                        <div className={"row"}>
+                                            <div className={`col-6 col-md-4 fw-bold`}>{f.charAt(0).toUpperCase() + f.slice(1)}:</div>
+                                            <div className={"col-6 col-md-8"}>{profileOwner[f]}</div>
+                                        </div>
                                     </div>
                                 }
-                            </div>
+                            </Fragment>
                         )
                     }
                     {
