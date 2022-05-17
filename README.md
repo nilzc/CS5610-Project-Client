@@ -1,4 +1,6 @@
 # CS5610 Project - Movie Database Website
+## Site:
+https://cs5610-project-client.netlify.app/
 ## URLs:
 * ```/``` and ```/home``` Homepage
 * ```/profile/my``` My profile screen
