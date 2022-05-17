@@ -1,6 +1,8 @@
 # CS5610 Project - Movie Database Website
 ## Site:
 https://cs5610-project-client.netlify.app/ (please give 1-2 minutes for Heroku server to start)
+## Server Repo:
+https://github.com/ZhuochengLin/CS5610-Project-Server
 ## URLs:
 * ```/``` and ```/home``` Homepage
 * ```/profile/my``` My profile screen
